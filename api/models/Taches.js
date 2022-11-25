@@ -31,13 +31,30 @@ const listTask = [
     },
   ];
 
+  /* Function -> Display all the task */
 function readAllTask() {
-let orderedMenu;
-const pizzas = parse(jsonDbPath, listTask);
-
-const allTask = orderedMenu ?? pizzas;
-return allTask;
+const list = parse(jsonDbPath, listTask);
+return list;
 }
+/* Function -> Create a task */
+function createOnetask(id, title, content) {
+    const list = parse(jsonDbPath, listTask);
+  
+    const createdTask = {
+      id, // pas sur de l'id 
+      title,
+      content,
+    };
+  
+    list.push(listTask);
+  
+    serialize(jsonDbPath, list);
+  
+    return createdTask;
+}
+
+
 module.exports = {
-    readAllTask
+    readAllTask,
+    createOnetask
   };

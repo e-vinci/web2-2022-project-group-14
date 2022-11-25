@@ -1,8 +1,16 @@
 ### Read all pizzas
 GET http://localhost:3000/taches
 
-### Read all pizzas with File variable
+### read all task
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/taches/displaytask
 
+### Create a ask
+POST {{baseUrl}}/taches/addtask
+Content-Type: application/json
 
+{
+    "id":"1",
+    "title":"Magic Green",
+    "content":"Epinards"
+}
