@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const usersRouter = require('./routes/users');
+const tacheRouter = require('./routes/taches');
 const pizzaRouter = require('./routes/pizzas');
 
 const app = express();
@@ -14,5 +15,6 @@ app.use(cookieParser());
 
 app.use('/users', usersRouter);
 app.use('/pizzas', pizzaRouter);
+app.use('/taches', tacheRouter);
 
 module.exports = app;
