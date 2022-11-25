@@ -1,3 +1,28 @@
+
 main{
-    margin: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.colonneLeft{
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+#innerColLeft{
+    padding-left: 10px;
+}
+
+.colonneRight{
+    margin-right: 10px;
+    padding-left: 10px;
+}
+
+#innerColRight{
+    padding-right: 10px;
+}
+
+.colonne{
+margin-left: 1%;
+margin-right: 1%;
 }
