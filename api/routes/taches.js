@@ -5,7 +5,6 @@ const path = require('node:path');
 
 const router = express.Router();
 
-const jsonDbPath = path.join(__dirname, '/../data/pizzas.json');
 
 
 /* Read all the pizzas from the menu
