@@ -3,7 +3,7 @@ import '../../stylesheets/main.css';
 
 const homePage = `
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
+  Login modal
 </button>
 
 <!-- login modal -->
@@ -37,6 +37,7 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
        FATHER SUCKERS ! 
       </div>
       <div class="modal-footer">
