@@ -1,0 +1,8 @@
+### Read all pizzas
+GET http://localhost:3000/taches
+
+### Read all pizzas with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/taches
+
+
