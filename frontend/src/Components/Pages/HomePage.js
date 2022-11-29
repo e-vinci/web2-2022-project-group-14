@@ -16,7 +16,8 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       MOTHER FUCKERS ! 
+        ICI
+    <label>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -38,7 +39,13 @@ const homePage = `
       </div>
       <div class="modal-body">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
-       FATHER SUCKERS ! 
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="usename" id="username" required>
+        <br>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
