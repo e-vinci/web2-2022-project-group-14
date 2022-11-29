@@ -5,7 +5,7 @@ GET http://localhost:3000/taches
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/taches/
 
-### Create a ask
+### Create a task
 POST {{baseUrl}}/taches/
 Content-Type: application/json
 
@@ -13,3 +13,6 @@ Content-Type: application/json
     "title":"Magic Green",
     "content":"Epinards"
 }
+
+### Remove a task with the Task ID
+DELETE {{baseUrl}}/taches/1

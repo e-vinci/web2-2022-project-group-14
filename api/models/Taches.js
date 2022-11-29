@@ -18,7 +18,7 @@ const listTask = [
     },
   ];
 
-  /* Function -> Display all the task */
+/* Function -> Display all the task */
 function readAllTask() {
 const list = parse(jsonDbPath, listTask);
 return list;
@@ -41,8 +41,23 @@ function createOnetask(title, content) {
     return createdTask;
 }
 
+/* Function -> Remove a Task from the Task List with the Task ID */
+function removeATask(id){
+  const idtask  = parseInt(id, 10); // Transform the string id (object) into integer
+  const list = parse(jsonDbPath, listTask);
+  const foundIndex = list.findIndex((task) => task.id === idtask);
+  if (foundIndex < 0) return undefined;
+  const deleteTask  = list.splice(foundIndex, 1);
+  const deleteTaskDiplsay = deleteTask[0];
+  serialize(jsonDbPath, list);
+  console.log(deleteTaskDiplsay)
+  return deleteTaskDiplsay;
+  ;
+}
+
 
 module.exports = {
     readAllTask,
-    createOnetask
+    createOnetask,
+    removeATask
   };
