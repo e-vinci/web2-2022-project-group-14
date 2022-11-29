@@ -3,14 +3,13 @@ GET http://localhost:3000/taches
 
 ### read all task
 @baseUrl = http://localhost:3000
-GET {{baseUrl}}/taches/displaytask
+GET {{baseUrl}}/taches/
 
 ### Create a ask
-POST {{baseUrl}}/taches/addtask
+POST {{baseUrl}}/taches/
 Content-Type: application/json
 
 {
-    "id":"1",
     "title":"Magic Green",
     "content":"Epinards"
 }

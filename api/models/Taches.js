@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
 
@@ -14,21 +16,6 @@ const listTask = [
       title: 'Tache : 2',
       content: 'Tomates, Courgettes, Oignons, Aubergines, Poivrons',
     },
-    {
-      id: 3,
-      title: 'Tache : 3',
-      content: 'Mozarella, Tomates, Oignons, Poivrons, Champignons, Olives',
-    },
-    {
-      id: 4,
-      title: 'Tache : 4',
-      content: 'Gruyère, Mozarella, Lardons, Tomates',
-    },
-    {
-      id: 5,
-      title: 'Tache : 5',
-      content: 'Tomates, Mozarella, Chorizo piquant, Jalapenos',
-    },
   ];
 
   /* Function -> Display all the task */
@@ -36,17 +23,18 @@ function readAllTask() {
 const list = parse(jsonDbPath, listTask);
 return list;
 }
+
 /* Function -> Create a task */
-function createOnetask(id, title, content) {
+function createOnetask(title, content) {
     const list = parse(jsonDbPath, listTask);
   
     const createdTask = {
-      id, // pas sur de l'id 
+      id : uuidv4(),
       title,
       content,
     };
   
-    list.push(listTask);
+    list.push(createdTask);
   
     serialize(jsonDbPath, list);
   

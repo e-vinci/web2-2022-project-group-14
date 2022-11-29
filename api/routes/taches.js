@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const path = require('node:path');
@@ -10,19 +11,12 @@ const {
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    
-});
-
-
-router.get('/displaytask', (req,res) => {
+router.get('/', (req,res) => {
     const allTask = readAllTask();
     return res.json(allTask);
 });
 
-router.post('/addtask', (req, res) => {
-    const { id } = req.body;
-
+router.post('/', (req, res) => {
     const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
     const content = req?.body?.content?.length !== 0 ? req.body.content : undefined;
 
