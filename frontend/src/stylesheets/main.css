@@ -1,0 +1,35 @@
+
+main{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.colonneLeft{
+    margin-left: 10px;
+}
+
+#innerColLeft{
+    padding: 10px;
+}
+
+#innerColLeft2{
+    padding: 10px;
+}
+
+.colonneRight{
+    margin-right: 10px;
+}
+
+#innerColRight{
+    padding: 10px;
+}
+
+#innerColRight2{
+    padding: 10px;
+}
+
+/*.colonne{
+margin-left: 1%;
+margin-right: 1%;
+}
+*/
