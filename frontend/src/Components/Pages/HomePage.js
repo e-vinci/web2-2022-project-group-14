@@ -212,19 +212,31 @@ const HomePage = () => {
   /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
   divBouttonRadio1.appendChild(inputRadioCheck1);
   
-  const labelRadioCheck1 = document.querySelector('label');
+  const labelRadioCheck1 = document.querySelector('label'); // Création du label du bouton radio 1 !
   labelRadioCheck1.className = 'form-check-label';
   /* labelRadioCheck1.for || Comment fait on le for ? */
   labelRadioCheck1.innerText = 'Default radio';
   divBouttonRadio1.appendChild(labelRadioCheck1);
 
 
-  const inputRadioCheck2 = document.querySelector('input'); // Création du input du bouton radio 1 ! 
+  const divBouttonRadio2= document.querySelector('div'); // Création de la div du second boutton radio
+  divBouttonRadio2.className = 'form-check';
+  secondInnerLeftRow.appendChild(divBouttonRadio2);
+
+  const inputRadioCheck2 = document.querySelector('input'); // Création du input du bouton radio 2 ! 
   inputRadioCheck2.className = 'form-check-input';
   inputRadioCheck2.type = 'radio';
   inputRadioCheck2.name = 'flexRadioDefault';
-  inputRadioCheck2.id = 'flexRadioDefault1';
+  inputRadioCheck2.id = 'flexRadioDefault2';
   /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
+  divBouttonRadio2.appendChild(inputRadioCheck2);
+
+
+  const labelRadioCheck2 = document.querySelector('label'); // Création du label du bouton radio 2 !
+  labelRadioCheck1.className = 'form-check-label';
+  /* labelRadioCheck1.for || Comment fait on le for ? */
+  labelRadioCheck2.innerText = 'Default radio';
+  divBouttonRadio2.appendChild(labelRadioCheck2);
 
 
 
