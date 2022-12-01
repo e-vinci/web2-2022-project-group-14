@@ -47,9 +47,6 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-<<<<<<< HEAD
-       FATHER SUCKERS ! 
-=======
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
 
         <label for="username"><b>Username</b></label>
@@ -58,7 +55,6 @@ const homePage = `
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
->>>>>>> 1d3a8c1af0e28d8a1118a415e44544ee3c15fc64
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -156,12 +152,89 @@ const homePage = `
 
 const HomePage = () => {
   const main = document.querySelector('main');
-  main.innerHTML = homePage;
   /*
-  const mainWrapper = document.querySelector('div');
+  main.innerHTML = homePage;
+
+  */
+
+// ---------------------------------------------------------------------------
+
+ // Création de la partie qui contiendra les 3 sections
+
+  const mainWrapper = document.querySelector('div'); 
   mainWrapper.className ='d-flex justify-content-between';
   main.appendChild(mainWrapper);
-  */
+
+// ---------------------------------------------------------------------------
+
+  // Création de la Colonne de gauche 
+
+  const mainLeftRow = document.querySelector('div');
+  mainLeftRow.className ='col-2 colonneLeft';
+  const firstInnerLeftRow = document.querySelector('div'); // Création de la première partie de la colonne de gauche
+  firstInnerLeftRow.className ='shadow mb-5 bg-body rounded';
+  firstInnerLeftRow.id ='innerColLeft'
+  mainLeftRow.appendChild(firstInnerLeftRow); // Rattachement de la première section dans la colonne
+  
+  const secondInnerLeftRow = document.querySelector('div'); // Création de la seconde partie de la colonne de gauche
+  secondInnerLeftRow.className ='shadow mb-5 bg-body rounded';
+  secondInnerLeftRow.id = 'innerColLeft2';
+  mainLeftRow.appendChild(secondInnerLeftRow); // Rattachement de la seconde section dans la colonne de gauche
+
+
+ // ---------------------------------------------------------------------------
+
+
+  // Création du formulaire de création de tâche dans la seconde partie de la colonne de gauche
+
+  const divTitreFormulaire = document.querySelector('div'); // div du titre et de la création du titre de la tâche
+  secondInnerLeftRow.appendChild(divTitreFormulaire);
+  const titleForm = document.querySelector('h3'); // Insertion du titre
+  titleForm.innerText = 'Créer une tâche :';
+  divTitreFormulaire.appendChild(titleForm);
+  const inputTitleTask = document.querySelector('input'); // Création du champs pour créer le titre de la tâche
+  inputTitleTask.className = "form-control form-control-sm";
+  inputTitleTask.type = "radio";
+  inputTitleTask.name = "flexRadioDefault";
+  inputTitleTask.id = "flexRadioDefault1";
+  divTitreFormulaire.appendChild(inputTitleTask);
+
+  const divBouttonRadio1= document.querySelector('div'); // Création de la div du premier boutton radio
+  divBouttonRadio1.className = 'form-check';
+  secondInnerLeftRow.appendChild(divBouttonRadio1);
+
+  const inputRadioCheck1 = document.querySelector('input'); // Création du input du bouton radio 1 ! 
+  inputRadioCheck1.className = 'form-check-input';
+  inputRadioCheck1.type = 'radio';
+  inputRadioCheck1.name = 'flexRadioDefault';
+  inputRadioCheck1.id = 'flexRadioDefault1';
+  /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
+  divBouttonRadio1.appendChild(inputRadioCheck1);
+  
+  const labelRadioCheck1 = document.querySelector('label');
+  labelRadioCheck1.className = 'form-check-label';
+  /* labelRadioCheck1.for || Comment fait on le for ? */
+  labelRadioCheck1.innerText = 'Default radio';
+  divBouttonRadio1.appendChild(labelRadioCheck1);
+
+
+  const inputRadioCheck2 = document.querySelector('input'); // Création du input du bouton radio 1 ! 
+  inputRadioCheck2.className = 'form-check-input';
+  inputRadioCheck2.type = 'radio';
+  inputRadioCheck2.name = 'flexRadioDefault';
+  inputRadioCheck2.id = 'flexRadioDefault1';
+  /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
+
+
+
+ // ---------------------------------------------------------------------------
+
+
+
+
+
+
+  
 };
       
 
