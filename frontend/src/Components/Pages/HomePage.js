@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
+import {setAuthenticatedUser} from '../../utils/auths'
+import Navigate from '../Router/Navigate'
 // import userPicture from '../../img/profile.png';
 
 const homePage = `
@@ -46,8 +48,7 @@ const homePage = `
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
+      <div class="modal-body"> 
 
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="usename" id="username" required>
@@ -237,5 +238,36 @@ const HomePage = () => {
   
 };
       
+async function onLogin(e) {
+  e.preventDefault();
+
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch('/api/auths/login', options);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  const authenticatedUser = await response.json();
+
+  console.log('Authenticated user : ', authenticatedUser);
+
+  setAuthenticatedUser(authenticatedUser);
+
+  Navigate('/');
+}
+
+onLogin();
 
 export default HomePage;

@@ -4,7 +4,7 @@ const { register, login } = require('../models/users');
 const router = express.Router();
 
 /* Register a user */
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 
@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
 });
 
 /* Login a user */
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 

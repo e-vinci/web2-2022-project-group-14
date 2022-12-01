@@ -1,8 +1,18 @@
 ### Read all pizzas
 GET http://localhost:3000/taches
 
-### Read all pizzas with File variable
+### read all task
 @baseUrl = http://localhost:3000
-GET {{baseUrl}}/taches
+GET {{baseUrl}}/taches/
 
+### Create a task
+POST {{baseUrl}}/taches/
+Content-Type: application/json
 
+{
+    "title":"Magic Green",
+    "content":"Epinards"
+}
+
+### Remove a task with the Task ID
+DELETE {{baseUrl}}/taches/1

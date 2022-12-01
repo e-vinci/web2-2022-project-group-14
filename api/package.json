@@ -20,13 +20,14 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.20",
     "prettier-airbnb-config": "^1.0.0"
   },
   "author": "e-Baron"
