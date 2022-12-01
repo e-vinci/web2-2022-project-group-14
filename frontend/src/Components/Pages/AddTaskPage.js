@@ -50,7 +50,7 @@ function renderTaskForm() {
       },
     };
   
-    const response = await fetch('/api/©', jsonOptions);
+    const response = await fetch('/api/taches', jsonOptions);
   
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
   
