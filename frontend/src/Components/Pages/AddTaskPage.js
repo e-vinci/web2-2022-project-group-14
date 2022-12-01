@@ -25,9 +25,25 @@ function renderTaskForm() {
     submit.value = 'add a new task to your list';
     submit.type = 'submit';
     submit.className = 'btn btn-danger';
+    const difficulte1 = document.createElement('select');
+    difficulte1.id = 'select';
+    const option1 = document.createElement('option');
+    option1.value = '1';
+    option1.text = '1';
+    const option2 = document.createElement('option');
+    option2.value = '2';
+    option2.text = '2';
+    const option3 = document.createElement('option');
+    option3.value = '3';
+    option3.text = '3';
+    difficulte1.appendChild(option1);
+    difficulte1.appendChild(option2);
+    difficulte1.appendChild(option3);
+    difficulte1.className = 'form-control mb-3';
     form.appendChild(title);
     form.appendChild(content);
     form.appendChild(submit);
+    form.appendChild(difficulte1);
     main.appendChild(form);
     form.addEventListener('submit', addTask);
   }
@@ -38,12 +54,14 @@ function renderTaskForm() {
   
     const title = document.querySelector('#title').value;
     const content = document.querySelector('#content').value;
+    const difficulte = document.querySelector('#select').value;
   
     const jsonOptions = {
       method: 'POST',
       body: JSON.stringify({
         title,
         content,
+        difficulte,
       }),
       headers: {
         'Content-Type': 'application/json',
