@@ -29,21 +29,21 @@ function renderTaskForm() {
     difficulte1.id = 'select';
     const option1 = document.createElement('option');
     option1.value = '1';
-    option1.text = '1';
+    option1.text = 'difficulte 1';
     const option2 = document.createElement('option');
     option2.value = '2';
-    option2.text = '2';
+    option2.text = 'difficulte 2';
     const option3 = document.createElement('option');
     option3.value = '3';
-    option3.text = '3';
+    option3.text = 'difficulte 3';
     difficulte1.appendChild(option1);
     difficulte1.appendChild(option2);
     difficulte1.appendChild(option3);
     difficulte1.className = 'form-control mb-3';
     form.appendChild(title);
     form.appendChild(content);
-    form.appendChild(submit);
     form.appendChild(difficulte1);
+    form.appendChild(submit);
     main.appendChild(form);
     form.addEventListener('submit', addTask);
   }
@@ -80,5 +80,32 @@ function renderTaskForm() {
 
 
   }
+
+
+  // eslint-disable-next-line no-unused-vars
+  const listTask = [
+    {
+      id: 1,
+      title: 'Tache : 1',
+      content: 'premiere tache',
+      difficulte: '1',
+    },
+    {
+      id: 2,
+      title: 'Tache : 2',
+      content: 'deuxieme tache',
+      difficulte: '2',
+    },
+    {
+      id: 3,
+      title: 'Tache : 3',
+      content: 'troisieme tache',
+      difficulte: '2',
+    },
+  ];
+
+
+
+
 
 export default AddTaskPage;
