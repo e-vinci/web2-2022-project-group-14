@@ -182,9 +182,7 @@ const HomePage = () => {
   secondInnerLeftRow.id = 'innerColLeft2';
   mainLeftRow.appendChild(secondInnerLeftRow); // Rattachement de la seconde section dans la colonne de gauche
 
-
  // ---------------------------------------------------------------------------
-
 
   // Création du formulaire de création de tâche dans la seconde partie de la colonne de gauche
 
@@ -218,7 +216,6 @@ const HomePage = () => {
   labelRadioCheck1.innerText = 'Default radio';
   divBouttonRadio1.appendChild(labelRadioCheck1);
 
-
   const divBouttonRadio2= document.querySelector('div'); // Création de la div du second boutton radio
   divBouttonRadio2.className = 'form-check';
   secondInnerLeftRow.appendChild(divBouttonRadio2);
@@ -231,23 +228,14 @@ const HomePage = () => {
   /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
   divBouttonRadio2.appendChild(inputRadioCheck2);
 
-
   const labelRadioCheck2 = document.querySelector('label'); // Création du label du bouton radio 2 !
   labelRadioCheck1.className = 'form-check-label';
   /* labelRadioCheck1.for || Comment fait on le for ? */
   labelRadioCheck2.innerText = 'Default radio';
   divBouttonRadio2.appendChild(labelRadioCheck2);
 
-
-
  // ---------------------------------------------------------------------------
 
-
-
-
-
-
-  
 };
       
 async function onLogin(e) {
