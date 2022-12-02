@@ -13,6 +13,8 @@ const enemies = [
       id: 1,  
       name: randomName(),
       HP: calcuateHP(getLastId()),
+      attack: calculateAttack(getLastId()),
+
     },
   ];
 
@@ -20,6 +22,12 @@ const enemies = [
   function calcuateHP(id){
     const HP = id * 2;
     return HP;
+  };
+
+  // calculate attack
+  function calculateAttack(id){
+    const attack = id + id;
+    return attack;
   };
 
   // get last id
@@ -82,5 +90,7 @@ const enemies = [
   
 
   module.exports = {
-    combat
+    combat,
+    createEnemies,
+    KillEnemy,
   };
