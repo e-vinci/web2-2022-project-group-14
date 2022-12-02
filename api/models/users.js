@@ -3,7 +3,7 @@ const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
 
 const jwtSecret = 'ilovemytasks!';
-const lifetimeJwt = 24 * 60 * 60 * 1000; // in ms : 24 * 60 * 60 * 1000 = 24h
+const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 1000 = 24h
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
 

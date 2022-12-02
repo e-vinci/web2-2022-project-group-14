@@ -6,7 +6,9 @@ const router = express.Router();
 /* Register a user */
 router.post('/', (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
+  console.log('username', username);
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
+  console.log('password', password);
 
   if (!username || !password) return res.sendStatus(400); // 400 Bad Request
 

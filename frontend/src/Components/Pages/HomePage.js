@@ -1,9 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// eslint-disable-next-line import/no-relative-packages
-import { register, login } from '../../../../api/models/users';
-// import { use } from '../../../../api/routes/auths';
 import '../../stylesheets/main.css';
-import {setAuthenticatedUser} from '../../utils/auths'
+// import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 // import userPicture from '../../img/profile.png';
 
@@ -156,10 +153,9 @@ const homePage = `
 
 const HomePage = () => {
   const main = document.querySelector('main');
-  /*
+  
   main.innerHTML = homePage;
-
-  */
+  
 
 // ---------------------------------------------------------------------------
 
@@ -261,45 +257,64 @@ async function onLogin(e) {
 };
 */
 
-const Login = () => {
-  const main = document.querySelector('main');
-  main.innerHTML = homePage;
+
+
+async function login(e) {
+  e.preventDefault();
 
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
+
+  const jsonOptions = {
+    method: 'GET',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch('/api/auths', jsonOptions);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  const loggedUser = await response.json();
   
-  main.addEventListener('submit', async (e) => {
+  // eslint-disable-next-line no-console
+  console.log('task add : ',loggedUser);
+}
+
+
+async function register(e) {
   e.preventDefault();
-
-    await login(username, password)
-  });
-};
-
-const Register = () => {
-  const main = document.querySelector('main');
-  main.innerHTML = homePage;
 
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-  
-  main.addEventListener('submit', async (e) => {
-  e.preventDefault();
 
-    await register(username, password)
-  });
-};
+  const jsonOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  const response = await fetch('/api/auths/login');
+  const response = await fetch('/api/auths', jsonOptions);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
   const authenticatedUser = await response.json();
+  
+  // eslint-disable-next-line no-console
+  console.log('User add : ', authenticatedUser);
+}
 
-  console.log('Authenticated user : ', authenticatedUser);
-
-  setAuthenticatedUser(authenticatedUser);
-
-Login();
-Register();
+login();
+register();
 
 export default HomePage;
