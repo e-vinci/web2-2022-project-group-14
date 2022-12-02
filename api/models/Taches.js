@@ -5,16 +5,22 @@ const { parse, serialize } = require('../utils/json');
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 
+/* difficulte de la tache */
+// eslint-disable-next-line no-unused-vars
+const difficule = ['1','2','3'];
+
 const listTask = [
     {
       id: 1,
       title: 'Tache : 1',
-      content: 'Gruyère, Sérac, Appenzel, Gorgonzola, Tomates',
+      content: 'premiere tache',
+      difficulte: '1',
     },
     {
       id: 2,
       title: 'Tache : 2',
-      content: 'Tomates, Courgettes, Oignons, Aubergines, Poivrons',
+      content: 'deuxieme tache',
+      difficulte: '2',
     },
   ];
 
@@ -25,13 +31,14 @@ return list;
 }
 
 /* Function -> Create a task */
-function createOnetask(title, content) {
+function createOnetask( title, content, difficulte) {
     const list = parse(jsonDbPath, listTask);
   
     const createdTask = {
       id : uuidv4(),
       title,
       content,
+      difficulte,
     };
   
     list.push(createdTask);
