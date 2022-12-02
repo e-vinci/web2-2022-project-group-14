@@ -78,7 +78,6 @@ function renderTaskForm() {
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
 
-
   }
 
 
