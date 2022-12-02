@@ -67,7 +67,7 @@ const enemies = [
       const firstEnemyHP = firstEnemy.HP;
       const firstEnemyId = firstEnemy.id;
       const firstEnemyName = firstEnemy.name;
-      const firstEnemyNewHP = firstEnemyHP - 1;
+      const firstEnemyNewHP = firstEnemyHP - 1 // replace by player attack;
       const firstEnemyNew = {
         id : firstEnemyId,
         name : firstEnemyName,
