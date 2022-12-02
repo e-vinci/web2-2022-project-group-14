@@ -1,7 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+// eslint-disable-next-line import/no-relative-packages
+import { register, login } from '../../../../api/models/users';
+// import { use } from '../../../../api/routes/auths';
 import '../../stylesheets/main.css';
 import {setAuthenticatedUser} from '../../utils/auths'
-import Navigate from '../Router/Navigate'
+// import Navigate from '../Router/Navigate'
 // import userPicture from '../../img/profile.png';
 
 const homePage = `
@@ -237,7 +240,8 @@ const HomePage = () => {
  // ---------------------------------------------------------------------------
 
 };
-      
+    
+/*
 async function onLogin(e) {
   e.preventDefault();
 
@@ -254,8 +258,38 @@ async function onLogin(e) {
       'Content-Type': 'application/json',
     },
   };
+};
+*/
 
-  const response = await fetch('/api/auths/login', options);
+const Login = () => {
+  const main = document.querySelector('main');
+  main.innerHTML = homePage;
+
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+  
+  main.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+    await login(username, password)
+  });
+};
+
+const Register = () => {
+  const main = document.querySelector('main');
+  main.innerHTML = homePage;
+
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+  
+  main.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+    await register(username, password)
+  });
+};
+
+  const response = await fetch('/api/auths/login');
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
@@ -265,9 +299,7 @@ async function onLogin(e) {
 
   setAuthenticatedUser(authenticatedUser);
 
-  Navigate('/');
-}
-
-onLogin();
+Login();
+Register();
 
 export default HomePage;
