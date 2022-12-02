@@ -67,27 +67,30 @@ const enemies = [
     return firstEnemy;
   }
 
-  // combat between ennemies and player
+  // combat between a ennemy and player as long as enemy HP > 0 or player HP > 0
   function combat(){
-    do{
-      const list = parse(jsonDbPath, enemies);
-      const firstEnemy = list[0];
-      const firstEnemyHP = firstEnemy.HP;
-      const firstEnemyId = firstEnemy.id;
-      const firstEnemyName = firstEnemy.name;
-      const firstEnemyNewHP = firstEnemyHP - 1 // replace by player attack;
-      const firstEnemyNew = {
-        id : firstEnemyId,
-        name : firstEnemyName,
-        HP: firstEnemyNewHP,
-      };
-      list[0] = firstEnemyNew;
-      serialize(jsonDbPath, list);
-    } while (enemies[0].HP > 0);
-    KillEnemy();
-    createEnemies();
+    const list = parse(jsonDbPath, enemies);
+    const firstEnemy = list[0];
+    const playerHP = 10; // recup player HP
+    const playerAttack = 2; // recup player attack
+    const enemyHP = firstEnemy.HP;
+    const enemyAttack = firstEnemy.attack;
+    let enemyHPAfterCombat = enemyHP - playerAttack;
+    let playerHPAfterCombat = playerHP - enemyAttack;
+    while (enemyHPAfterCombat > 0 && playerHPAfterCombat > 0){
+      enemyHPAfterCombat -= playerAttack;
+      playerHPAfterCombat -= enemyAttack;
+    }
+    if (enemyHPAfterCombat <= 0){
+      console.log('ennemy is dead');
+      KillEnemy();
+      createEnemies();
+    }
+    if (playerHPAfterCombat <= 0){
+      console.log('player is dead');
+    }
+    serialize(jsonDbPath, list);
   }
-  
 
   module.exports = {
     combat,
