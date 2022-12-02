@@ -49,9 +49,7 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-<<<<<<< HEAD
        FATHER SUCKERS ! 
-=======
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
 
         <label for="username"><b>Username</b></label>
@@ -60,7 +58,6 @@ const homePage = `
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
->>>>>>> 1d3a8c1af0e28d8a1118a415e44544ee3c15fc64
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
