@@ -1,16 +1,21 @@
 
-### read all task
 @baseUrl = http://localhost:3000
-GET {{baseUrl}}/
+GET {{baseUrl}}
 
 ### Create a user
-POST {{baseUrl}}/auths/
+POST {{baseUrl}}/auths/register/
 Content-Type: application/json
 
 {
-    "username": "testa",
+    "username": "testc",
     "password": "test"
 }
 
-### Remove a task with the Task ID
-DELETE {{baseUrl}}/taches/1
+### Login
+POST {{baseUrl}}/auths/login/
+Content-Type: application/json
+ 
+{
+    "username" : "testc",
+    "password" : "test"
+}
