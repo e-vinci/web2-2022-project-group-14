@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import {setAuthenticatedUser} from '../../utils/auths'
 import Navigate from '../Router/Navigate'
-// import userPicture from '../../img/profile.png';
+import userPicture from '../../img/profile.png';
 
 const homePage = `
 
@@ -186,6 +186,12 @@ const HomePage = () => {
  // ---------------------------------------------------------------------------
 
 
+   // Ici il va falloir mettre le code pour récupérer la liste des tâches
+
+
+// ---------------------------------------------------------------------------
+
+
   // Création du formulaire de création de tâche dans la seconde partie de la colonne de gauche
 
   const divTitreFormulaire = document.querySelector('div'); // div du titre et de la création du titre de la tâche
@@ -242,13 +248,98 @@ const HomePage = () => {
 
  // ---------------------------------------------------------------------------
 
+  // Création de la colonne centrale
 
+  const mainCentralRow = document.querySelector('div');
+  mainCentralRow.className = 'col-7 colonne';
+  mainWrapper.appendChild(mainCentralRow);
 
+  // Création de la div qui contiendra le titre de la tâche que l'on édite
 
+  const firstInnerCentralRow = document.querySelector('div');
+  firstInnerCentralRow.className = 'shadow p-3 mb-5 bg-body rounded';
+  mainCentralRow.appendChild(firstInnerCentralRow);
 
+  // Ajout du titre dans cette première div
 
+  const firstCentralTitleTask = document.querySelector('h2');
+  firstCentralTitleTask.innerText = 'Tâche n°1'; // Provisoire mais on doit récupérer la tâche qu'on veut éditer !
+  firstInnerCentralRow.appendChild(firstCentralTitleTask);
   
+  // Création de la seconde div
+
+  const secondInnerCentralRow = document.querySelector('div');
+  secondInnerCentralRow.innerText = 'shadow p-3 mb-5 bg-body rounded';
+  mainCentralRow.appendChild(secondInnerCentralRow);
+
+  // Ajout d'un titre dans la seconde div
+
+  const secondCentralTitleTask = document.querySelector('h2');
+  secondCentralTitleTask.innerText = 'Contenu';
+  mainCentralRow.appendChild(secondCentralTitleTask);
+
+
+ // ---------------------------------------------------------------------------
+
+  // Création de la colonne de droite
+
+ const mainRightRow = document.querySelector('div');
+ mainRightRow.className = 'col-2 colonneRight';
+ mainWrapper.appendChild(mainRightRow);
+ 
+ // Création de la première section 
+
+ const firstInnerRightRow = document.querySelector('div');
+ firstInnerRightRow.className = 'shadow mb-5 bg-body rounded';
+ firstInnerRightRow.id = 'innerColRight';
+ // Il faut encore ajouter les ennemis !
+ mainWrapper.appendChild(firstInnerRightRow);
+
+ // Création de la seconde section
+
+ const secondInnerRightRow = document.querySelector('div');
+ secondInnerRightRow.className = 'd-flex justify-content-between shadow mb-5 bg-body rounded';
+ secondInnerRightRow.id = 'innerColRight2';
+ mainRightRow.appendChild(secondInnerRightRow);
+
+ // Rajout de la div pour l'image
+ const divUser = document.querySelector('div');
+ divUser.id = 'userPicture';
+ // Rajout de l'image
+ const image = new Image();
+ image.src = userPicture;
+ divUser.appendChild(image);
+ secondInnerRightRow.appendChild(divUser);
+
+ // Rajout de la div pour les progressbar
+ const divProgressBares = document.querySelector('div');
+ divProgressBares.id = 'progressesBar';
+secondInnerRightRow.appendChild(divProgressBares);
+
+// Ajout de la première barre de progression
+
+const divFirstProgressBar = document.querySelector('div');
+divFirstProgressBar.className = 'progress';
+const firstProgressBar = document.querySelector('div');
+firstProgressBar.className ='progress-bar bg-success progress-bar-striped progress-bar-animated'; // Comment faire le reste des éléments ?
+firstProgressBar.innerText = '25%';
+divProgressBares.appendChild(divFirstProgressBar);
+divFirstProgressBar.appendChild(firstProgressBar);
+
+// Ajout de la première barre de progression
+
+const divSecondProgressBar = document.querySelector('div');
+divSecondProgressBar.className = 'progress';
+const secondProgressBar = document.querySelector('div');
+secondProgressBar.className ='progress-bar bg-success progress-bar-striped progress-bar-animated'; // Comment faire le reste des éléments ?
+secondProgressBar.innerText = '25%';
+divProgressBares.appendChild(divSecondProgressBar);
+divSecondProgressBar.appendChild(secondProgressBar);
+
+
+// FIN  
 };
+
       
 async function onLogin(e) {
   e.preventDefault();
