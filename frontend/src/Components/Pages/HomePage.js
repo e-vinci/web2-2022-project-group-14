@@ -326,7 +326,7 @@ const divSecondProgressBar = document.querySelector('div');
 divSecondProgressBar.className = 'progress';
 const secondProgressBar = document.querySelector('div');
 secondProgressBar.className ='progress-bar bg-success progress-bar-striped progress-bar-animated'; // Comment faire le reste des éléments ?
-secondProgressBar.innerText = '25%';
+secondProgressBar.innerText = '75%';
 divProgressBares.appendChild(divSecondProgressBar);
 divSecondProgressBar.appendChild(secondProgressBar);
 
