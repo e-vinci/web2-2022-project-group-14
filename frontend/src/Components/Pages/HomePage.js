@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
-import {setAuthenticatedUser} from '../../utils/auths'
-import Navigate from '../Router/Navigate'
+// import {setAuthenticatedUser} from '../../utils/auths'
+// import Navigate from '../Router/Navigate'
 import userPicture from '../../img/profile.png';
 
 const homePage = `
@@ -48,8 +48,8 @@ const homePage = `
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body"> 
-
+      <div class="modal-body">
+      
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="usename" id="username" required>
         <br>
@@ -153,10 +153,9 @@ const homePage = `
 
 const HomePage = () => {
   const main = document.querySelector('main');
-  /*
+  
   main.innerHTML = homePage;
-
-  */
+  
 
 // ---------------------------------------------------------------------------
 
@@ -181,7 +180,6 @@ const HomePage = () => {
   secondInnerLeftRow.className ='shadow mb-5 bg-body rounded';
   secondInnerLeftRow.id = 'innerColLeft2';
   mainLeftRow.appendChild(secondInnerLeftRow); // Rattachement de la seconde section dans la colonne de gauche
-
 
  // ---------------------------------------------------------------------------
 
@@ -224,7 +222,6 @@ const HomePage = () => {
   labelRadioCheck1.innerText = 'Default radio';
   divBouttonRadio1.appendChild(labelRadioCheck1);
 
-
   const divBouttonRadio2= document.querySelector('div'); // Création de la div du second boutton radio
   divBouttonRadio2.className = 'form-check';
   secondInnerLeftRow.appendChild(divBouttonRadio2);
@@ -237,14 +234,11 @@ const HomePage = () => {
   /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
   divBouttonRadio2.appendChild(inputRadioCheck2);
 
-
   const labelRadioCheck2 = document.querySelector('label'); // Création du label du bouton radio 2 !
   labelRadioCheck1.className = 'form-check-label';
   /* labelRadioCheck1.for || Comment fait on le for ? */
   labelRadioCheck2.innerText = 'Default radio';
   divBouttonRadio2.appendChild(labelRadioCheck2);
-
-
 
  // ---------------------------------------------------------------------------
 
@@ -339,8 +333,8 @@ divSecondProgressBar.appendChild(secondProgressBar);
 
 // FIN  
 };
-
-      
+    
+/*
 async function onLogin(e) {
   e.preventDefault();
 
@@ -357,20 +351,67 @@ async function onLogin(e) {
       'Content-Type': 'application/json',
     },
   };
+};
+*/
 
-  const response = await fetch('/api/auths/login', options);
+
+
+async function login(e) {
+  e.preventDefault();
+
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+
+  const jsonOptions = {
+    method: 'GET',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch('/api/auths', jsonOptions);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  const loggedUser = await response.json();
+  
+  // eslint-disable-next-line no-console
+  console.log('task add : ',loggedUser);
+}
+
+
+async function register(e) {
+  e.preventDefault();
+
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+
+  const jsonOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch('/api/auths', jsonOptions);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
   const authenticatedUser = await response.json();
-
-  console.log('Authenticated user : ', authenticatedUser);
-
-  setAuthenticatedUser(authenticatedUser);
-
-  Navigate('/');
+  
+  // eslint-disable-next-line no-console
+  console.log('User add : ', authenticatedUser);
 }
 
-onLogin();
+login();
+register();
 
 export default HomePage;
