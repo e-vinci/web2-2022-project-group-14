@@ -1,5 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { token } from 'morgan';
 import '../../stylesheets/main.css';
+
+const idUser = token.username; // Prends le Id du username login
 
 const AddTaskPage = () => {
     renderTaskForm();
@@ -62,6 +65,7 @@ function renderTaskForm() {
         title,
         content,
         difficulte,
+        idUser : "1"
       }),
       headers: {
         'Content-Type': 'application/json',
