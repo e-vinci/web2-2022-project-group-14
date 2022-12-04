@@ -1,6 +1,9 @@
+const jwtDecode = require('jwt-decode')
+
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
+
 
 const jwtSecret = 'ilovemytasks!';
 const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 1000 = 24h
@@ -31,6 +34,9 @@ function login(username, password) {
     token,
   };
 
+  const id = jwtDecode(token).username;
+  console.log(id);
+
   return authenticatedUser;
 }
 
@@ -50,6 +56,8 @@ function register(username, password) {
     username,
     token,
   };
+
+  console.log
 
   return authenticatedUser;
 }
