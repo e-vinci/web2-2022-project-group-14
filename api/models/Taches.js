@@ -15,12 +15,14 @@ const listTask = [
       title: 'Tache : 1',
       content: 'premiere tache',
       difficulte: '1',
+      idUser : '1'
     },
     {
       id: 2,
       title: 'Tache : 2',
       content: 'deuxieme tache',
       difficulte: '2',
+      idUser : '2'
     },
   ];
 
@@ -31,7 +33,7 @@ return list;
 }
 
 /* Function -> Create a task */
-function createOnetask( title, content, difficulte) {
+function createOnetask( title, content, difficulte, idUser) {
     const list = parse(jsonDbPath, listTask);
   
     const createdTask = {
@@ -39,6 +41,7 @@ function createOnetask( title, content, difficulte) {
       title,
       content,
       difficulte,
+      idUser, 
     };
   
     list.push(createdTask);

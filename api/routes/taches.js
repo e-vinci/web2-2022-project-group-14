@@ -20,10 +20,13 @@ router.post('/', (req, res) => {
     const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
     const content = req?.body?.content?.length !== 0 ? req.body.content : undefined;
     const difficulte = req?.body?.difficulte?.length !== 0 ? req.body.difficulte : undefined;
+    const idUser = req?.body?.idUser?.length !== 0 ? req.body.idUser : undefined;
 
-    if (!title || !content || !difficulte) return res.sendStatus(400); // error code 'Bad request'
+    console.log(idUser);
+
+    if (!title || !content || !difficulte || !idUser) return res.sendStatus(400); // error code 'Bad request'
     
-    const createdTask = createOnetask(title, content, difficulte);
+    const createdTask = createOnetask(title, content, difficulte, idUser);
     return res.json(createdTask);
 })
 
