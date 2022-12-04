@@ -10,6 +10,8 @@ const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 10
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
 
+let authenticatedUser = null;
+
 const defaultUsers = [
   {
     id: 1,
@@ -36,13 +38,10 @@ function login(username, password) {
     },
   );
 
-  const authenticatedUser = {
+  authenticatedUser = {
     username,
     token,
   };
-
-  const id = jwtDecode(token).username;
-  console.log(id);
 
   return authenticatedUser;
 }
@@ -51,18 +50,29 @@ function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
 
-  createOneUser(username, password);
+  const createdUser = createOneUser(username, password);
 
+  // create a JWT token
   const token = jwt.sign(
-    { username }, // session data added to the payload (payload : part 2 of a JWT)
-    jwtSecret, // secret used for the signature (signature part 3 of a JWT)
-    { expiresIn: lifetimeJwt }, // lifetime of the JWT (added to the JWT payload)
+    {
+      id: createdUser.id,
+      username: createdUser.username,
+    },
+    jwtSecret,
+    {
+      expiresIn: lifetimeJwt,
+    },
   );
 
-  const authenticatedUser = {
+  authenticatedUser = {
     username,
     token,
   };
+
+  // decode token to get id
+  const decodedToken = jwtDecode(token, jwtSecret);
+  const {id} = decodedToken;
+  console.log("id", id);
 
   return authenticatedUser;
 }
@@ -100,8 +110,14 @@ function getNextId() {
   return nextId;
 }
 
+function returnUser() {
+  return authenticatedUser;
+}
+
+
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
+  returnUser,
 };

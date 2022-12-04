@@ -12,8 +12,7 @@ Content-Type: application/json
 {
     "title":"tache de test titre",
     "content":"tache de test",
-    "difficulte":"1",
-    "idUser":1
+    "difficulte":"1"
 }
 
 
