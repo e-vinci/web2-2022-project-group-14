@@ -23,10 +23,17 @@ function login(username, password) {
   if (!userFound) return undefined;
   if (userFound.password !== password) return undefined;
 
+  
+  // create a JWT token
   const token = jwt.sign(
-    { username }, // session data added to the payload (payload : part 2 of a JWT)
-    jwtSecret, // secret used for the signature (signature part 3 of a JWT)
-    { expiresIn: lifetimeJwt }, // lifetime of the JWT (added to the JWT payload)
+    {
+      id: userFound.id,
+      username: userFound.username,
+    },
+    jwtSecret,
+    {
+      expiresIn: lifetimeJwt,
+    },
   );
 
   const authenticatedUser = {
@@ -56,8 +63,6 @@ function register(username, password) {
     username,
     token,
   };
-
-  console.log
 
   return authenticatedUser;
 }
