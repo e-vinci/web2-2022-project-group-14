@@ -1,11 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// eslint-disable-next-line import/no-relative-packages
-import { register, login } from '../../../../api/models/users';
-// import { use } from '../../../../api/routes/auths';
 import '../../stylesheets/main.css';
-import {setAuthenticatedUser} from '../../utils/auths'
+// import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
-// import userPicture from '../../img/profile.png';
+import userPicture from '../../img/profile.png';
 
 const homePage = `
 
@@ -158,10 +155,9 @@ const homePage = `
 
 const HomePage = () => {
   const main = document.querySelector('main');
-  /*
+  
   main.innerHTML = homePage;
-
-  */
+  
 
 // ---------------------------------------------------------------------------
 
@@ -188,6 +184,13 @@ const HomePage = () => {
   mainLeftRow.appendChild(secondInnerLeftRow); // Rattachement de la seconde section dans la colonne de gauche
 
  // ---------------------------------------------------------------------------
+
+
+   // Ici il va falloir mettre le code pour récupérer la liste des tâches
+
+
+// ---------------------------------------------------------------------------
+
 
   // Création du formulaire de création de tâche dans la seconde partie de la colonne de gauche
 
@@ -241,6 +244,96 @@ const HomePage = () => {
 
  // ---------------------------------------------------------------------------
 
+  // Création de la colonne centrale
+
+  const mainCentralRow = document.querySelector('div');
+  mainCentralRow.className = 'col-7 colonne';
+  mainWrapper.appendChild(mainCentralRow);
+
+  // Création de la div qui contiendra le titre de la tâche que l'on édite
+
+  const firstInnerCentralRow = document.querySelector('div');
+  firstInnerCentralRow.className = 'shadow p-3 mb-5 bg-body rounded';
+  mainCentralRow.appendChild(firstInnerCentralRow);
+
+  // Ajout du titre dans cette première div
+
+  const firstCentralTitleTask = document.querySelector('h2');
+  firstCentralTitleTask.innerText = 'Tâche n°1'; // Provisoire mais on doit récupérer la tâche qu'on veut éditer !
+  firstInnerCentralRow.appendChild(firstCentralTitleTask);
+  
+  // Création de la seconde div
+
+  const secondInnerCentralRow = document.querySelector('div');
+  secondInnerCentralRow.innerText = 'shadow p-3 mb-5 bg-body rounded';
+  mainCentralRow.appendChild(secondInnerCentralRow);
+
+  // Ajout d'un titre dans la seconde div
+
+  const secondCentralTitleTask = document.querySelector('h2');
+  secondCentralTitleTask.innerText = 'Contenu';
+  mainCentralRow.appendChild(secondCentralTitleTask);
+
+
+ // ---------------------------------------------------------------------------
+
+  // Création de la colonne de droite
+
+ const mainRightRow = document.querySelector('div');
+ mainRightRow.className = 'col-2 colonneRight';
+ mainWrapper.appendChild(mainRightRow);
+ 
+ // Création de la première section 
+
+ const firstInnerRightRow = document.querySelector('div');
+ firstInnerRightRow.className = 'shadow mb-5 bg-body rounded';
+ firstInnerRightRow.id = 'innerColRight';
+ // Il faut encore ajouter les ennemis !
+ mainWrapper.appendChild(firstInnerRightRow);
+
+ // Création de la seconde section
+
+ const secondInnerRightRow = document.querySelector('div');
+ secondInnerRightRow.className = 'd-flex justify-content-between shadow mb-5 bg-body rounded';
+ secondInnerRightRow.id = 'innerColRight2';
+ mainRightRow.appendChild(secondInnerRightRow);
+
+ // Rajout de la div pour l'image
+ const divUser = document.querySelector('div');
+ divUser.id = 'userPicture';
+ // Rajout de l'image
+ const image = new Image();
+ image.src = userPicture;
+ divUser.appendChild(image);
+ secondInnerRightRow.appendChild(divUser);
+
+ // Rajout de la div pour les progressbar
+ const divProgressBares = document.querySelector('div');
+ divProgressBares.id = 'progressesBar';
+secondInnerRightRow.appendChild(divProgressBares);
+
+// Ajout de la première barre de progression
+
+const divFirstProgressBar = document.querySelector('div');
+divFirstProgressBar.className = 'progress';
+const firstProgressBar = document.querySelector('div');
+firstProgressBar.className ='progress-bar bg-success progress-bar-striped progress-bar-animated'; // Comment faire le reste des éléments ?
+firstProgressBar.innerText = '25%';
+divProgressBares.appendChild(divFirstProgressBar);
+divFirstProgressBar.appendChild(firstProgressBar);
+
+// Ajout de la première barre de progression
+
+const divSecondProgressBar = document.querySelector('div');
+divSecondProgressBar.className = 'progress';
+const secondProgressBar = document.querySelector('div');
+secondProgressBar.className ='progress-bar bg-success progress-bar-striped progress-bar-animated'; // Comment faire le reste des éléments ?
+secondProgressBar.innerText = '75%';
+divProgressBares.appendChild(divSecondProgressBar);
+divSecondProgressBar.appendChild(secondProgressBar);
+
+
+// FIN  
 };
     
 /*
@@ -263,45 +356,64 @@ async function onLogin(e) {
 };
 */
 
-const Login = () => {
-  const main = document.querySelector('main');
-  main.innerHTML = homePage;
+
+
+async function login(e) {
+  e.preventDefault();
 
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
+
+  const jsonOptions = {
+    method: 'GET',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch('/api/auths', jsonOptions);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  const loggedUser = await response.json();
   
-  main.addEventListener('submit', async (e) => {
+  // eslint-disable-next-line no-console
+  console.log('task add : ',loggedUser);
+}
+
+
+async function register(e) {
   e.preventDefault();
-
-    await login(username, password)
-  });
-};
-
-const Register = () => {
-  const main = document.querySelector('main');
-  main.innerHTML = homePage;
 
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-  
-  main.addEventListener('submit', async (e) => {
-  e.preventDefault();
 
-    await register(username, password)
-  });
-};
+  const jsonOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  const response = await fetch('/api/auths/login');
+  const response = await fetch('/api/auths', jsonOptions);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
   const authenticatedUser = await response.json();
+  
+  // eslint-disable-next-line no-console
+  console.log('User add : ', authenticatedUser);
+}
 
-  console.log('Authenticated user : ', authenticatedUser);
-
-  setAuthenticatedUser(authenticatedUser);
-
-Login();
-Register();
+login();
+register();
 
 export default HomePage;
