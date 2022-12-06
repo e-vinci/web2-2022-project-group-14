@@ -10,8 +10,8 @@ POST {{baseUrl}}/taches/
 Content-Type: application/json
 
 {
-    "title":"on est con ? ",
-    "content":"AAA de test",
+    "title":"on est conAAA ? ",
+    "content":"AA112211A de test",
     "difficulte":"3"
 }
 

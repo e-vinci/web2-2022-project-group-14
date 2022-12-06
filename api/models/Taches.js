@@ -18,9 +18,9 @@ const listTask = [];
 /* Function -> Display all the task */
 function readAllTask() {
   const list = parse(jsonDbPath, listTask);
-  // check if the id is null -> error 
-  list.filter((idUser) => idUser.id === returnId())
-  return list;
+  const listfiltred = list.filter((idUser) => idUser.idUser === returnId())
+  console.log(returnId());
+  return listfiltred;
 }
 
 /* Function -> Create a task */
@@ -44,7 +44,7 @@ function createOnetask( title, content, difficulte) {
 
 /* Function -> Remove a Task from the Task List with the Task ID */
 function removeATask(id){
-  const idtask  = parseInt(id, 10); // Transform the string id (object) into integer
+  const idtask  = parseInt(id, 10);
   const list = parse(jsonDbPath, listTask);
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log(foundIndex);
@@ -74,6 +74,19 @@ function displayTask(id){
   console.log(task);
   serialize(jsonDbPath, list);
   return task;
+}
+
+/* Function -> Valide a Task by the Task ID */
+function valideATask(id){
+  const idtask  = parseInt(id, 10); 
+  const list = parse(jsonDbPath, listTask);
+  const foundIndex = list.findIndex((task) => task.id === idtask);
+  console.log('FoundIndex = ');
+  console.log(foundIndex);
+  if (foundIndex < 0) return undefined;
+
+  const valide = 
+
 }
 
 
