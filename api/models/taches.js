@@ -18,7 +18,7 @@ const listTask = [];
 /* Function -> Display all the task */
 function readAllTask() {
   const list = parse(jsonDbPath, listTask);
-  const listfiltred = list.filter((idUser) => idUser.idUser === returnId())
+  const listfiltred = list.filter((task) => task.idUser === returnId())
   console.log(returnId());
   return listfiltred;
 }
@@ -44,22 +44,25 @@ function createOnetask( title, content, difficulte) {
 
 /* Function -> Remove a Task from the Task List with the Task ID */
 function removeATask(id){
-  const idtask  = parseInt(id, 10);
+  const idtask  = id;
+  console.log("idtask : ", idtask);
   const list = parse(jsonDbPath, listTask);
+  console.log("list : ", list);
   const foundIndex = list.findIndex((task) => task.id === idtask);
-  console.log(foundIndex);
+  console.log("foundIndex : ", foundIndex);
   if (foundIndex < 0) return undefined;
   const deleteTask  = list.splice(foundIndex, 1);
+  console.log("deleteTask", deleteTask);
   const deleteTaskDiplsay = deleteTask[0];
+  console.log("deleteTaskDiplsay", deleteTaskDiplsay);
   serialize(jsonDbPath, list);
-  console.log(deleteTaskDiplsay)
   return deleteTaskDiplsay;
   ;
 }
 
 /* Function -> Display a specific Task with the Task ID */
 function displayTask(id){
-  const idtask  = parseInt(id, 10); 
+  const idtask  = id;
   const list = parse(jsonDbPath, listTask);
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log('FoundIndex = ');
