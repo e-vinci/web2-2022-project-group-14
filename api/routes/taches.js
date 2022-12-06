@@ -5,7 +5,8 @@ const {
     readAllTask,
     createOnetask,
     removeATask,
-    displayTask
+    displayTask,
+    valideATask
 } = require('../models/taches');
 
 const router = express.Router();
@@ -42,5 +43,12 @@ module.exports = router;
 router.get('/:id', (req,res) => {
     const task  = displayTask(req.params.id);
     return res.json(task);
+})
+
+router.post('/valide/:id', (req,res) => {
+    console.log(req.params.id);
+    const valide = valideATask(req.params.id);
+    if (!valideATask) return res.sendStatus(404);
+    return res.json(valide);
 })
 

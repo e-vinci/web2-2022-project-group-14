@@ -22,3 +22,5 @@ DELETE {{baseUrl}}/taches/1
 ### Display a specific task with the Task ID
 GET {{baseUrl}}/taches/fd11d28a-4469-433d-a4d1-56f46f52dd11
 
+### Valide a Task with the Task ID
+POST {{baseUrl}}/taches/valide/
