@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnUser } = require('./users');
+const { returnUser, returnId } = require('./users');
 
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
@@ -13,44 +13,26 @@ const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 // eslint-disable-next-line no-unused-vars
 const difficule = ['1','2','3'];
 
-const listTask = [
-    {
-      id: uuidv4(),
-      title: 'Tache : 1',
-      content: 'premiere tache',
-      difficulte: '1',
-      idUser : 1
-    },
-    {
-      id: uuidv4(),
-      title: 'Tache : 2',
-      content: 'deuxieme tache',
-      difficulte: '2',
-      idUser : 2
-    },
-  ];
+const listTask = [];
 
 /* Function -> Display all the task */
 function readAllTask() {
-const list = parse(jsonDbPath, listTask);
-return list;
+  const list = parse(jsonDbPath, listTask);
+  const listfiltred = list.filter((idUser) => idUser.idUser === returnId())
+  console.log(returnId());
+  return listfiltred;
 }
 
 /* Function -> Create a task */
 function createOnetask( title, content, difficulte) {
     const list = parse(jsonDbPath, listTask);
-    // get user id from token
-    const decodedToken = jwtDecode(returnUser(), 'ilovemytasks!');
-    const {idUser} = decodedToken;
-    console.log("id", idUser);
-   
 
     const createdTask = {
       id : uuidv4(),
       title,
       content,
       difficulte,
-      idUser
+      idUser : returnId()
     };
   
     list.push(createdTask);
@@ -62,7 +44,7 @@ function createOnetask( title, content, difficulte) {
 
 /* Function -> Remove a Task from the Task List with the Task ID */
 function removeATask(id){
-  const idtask  = parseInt(id, 10); // Transform the string id (object) into integer
+  const idtask  = parseInt(id, 10);
   const list = parse(jsonDbPath, listTask);
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log(foundIndex);
@@ -92,6 +74,19 @@ function displayTask(id){
   console.log(task);
   serialize(jsonDbPath, list);
   return task;
+}
+
+/* Function -> Valide a Task by the Task ID */
+function valideATask(id){
+  const idtask  = parseInt(id, 10); 
+  const list = parse(jsonDbPath, listTask);
+  const foundIndex = list.findIndex((task) => task.id === idtask);
+  console.log('FoundIndex = ');
+  console.log(foundIndex);
+  if (foundIndex < 0) return undefined;
+
+  const valide = 
+
 }
 
 

@@ -6,7 +6,7 @@ const {
     createOnetask,
     removeATask,
     displayTask
-} = require('../models/Taches');
+} = require('../models/taches');
 
 const router = express.Router();
 
@@ -43,3 +43,4 @@ router.get('/:id', (req,res) => {
     const task  = displayTask(req.params.id);
     return res.json(task);
 })
+

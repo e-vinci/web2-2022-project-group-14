@@ -53,7 +53,7 @@ function renderTaskForm() {
     form.addEventListener('submit', addTask);
   }
 
-
+  // Add task 
   async function addTask(e) {
     e.preventDefault();
   
@@ -67,7 +67,7 @@ function renderTaskForm() {
         title,
         content,
         difficulte,
-        idUser : "1"
+        idUser
       }),
       headers: {
         'Content-Type': 'application/json',

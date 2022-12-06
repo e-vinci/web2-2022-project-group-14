@@ -114,10 +114,18 @@ function returnUser() {
   return authenticatedUser;
 }
 
+function returnId() {
+  const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
+  const {id} = decodedToken;
+  console.log("id", id);
+  return id;
+}
+
 
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   returnUser,
+  returnId,
 };

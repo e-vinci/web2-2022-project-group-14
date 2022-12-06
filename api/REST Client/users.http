@@ -7,7 +7,7 @@ POST {{baseUrl}}/auths/register/
 Content-Type: application/json
 
 {
-    "username": "nomRandom12",
+    "username": "nomRandom3",
     "password": "test"
 }
 
@@ -16,6 +16,6 @@ POST {{baseUrl}}/auths/login/
 Content-Type: application/json
  
 {
-    "username" : "nomRandom",
+    "username" : "nomRandom3",
     "password" : "test"
 }
