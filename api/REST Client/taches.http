@@ -10,9 +10,9 @@ POST {{baseUrl}}/taches/
 Content-Type: application/json
 
 {
-    "title":"tache de test titre",
-    "content":"tache de test",
-    "difficulte":"1"
+    "title":"on est con ? ",
+    "content":"AAA de test",
+    "difficulte":"3"
 }
 
 
@@ -20,5 +20,5 @@ Content-Type: application/json
 DELETE {{baseUrl}}/taches/1
 
 ### Display a specific task with the Task ID
-GET {{baseUrl}}/taches/1
+GET {{baseUrl}}/taches/fd11d28a-4469-433d-a4d1-56f46f52dd11
 

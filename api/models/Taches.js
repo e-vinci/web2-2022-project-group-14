@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnUser } = require('./users');
+const { returnUser, returnId } = require('./users');
 
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
@@ -13,44 +13,26 @@ const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 // eslint-disable-next-line no-unused-vars
 const difficule = ['1','2','3'];
 
-const listTask = [
-    {
-      id: uuidv4(),
-      title: 'Tache : 1',
-      content: 'premiere tache',
-      difficulte: '1',
-      idUser : 1
-    },
-    {
-      id: uuidv4(),
-      title: 'Tache : 2',
-      content: 'deuxieme tache',
-      difficulte: '2',
-      idUser : 2
-    },
-  ];
+const listTask = [];
 
 /* Function -> Display all the task */
 function readAllTask() {
-const list = parse(jsonDbPath, listTask);
-return list;
+  const list = parse(jsonDbPath, listTask);
+  // check if the id is null -> error 
+  list.filter((idUser) => idUser.id === returnId())
+  return list;
 }
 
 /* Function -> Create a task */
 function createOnetask( title, content, difficulte) {
     const list = parse(jsonDbPath, listTask);
-    // get user id from token
-    const decodedToken = jwtDecode(returnUser(), 'ilovemytasks!');
-    const {idUser} = decodedToken;
-    console.log("id", idUser);
-   
 
     const createdTask = {
       id : uuidv4(),
       title,
       content,
       difficulte,
-      idUser
+      idUser : returnId()
     };
   
     list.push(createdTask);
