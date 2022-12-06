@@ -1,11 +1,10 @@
+
 /* eslint-disable spaced-comment */
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import { token } from 'morgan';
 import '../../stylesheets/main.css';
 
 
-//const idUser = token.username; // Prends le Id du username login
 
 const AddTaskPage = () => {
     renderTaskForm();
@@ -67,8 +66,7 @@ function renderTaskForm() {
       body: JSON.stringify({
         title,
         content,
-        difficulte,
-        //idUser
+        difficulte
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -86,32 +84,6 @@ function renderTaskForm() {
     console.log('task add : ',newTask);
 
   }
-
-
-  // eslint-disable-next-line no-unused-vars
-  const listTask = [
-    {
-      id: 1,
-      title: 'Tache : 1',
-      content: 'premiere tache',
-      difficulte: '1',
-    },
-    {
-      id: 2,
-      title: 'Tache : 2',
-      content: 'deuxieme tache',
-      difficulte: '2',
-    },
-    {
-      id: 3,
-      title: 'Tache : 3',
-      content: 'troisieme tache',
-      difficulte: '2',
-    },
-  ];
-
-
-
 
 
 export default AddTaskPage;

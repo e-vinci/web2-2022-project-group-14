@@ -4,6 +4,7 @@ import '../../stylesheets/main.css';
 // import Navigate from '../Router/Navigate'
 import userPicture from '../../img/profile.png';
 
+
 const homePage = `
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -72,49 +73,25 @@ const homePage = `
 <div class="d-flex justify-content-between">
   <div class="col-2 colonneLeft">
     <div class="shadow mb-5 bg-body rounded" id="innerColLeft">
-      <p>Tâche n°1</p>
-      <p>Tâche n°2</p>
-      <p>Tâche n°3</p>
-      <p>Tâche n°4</p>
-      <p>Tâche n°5</p>
-      <p>Tâche n°6</p>
-      <p>Tâche n°7</p>
-      <p>Tâche n°8</p>
-      <p>Tâche n°9</p>
-      <p>Tâche n°10</p>
-      <p>Tâche n°11</p>
-      <p>Tâche n°12</p>
-      <p>Tâche n°13</p>
-      <p>Tâche n°14</p>
-      <p>Tâche n°15</p>
+    <table>
+    </table>    
     </div>
     <div class="shadow mb-5 bg-body rounded" id="innerColLeft2">
       <div>
         <h3>Créer tâche :</h3>
-        <input class="form-control form-control-sm" type="text" placeholder="Créer une tâche" aria-label=".form-control-sm example">
-      </div>
-      <div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Default radio
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Default checked radio
-          </label>
-        </div>
+        <form id="taskForm">
       </div>
     </div>
   </div>
+  
   <div class="col-7 colonne">
     <div class="shadow p-3 mb-5 bg-body rounded">
-      <p>Tâche n°1</p>
+    <p >Tâche Selectionée</p>
+    <p id="displayTache" ></p>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded">
-      <p>contenu</p>
+      <p>Contenu de la tache </p>
+      <p id="displayContenu" ></p>
     </div>
   </div>
   <div class="col-2 colonneRight">
@@ -158,7 +135,9 @@ const HomePage = () => {
   
   main.innerHTML = homePage;
   
-
+  
+  getJSONTasksAndDisplay();
+  renderTaskForm();
 // ---------------------------------------------------------------------------
 
  // Création de la partie qui contiendra les 3 sections
@@ -186,32 +165,109 @@ const HomePage = () => {
  // ---------------------------------------------------------------------------
 
 
-  // get the element of a table
-  const table = document.querySelector('table');
-  table.className = 'table table-striped';
-  firstInnerLeftRow.appendChild(table);
-  // get the element of a thead
-  const thead = document.querySelector('thead');
-  thead.className = 'thead-dark';
-  table.appendChild(thead);
-  // get the element of a tr
-  const tr = document.querySelector('tr');
-  thead.appendChild(tr);
-  // get the element of a th
-  const th = document.querySelector('th');
-  th.scope = 'col';
-  th.innerText = 'Tâche';
-  tr.appendChild(th);
-  // get the element of a tbody
-  const tbody = document.querySelector('tbody');
-  table.appendChild(tbody);
-  // get the element of a tr
-  const tr2 = document.querySelector('tr');
-  tbody.appendChild(tr2);
-  // get the element of a td
-  const td = document.querySelector('td');
-  td.innerText = 'Tâche n°1'; // Provisoire mais on doit récupérer la tâche qu'on veut éditer !
-  tr2.appendChild(td);
+
+  async function getJSONTasksAndDisplay() {
+    
+      const response = await fetch('/api/taches');
+      const data = await response.json();
+    
+      
+      // Create a table element
+      const table = document.querySelector('table');
+  
+      // eslint-disable-next-line no-restricted-syntax
+      for(const key of Object.keys(data)) {
+
+        const row = document.createElement('tr');
+        const valueCel = document.createElement('td');
+        valueCel.datavalue = data[key];
+        valueCel.textContent = JSON.stringify(data[key].title);
+        // eslint-disable-next-line func-names
+        valueCel.addEventListener("click", function() { 
+          document.getElementById("displayTache").innerHTML = this.datavalue.title;
+          document.getElementById("displayContenu").innerHTML = this.datavalue.content;
+        });
+        row.appendChild(valueCel);
+
+        table.appendChild(row);
+      }
+  }
+  
+  function renderTaskForm() {
+    const divForm = document.getElementById('innerColLeft2');
+    const form = document.createElement('form');
+    form.className = 'p-5';
+    const title = document.createElement('input');
+    title.type = 'text';
+    title.id = 'title';
+    title.placeholder = 'title of your task';
+    title.required = true;
+    title.className = 'form-control mb-3';
+    const content = document.createElement('input');
+    content.type = 'text';
+    content.id = 'content';
+    content.required = true;
+    content.placeholder = 'Content of your task';
+    content.className = 'form-control mb-3';
+    const submit = document.createElement('input');
+    submit.value = 'ajouter tache';
+    submit.type = 'submit';
+    submit.className = 'btn btn-danger';
+    const difficulte1 = document.createElement('select');
+    difficulte1.id = 'select';
+    const option1 = document.createElement('option');
+    option1.value = '1';
+    option1.text = 'difficulte 1';
+    const option2 = document.createElement('option');
+    option2.value = '2';
+    option2.text = 'difficulte 2';
+    const option3 = document.createElement('option');
+    option3.value = '3';
+    option3.text = 'difficulte 3';
+    difficulte1.appendChild(option1);
+    difficulte1.appendChild(option2);
+    difficulte1.appendChild(option3);
+    difficulte1.className = 'form-control mb-3';
+    form.appendChild(title);
+    form.appendChild(content);
+    form.appendChild(difficulte1);
+    form.appendChild(submit);
+    divForm.appendChild(form);
+    form.addEventListener('submit', addTask );
+  
+  }
+
+  // Add task 
+  async function addTask(e) {
+    e.preventDefault();
+  
+    const title = document.querySelector('#title').value;
+    const content = document.querySelector('#content').value;
+    const difficulte = document.querySelector('#select').value;
+  
+    const jsonOptions = {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        content,
+        difficulte
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  
+    const response = await fetch('/api/taches', jsonOptions);
+  
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+  
+    const newTask = await response.json();
+    
+    
+    // eslint-disable-next-line no-console
+    console.log('task add : ',newTask);
+
+  }
 
 
 // ---------------------------------------------------------------------------
@@ -445,5 +501,6 @@ async function register(e) {
 
 login();
 register();
+
 
 export default HomePage;

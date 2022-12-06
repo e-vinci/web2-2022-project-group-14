@@ -28,7 +28,9 @@ main{
     padding: 10px;
 }
 
-
+table tr td  {
+    border: 1px solid black;
+  }
 
 /*.colonne{
 margin-left: 1%;
