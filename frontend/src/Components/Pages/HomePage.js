@@ -184,7 +184,32 @@ const HomePage = () => {
  // ---------------------------------------------------------------------------
 
 
-   // Ici il va falloir mettre le code pour récupérer la liste des tâches
+  // get the element of a table
+  const table = document.querySelector('table');
+  table.className = 'table table-striped';
+  firstInnerLeftRow.appendChild(table);
+  // get the element of a thead
+  const thead = document.querySelector('thead');
+  thead.className = 'thead-dark';
+  table.appendChild(thead);
+  // get the element of a tr
+  const tr = document.querySelector('tr');
+  thead.appendChild(tr);
+  // get the element of a th
+  const th = document.querySelector('th');
+  th.scope = 'col';
+  th.innerText = 'Tâche';
+  tr.appendChild(th);
+  // get the element of a tbody
+  const tbody = document.querySelector('tbody');
+  table.appendChild(tbody);
+  // get the element of a tr
+  const tr2 = document.querySelector('tr');
+  tbody.appendChild(tr2);
+  // get the element of a td
+  const td = document.querySelector('td');
+  td.innerText = 'Tâche n°1'; // Provisoire mais on doit récupérer la tâche qu'on veut éditer !
+  tr2.appendChild(td);
 
 
 // ---------------------------------------------------------------------------
@@ -240,6 +265,10 @@ const HomePage = () => {
   labelRadioCheck2.innerText = 'Default radio';
   divBouttonRadio2.appendChild(labelRadioCheck2);
 
+
+
+
+
  // ---------------------------------------------------------------------------
 
   // Création de la colonne centrale
@@ -286,6 +315,7 @@ const HomePage = () => {
  const firstInnerRightRow = document.querySelector('div');
  firstInnerRightRow.className = 'shadow mb-5 bg-body rounded';
  firstInnerRightRow.id = 'innerColRight';
+
  // Il faut encore ajouter les ennemis !
  mainWrapper.appendChild(firstInnerRightRow);
 
