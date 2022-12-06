@@ -5,6 +5,7 @@ const {
     readAllTask,
     createOnetask,
     removeATask,
+    displayTask
 } = require('../models/Taches');
 
 const router = express.Router();
@@ -35,3 +36,10 @@ router.delete('/:id', (req,res) => {
     return res.json(remove);
 })
 module.exports = router;
+
+
+/* Display a specific Task */
+router.get('/:id', (req,res) => {
+    const task  = displayTask(req.params.id);
+    return res.json(task);
+})

@@ -15,5 +15,10 @@ Content-Type: application/json
     "difficulte":"1"
 }
 
+
 ### Remove a task with the Task ID
 DELETE {{baseUrl}}/taches/1
+
+### Display a specific task with the Task ID
+GET {{baseUrl}}/taches/1
+

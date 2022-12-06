@@ -49,7 +49,9 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      
+       FATHER SUCKERS ! 
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
+
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="usename" id="username" required>
         <br>
