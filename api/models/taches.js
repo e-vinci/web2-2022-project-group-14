@@ -78,15 +78,8 @@ function displayTask(id){
 
 /* Function -> Valide a Task by the Task ID */
 function valideATask(id){
-  const idtask  = parseInt(id, 10); 
-  const list = parse(jsonDbPath, listTask);
-  const foundIndex = list.findIndex((task) => task.id === idtask);
-  console.log('FoundIndex = ');
-  console.log(foundIndex);
-  if (foundIndex < 0) return undefined;
-
-  
-  const valide = 
+  // ajouter la méthode qui incrémente les points de vie du joueur + incrémente les points de dégats
+  return removeATask(id);
 
 }
 
@@ -95,5 +88,6 @@ module.exports = {
     readAllTask,
     createOnetask,
     removeATask, 
-    displayTask
+    displayTask,
+    valideATask
   };
