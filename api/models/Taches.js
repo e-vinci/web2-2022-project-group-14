@@ -85,6 +85,7 @@ function valideATask(id){
   console.log(foundIndex);
   if (foundIndex < 0) return undefined;
 
+  
   const valide = 
 
 }
