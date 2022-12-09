@@ -1,10 +1,8 @@
-const jwtDecode = require('jwt-decode')
-
 const { v4: uuidv4 } = require('uuid');
 
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnUser, returnId } = require('./users');
+const { returnId } = require('./users');
 
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');

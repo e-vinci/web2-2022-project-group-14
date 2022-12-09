@@ -1,7 +1,7 @@
 const path = require('node:path');
-const { parse, serialize } = require('../utils/json');
 const { v4: uuidv4 } = require('uuid');
-const { returnId} = require('./users');
+const { parse, serialize } = require('../utils/json');
+const { returnId } = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
 
@@ -51,9 +51,10 @@ const listPlayerCharacters = [];
     return 0;
   }
 
-  function getXP(currentUserID, taskDifficulty, monsterLevel) {
+  function getXP(taskDifficulty, monsterLevel) {
     const list = parse(jsonDbPath, listPlayerCharacters	);
-    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === currentUserID);
+    // eslint-disable-next-line no-shadow
+    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === returnId);
     const taskXP = getTaskXP(taskDifficulty);
     const monsterXP = getMonsterXP(monsterLevel);
     const totalXP = taskXP + monsterXP;
@@ -61,7 +62,7 @@ const listPlayerCharacters = [];
     if (playerCharacter.currentXP >= playerCharacter.XPToLvlUp) {
       playerCharacter.level += 1;
       playerCharacter.currentXP = 0;
-      playerCharacter.XPToLvlUp = playerCharacter.XPToLvlUp * 1.3;
+      playerCharacter.XPToLvlUp *= 1.3;
       playerCharacter.maxHP += 5;
       playerCharacter.currentHP = playerCharacter.maxHP;
       playerCharacter.attack += 1;
