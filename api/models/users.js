@@ -1,4 +1,4 @@
-const jwtDecode = require('jwt-decode')
+const jwtDecode = require('jwt-decode');
 
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
