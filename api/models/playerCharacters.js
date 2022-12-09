@@ -2,6 +2,7 @@ const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
 const { v4: uuidv4 } = require('uuid');
 const { returnId } = require('./users');
+const { takeCoverage } = require('node:v8');
 
 const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
 
@@ -11,7 +12,7 @@ const listPlayerCharacters = [];
   function createPlayerCharacter(currentUserID) {
     const list = parse(jsonDbPath, listPlayerCharacters	);
 
-    const newPlayerCharacter = {
+    const PlayerCharacter = {
       id: uuidv4(),
       userId: currentUserID,
       maxHP: 10,
@@ -22,11 +23,55 @@ const listPlayerCharacters = [];
       attack: 2
     };
 
-    list.push(newPlayerCharacter);
+    list.push(PlayerCharacter);
     serialize(jsonDbPath, list);
-    return newPlayerCharacter;
+    return PlayerCharacter;
+  }
+
+  function getTaskXP(taskDifficulty) {
+    if(taskDifficulty === 1) {
+      return 10;
+    }
+
+    if(taskDifficulty === 2) {
+      return 20;
+    }
+
+    if(taskDifficulty === 3) {
+      return 30;
+    }
+
+    return 0;
+  }
+
+  function getMonsterXP(monsterLevel) {
+    if(monsterLevel > 0) {
+      return monsterLevel * 10;
+    }
+
+    return 0;
+  }
+
+  function getXP(currentUserID, taskDifficulty, monsterLevel) {
+    const list = parse(jsonDbPath, listPlayerCharacters	);
+    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === currentUserID);
+    const taskXP = getTaskXP(taskDifficulty);
+    const monsterXP = getMonsterXP(monsterLevel);
+    const totalXP = taskXP + monsterXP;
+    playerCharacter.currentXP += totalXP;
+    if (playerCharacter.currentXP >= playerCharacter.XPToLvlUp) {
+      playerCharacter.level += 1;
+      playerCharacter.currentXP = 0;
+      playerCharacter.XPToLvlUp = playerCharacter.XPToLvlUp * 1.3;
+      playerCharacter.maxHP += 5;
+      playerCharacter.currentHP = playerCharacter.maxHP;
+      playerCharacter.attack += 1;
+    }
+    serialize(jsonDbPath, list);
+    return playerCharacter;
   }
 
   module.exports = {
     createPlayerCharacter,
+    getXP,
   };
