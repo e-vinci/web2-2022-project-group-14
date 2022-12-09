@@ -1,11 +1,16 @@
+const jwtDecode = require('jwt-decode')
+
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
+
 
 const jwtSecret = 'ilovemytasks!';
 const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 1000 = 24h
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
+
+let authenticatedUser = null;
 
 const defaultUsers = [
   {
@@ -20,13 +25,20 @@ function login(username, password) {
   if (!userFound) return undefined;
   if (userFound.password !== password) return undefined;
 
+  
+  // create a JWT token
   const token = jwt.sign(
-    { username }, // session data added to the payload (payload : part 2 of a JWT)
-    jwtSecret, // secret used for the signature (signature part 3 of a JWT)
-    { expiresIn: lifetimeJwt }, // lifetime of the JWT (added to the JWT payload)
+    {
+      id: userFound.id,
+      username: userFound.username,
+    },
+    jwtSecret,
+    {
+      expiresIn: lifetimeJwt,
+    },
   );
 
-  const authenticatedUser = {
+  authenticatedUser = {
     username,
     token,
   };
@@ -38,18 +50,29 @@ function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
 
-  createOneUser(username, password);
+  const createdUser = createOneUser(username, password);
 
+  // create a JWT token
   const token = jwt.sign(
-    { username }, // session data added to the payload (payload : part 2 of a JWT)
-    jwtSecret, // secret used for the signature (signature part 3 of a JWT)
-    { expiresIn: lifetimeJwt }, // lifetime of the JWT (added to the JWT payload)
+    {
+      id: createdUser.id,
+      username: createdUser.username,
+    },
+    jwtSecret,
+    {
+      expiresIn: lifetimeJwt,
+    },
   );
 
-  const authenticatedUser = {
+  authenticatedUser = {
     username,
     token,
   };
+
+  // decode token to get id
+  const decodedToken = jwtDecode(token, jwtSecret);
+  const {id} = decodedToken;
+  console.log("id", id);
 
   return authenticatedUser;
 }
@@ -87,8 +110,22 @@ function getNextId() {
   return nextId;
 }
 
+function returnUser() {
+  return authenticatedUser;
+}
+
+function returnId() {
+  const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
+  const {id} = decodedToken;
+  console.log("id", id);
+  return id;
+}
+
+
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
+  returnUser,
+  returnId,
 };

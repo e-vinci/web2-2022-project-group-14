@@ -10,10 +10,17 @@ POST {{baseUrl}}/taches/
 Content-Type: application/json
 
 {
-    "title":"tache de test titre",
-    "content":"tache de test",
-    "difficulte":"1"
+    "title":"raphael ? ",
+    "content":"AA112211A rgrg test",
+    "difficulte":"3"
 }
 
+
 ### Remove a task with the Task ID
-DELETE {{baseUrl}}/taches/1
+DELETE {{baseUrl}}/taches/0394347f-d18d-40ce-a803-9985d4a05d2a
+
+### Display a specific task with the Task ID
+GET {{baseUrl}}/taches/6af259a8-23e1-465b-83af-f56b4560d20f
+
+### Valide a Task with the Task ID
+POST {{baseUrl}}/taches/valide/f7f31857-e4a8-4e47-966c-30b2ac36472f
