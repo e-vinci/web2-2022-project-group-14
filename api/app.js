@@ -6,6 +6,7 @@ const usersRouter = require('./routes/users');
 const tacheRouter = require('./routes/taches');
 const pizzaRouter = require('./routes/pizzas');
 const authsRouter = require('./routes/auths');
+const enemiesRouter = require('./routes/enemies');
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use('/users', usersRouter);
 app.use('/pizzas', pizzaRouter);
 app.use('/taches', tacheRouter);
 app.use('/auths', authsRouter);
+app.use('/enemies', enemiesRouter);
 
 
 module.exports = app;

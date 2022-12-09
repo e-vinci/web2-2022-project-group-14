@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}
+
+### Create a enemy
+POST {{baseUrl}}/enemies/
+
+### kill a enemy
+DELETE {{baseUrl}}/enemies/delete
+
+### combat
+POST {{baseUrl}}/enemies/combat
