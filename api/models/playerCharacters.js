@@ -1,20 +1,19 @@
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
 const { v4: uuidv4 } = require('uuid');
-const { returnId } = require('./users');
-const { takeCoverage } = require('node:v8');
+const { returnId} = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
 
 const listPlayerCharacters = [];
 
   // create ennemies
-  function createPlayerCharacter(currentUserID) {
+  function createPlayerCharacter() {
     const list = parse(jsonDbPath, listPlayerCharacters	);
 
     const PlayerCharacter = {
       id: uuidv4(),
-      userId: currentUserID,
+      userId: returnId(),
       maxHP: 10,
       currentHP: 10,
       level: 1,
