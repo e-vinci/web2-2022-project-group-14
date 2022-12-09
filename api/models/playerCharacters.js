@@ -8,71 +8,71 @@ const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
 
 const listPlayerCharacters = [];
 
-  // create ennemies
-  function createPlayerCharacter(currentUserID) {
-    const list = parse(jsonDbPath, listPlayerCharacters	);
+// create ennemies
+function createPlayerCharacter(currentUserID) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
 
-    const PlayerCharacter = {
-      id: uuidv4(),
-      userId: currentUserID,
-      maxHP: 10,
-      currentHP: 10,
-      level: 1,
-      XPToLvlUp: 50,
-      currentXP: 0,
-      attack: 2
-    };
-
-    list.push(PlayerCharacter);
-    serialize(jsonDbPath, list);
-    return PlayerCharacter;
-  }
-
-  function getTaskXP(taskDifficulty) {
-    if(taskDifficulty === 1) {
-      return 10;
-    }
-
-    if(taskDifficulty === 2) {
-      return 20;
-    }
-
-    if(taskDifficulty === 3) {
-      return 30;
-    }
-
-    return 0;
-  }
-
-  function getMonsterXP(monsterLevel) {
-    if(monsterLevel > 0) {
-      return monsterLevel * 10;
-    }
-
-    return 0;
-  }
-
-  function getXP(currentUserID, taskDifficulty, monsterLevel) {
-    const list = parse(jsonDbPath, listPlayerCharacters	);
-    // eslint-disable-next-line no-shadow
-    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === currentUserID);
-    const taskXP = getTaskXP(taskDifficulty);
-    const monsterXP = getMonsterXP(monsterLevel);
-    const totalXP = taskXP + monsterXP;
-    playerCharacter.currentXP += totalXP;
-    if (playerCharacter.currentXP >= playerCharacter.XPToLvlUp) {
-      playerCharacter.level += 1;
-      playerCharacter.currentXP = 0;
-      playerCharacter.XPToLvlUp *= 1.3;
-      playerCharacter.maxHP += 5;
-      playerCharacter.currentHP = playerCharacter.maxHP;
-      playerCharacter.attack += 1;
-    }
-    serialize(jsonDbPath, list);
-    return playerCharacter;
-  }
-
-  module.exports = {
-    createPlayerCharacter,
-    getXP,
+  const PlayerCharacter = {
+    id: uuidv4(),
+    userId: currentUserID,
+    maxHP: 10,
+    currentHP: 10,
+    level: 1,
+    XPToLvlUp: 50,
+    currentXP: 0,
+    attack: 2,
   };
+
+  list.push(PlayerCharacter);
+  serialize(jsonDbPath, list);
+  return PlayerCharacter;
+}
+
+function getTaskXP(taskDifficulty) {
+  if (taskDifficulty === '1') {
+    return 10;
+  }
+
+  if (taskDifficulty === '2') {
+    return 20;
+  }
+
+  if (taskDifficulty === '3') {
+    return 30;
+  }
+
+  return 0;
+}
+
+function getMonsterXP(monsterLevel) {
+  if (monsterLevel > 0) {
+    return monsterLevel * 10;
+  }
+
+  return 0;
+}
+
+function getXP(taskDifficulty, monsterLevel) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  // eslint-disable-next-line no-shadow
+  const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === returnId());
+  const taskXP = getTaskXP(taskDifficulty);
+  const monsterXP = getMonsterXP(monsterLevel);
+  const totalXP = taskXP + monsterXP;
+  playerCharacter.currentXP += totalXP;
+  if (playerCharacter.currentXP >= playerCharacter.XPToLvlUp) {
+    playerCharacter.level += 1;
+    playerCharacter.currentXP = 0;
+    playerCharacter.XPToLvlUp *= 1.3;
+    playerCharacter.maxHP += 5;
+    playerCharacter.currentHP = playerCharacter.maxHP;
+    playerCharacter.attack += 1;
+  }
+  serialize(jsonDbPath, list);
+  return playerCharacter;
+}
+
+module.exports = {
+  createPlayerCharacter,
+  getXP,
+};

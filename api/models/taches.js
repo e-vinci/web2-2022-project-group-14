@@ -6,60 +6,55 @@ const { returnId, getXP } = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 
-/* difficulte de la tache */
-// eslint-disable-next-line no-unused-vars
-const difficule = ['1','2','3'];
-
 const listTask = [];
 
 /* Function -> Display all the task */
 function readAllTask() {
   const list = parse(jsonDbPath, listTask);
-  const listfiltred = list.filter((task) => task.idUser === returnId())
+  const listfiltred = list.filter((task) => task.idUser === returnId());
   console.log(returnId());
   return listfiltred;
 }
 
 /* Function -> Create a task */
-function createOnetask( title, content, difficulte) {
-    const list = parse(jsonDbPath, listTask);
+function createOnetask(title, content, difficulte) {
+  const list = parse(jsonDbPath, listTask);
 
-    const createdTask = {
-      id : uuidv4(),
-      title,
-      content,
-      difficulte,
-      idUser : returnId()
-    };
-  
-    list.push(createdTask);
-  
-    serialize(jsonDbPath, list);
-  
-    return createdTask;
+  const createdTask = {
+    id: uuidv4(),
+    title,
+    content,
+    difficulte,
+    idUser: returnId(),
+  };
+
+  list.push(createdTask);
+
+  serialize(jsonDbPath, list);
+
+  return createdTask;
 }
 
 /* Function -> Remove a Task from the Task List with the Task ID */
-function removeATask(id){
-  const idtask  = id;
-  console.log("idtask : ", idtask);
+function removeATask(id) {
+  const idtask = id;
+  console.log('idtask : ', idtask);
   const list = parse(jsonDbPath, listTask);
-  console.log("list : ", list);
+  console.log('list : ', list);
   const foundIndex = list.findIndex((task) => task.id === idtask);
-  console.log("foundIndex : ", foundIndex);
+  console.log('foundIndex : ', foundIndex);
   if (foundIndex < 0) return undefined;
-  const deleteTask  = list.splice(foundIndex, 1);
-  console.log("deleteTask", deleteTask);
+  const deleteTask = list.splice(foundIndex, 1);
+  console.log('deleteTask', deleteTask);
   const deleteTaskDiplsay = deleteTask[0];
-  console.log("deleteTaskDiplsay", deleteTaskDiplsay);
+  console.log('deleteTaskDiplsay', deleteTaskDiplsay);
   serialize(jsonDbPath, list);
   return deleteTaskDiplsay;
-  ;
 }
 
 /* Function -> Display a specific Task with the Task ID */
-function displayTask(id){
-  const idtask  = id;
+function displayTask(id) {
+  const idtask = id;
   const list = parse(jsonDbPath, listTask);
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log('FoundIndex = ');
@@ -67,9 +62,9 @@ function displayTask(id){
   if (foundIndex < 0) return undefined;
 
   const task = {
-    title : list[foundIndex].title, 
-    content : list[foundIndex].content
-  }
+    title: list[foundIndex].title,
+    content: list[foundIndex].content,
+  };
 
   console.log(task);
   serialize(jsonDbPath, list);
@@ -77,22 +72,21 @@ function displayTask(id){
 }
 
 /* Function -> Valide a Task by the Task ID */
-function valideATask(id){
+function valideATask(id) {
   // get difficulty of the task and add XP to the player with getXP
-  const idtask  = id;
+  const idtask = id;
   const list = parse(jsonDbPath, listTask);
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log('FoundIndex = ');
   console.log(foundIndex);
-  getXP(returnId(), list[foundIndex].difficulte, 0);
+  getXP(list[foundIndex].difficulte, 0);
   return removeATask(id);
 }
 
-
 module.exports = {
-    readAllTask,
-    createOnetask,
-    removeATask, 
-    displayTask,
-    valideATask
-  };
+  readAllTask,
+  createOnetask,
+  removeATask,
+  displayTask,
+  valideATask,
+};

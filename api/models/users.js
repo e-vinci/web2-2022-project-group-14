@@ -19,7 +19,6 @@ function login(username, password) {
   if (!userFound) return undefined;
   if (userFound.password !== password) return undefined;
 
-  
   // create a JWT token
   const token = jwt.sign(
     {
@@ -65,8 +64,8 @@ function register(username, password) {
 
   // decode token to get id
   const decodedToken = jwtDecode(token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
 
   createPlayerCharacter(id);
 
@@ -112,11 +111,10 @@ function returnUser() {
 
 function returnId() {
   const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
   return id;
 }
-
 
 module.exports = {
   login,

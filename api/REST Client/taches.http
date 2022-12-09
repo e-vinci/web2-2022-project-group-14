@@ -10,9 +10,9 @@ POST {{baseUrl}}/taches/
 Content-Type: application/json
 
 {
-    "title":"raphael ? ",
+    "title":"raphael a? ",
     "content":"AA112211A rgrg test",
-    "difficulte":"3"
+    "difficulte":3
 }
 
 
@@ -23,4 +23,4 @@ DELETE {{baseUrl}}/taches/0394347f-d18d-40ce-a803-9985d4a05d2a
 GET {{baseUrl}}/taches/6af259a8-23e1-465b-83af-f56b4560d20f
 
 ### Valide a Task with the Task ID
-POST {{baseUrl}}/taches/valide/4c1115e2-6d8a-4f72-a378-a4063a43f1d8
+POST {{baseUrl}}/taches/valide/84965d10-37c1-40ea-b1b9-21da4dd8a717

@@ -39,9 +39,7 @@ const MENU = [
    GET /pizzas?order=-title : descending order by title
 */
 router.get('/', (req, res) => {
-  const orderByTitle = req?.query?.order?.includes('title')
-    ? req.query.order
-    : undefined;
+  const orderByTitle = req?.query?.order?.includes('title') ? req.query.order : undefined;
   let orderedMenu;
   const pizzas = parse(jsonDbPath, MENU);
   if (orderByTitle) orderedMenu = [...pizzas].sort((a, b) => a.title.localeCompare(b.title));
