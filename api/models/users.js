@@ -3,7 +3,7 @@ const jwtDecode = require('jwt-decode')
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-
+const { createPlayerCharacter } = require('./playerCharacters');
 
 const jwtSecret = 'ilovemytasks!';
 const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 1000 = 24h
@@ -12,13 +12,7 @@ const jsonDbPath = path.join(__dirname, '/../data/users.json');
 
 let authenticatedUser = null;
 
-const defaultUsers = [
-  {
-    id: 1,
-    username: 'admin',
-    password: 'admin',
-  },
-];
+const defaultUsers = [];
 
 function login(username, password) {
   const userFound = readOneUserFromUsername(username);
@@ -73,6 +67,8 @@ function register(username, password) {
   const decodedToken = jwtDecode(token, jwtSecret);
   const {id} = decodedToken;
   console.log("id", id);
+
+  createPlayerCharacter(id);
 
   return authenticatedUser;
 }
