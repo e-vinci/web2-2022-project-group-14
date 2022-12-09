@@ -4,7 +4,7 @@ const { parse, serialize } = require('../utils/json');
 // eslint-disable-next-line no-unused-vars
 const { returnId } = require('./users');
 
-const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
+const jsonDbPath = path.join(__dirname, '/../data/PlayerCharacters.json');
 
 const listPlayerCharacters = [];
 
@@ -52,10 +52,11 @@ function getMonsterXP(monsterLevel) {
   return 0;
 }
 
-function getXP(taskDifficulty, monsterLevel) {
+function getXP(userID, taskDifficulty, monsterLevel) {
   const list = parse(jsonDbPath, listPlayerCharacters);
   // eslint-disable-next-line no-shadow
-  const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === returnId());
+  console.log(userID)
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === userID);
   const taskXP = getTaskXP(taskDifficulty);
   const monsterXP = getMonsterXP(monsterLevel);
   const totalXP = taskXP + monsterXP;

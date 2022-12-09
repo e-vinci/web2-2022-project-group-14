@@ -2,7 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnId, getXP } = require('./users');
+const { returnId } = require('./users');
+const { getXP } = require('./playerCharacters');
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 
@@ -79,7 +80,7 @@ function valideATask(id) {
   const foundIndex = list.findIndex((task) => task.id === idtask);
   console.log('FoundIndex = ');
   console.log(foundIndex);
-  getXP(list[foundIndex].difficulte, 0);
+  getXP(returnId() ,list[foundIndex].difficulte, 0);
   return removeATask(id);
 }
 
