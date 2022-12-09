@@ -55,10 +55,14 @@ function getMonsterXP(monsterLevel) {
 function getXP(userID, taskDifficulty, monsterLevel) {
   const list = parse(jsonDbPath, listPlayerCharacters);
   // eslint-disable-next-line no-shadow
-  console.log(userID)
+  console.log(userID);
+  console.log(taskDifficulty);
+  console.log(monsterLevel);
   const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === userID);
   const taskXP = getTaskXP(taskDifficulty);
+  console.log(taskXP);
   const monsterXP = getMonsterXP(monsterLevel);
+  console.log(monsterXP);
   const totalXP = taskXP + monsterXP;
   playerCharacter.currentXP += totalXP;
   if (playerCharacter.currentXP >= playerCharacter.XPToLvlUp) {
