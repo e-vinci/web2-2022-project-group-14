@@ -2,8 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnId } = require('./users');
-
+const { returnId, getXP } = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 
@@ -79,9 +78,14 @@ function displayTask(id){
 
 /* Function -> Valide a Task by the Task ID */
 function valideATask(id){
-  // ajouter la méthode qui incrémente les points de vie du joueur + incrémente les points de dégats
+  // get difficulty of the task and add XP to the player with getXP
+  const idtask  = id;
+  const list = parse(jsonDbPath, listTask);
+  const foundIndex = list.findIndex((task) => task.id === idtask);
+  console.log('FoundIndex = ');
+  console.log(foundIndex);
+  getXP(returnId(), list[foundIndex].difficulte, 0);
   return removeATask(id);
-
 }
 
 

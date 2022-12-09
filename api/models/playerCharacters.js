@@ -1,6 +1,7 @@
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
+// eslint-disable-next-line no-unused-vars
 const { returnId } = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
@@ -8,12 +9,12 @@ const jsonDbPath = path.join(__dirname, '/../data/playerCharacters.json');
 const listPlayerCharacters = [];
 
   // create ennemies
-  function createPlayerCharacter() {
+  function createPlayerCharacter(currentUserID) {
     const list = parse(jsonDbPath, listPlayerCharacters	);
 
     const PlayerCharacter = {
       id: uuidv4(),
-      userId: returnId(),
+      userId: currentUserID,
       maxHP: 10,
       currentHP: 10,
       level: 1,
@@ -51,10 +52,10 @@ const listPlayerCharacters = [];
     return 0;
   }
 
-  function getXP(taskDifficulty, monsterLevel) {
+  function getXP(currentUserID, taskDifficulty, monsterLevel) {
     const list = parse(jsonDbPath, listPlayerCharacters	);
     // eslint-disable-next-line no-shadow
-    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === returnId);
+    const playerCharacter = list.find((playerCharacter) => playerCharacter.userId === currentUserID);
     const taskXP = getTaskXP(taskDifficulty);
     const monsterXP = getMonsterXP(monsterLevel);
     const totalXP = taskXP + monsterXP;

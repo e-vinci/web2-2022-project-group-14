@@ -1,6 +1,6 @@
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
-const { returnId} = require ('./users');
+// const { returnId } = require ('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/enemies.json');
 
@@ -19,17 +19,19 @@ const enemies = [
   ];
 
   // crée un objet de type Map, et appelle la fonction returnId() pour récupérer un identifiant d'utilisateur.
-const map = new Map();
+// const map = new Map();
 
   // utilise la méthode get() de l'objet Map pour récupérer la liste d'ennemis associée à l'identifiant d'utilisateur.
   // Si cette liste n'existe pas dans le Map (si la valeur retournée par get() est undefined), il utilise la méthode set() pour ajouter la liste d'ennemis au Map en utilisant l'identifiant d'utilisateur comme clé.
-const idUtilisateur = returnId();
+// const idUtilisateur = returnId();
 
-  // crée une liste d'ennemis et ajoute cette liste au Map en utilisant l'identifiant d'utilisateur comme clé. Si la liste d'ennemis n'existe pas déjà dans le Map, elle est ajoutée.
+// crée une liste d'ennemis et ajoute cette liste au Map en utilisant l'identifiant d'utilisateur comme clé. Si la liste d'ennemis n'existe pas déjà dans le Map, elle est ajoutée.
+/*
 const listEnemy =  map.get(idUtilisateur);
 if(listEnemy === undefined){
   map.set(idUtilisateur, enemies);
 }
+*/
 
 
   // calculate HP
