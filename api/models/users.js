@@ -173,13 +173,13 @@ function returnId() {
 
 // calculate HP
 function calcuateHP(lvl){
-  const HP = lvl * 2;
+  const HP = lvl + (lvl *1,2);
   return HP;
   };
   
   // calculate attack
 function calculateAttack(lvl){
-  const attack = lvl + lvl;
+  const attack = lvl + (lvl *1,8);
   return attack;
 };
   
@@ -264,27 +264,54 @@ function fight() {
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
 
-  // get le joueur de chez efe
+  // Ne fonctionne pas encore
   const player = getPlayer();
 
-  while (player.HP > 0 && firstEnemy.HP > 0) {
+  while (player.currentHP > 0 && firstEnemy.HP > 0) {
     // Calculate the player's and enemy's remaining hit points after combat
-    const playerHP = player.HP - firstEnemy.attack;
+    const playerHP = player.currentHP - firstEnemy.attack;
     const enemyHP = firstEnemy.HP - player.attack;
 
     // Update player and enemy HP
-    player.HP = playerHP;
+    player.currentHP = playerHP;
     firstEnemy.HP = enemyHP;
   }
   
   // If player dies, stop execution
-  if (player.HP <= 0) return undefined;
+  if (player.currentHP <= 0){
+    player.currentHP = 0;
+    console.log(player.currentHP);
+    return player.currentHP;
+  }
+
+/*
+  let playerHP = 1;
+  const playerAttack = 1;
+
+  while (playerHP > 0 && firstEnemy.hp > 0) {
+    // Calculate the player's and enemy's remaining hit points after combat
+    const playerhp = playerHP - firstEnemy.attack;
+    const enemyHP = firstEnemy.hp - playerAttack;
+
+    // Update player and enemy HP
+    playerHP = playerhp;
+    firstEnemy.hp = enemyHP;
+  }
+
+  // If player dies, stop execution
+  if (playerHP <= 0){
+    playerHP = 0;
+    console.log(playerHP);
+    return playerHP;
+  }
+  */
   
   // If the enemy dies, add a new enemy and remove the current enemy
+  if (firstEnemy.hp <= 0){
   addEnemy();
   removeEnemy();
   getXP(returnId(),0,firstEnemy.lvl);
-
+  }
   return firstEnemy;
 }
 
