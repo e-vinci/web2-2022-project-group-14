@@ -19,3 +19,17 @@ Content-Type: application/json
     "username" : "nomRandom9",
     "password" : "test"
 }
+
+### addEnemy
+POST {{baseUrl}}/auths/addEnemy/
+Content-Type: application/json
+
+
+### removeEnemy
+POST {{baseUrl}}/auths/removeEnemy/
+Content-Type: application/json
+
+
+### readAllEnemies
+GET {{baseUrl}}/auths/readAllEnemies/
+Content-Type: application/json
