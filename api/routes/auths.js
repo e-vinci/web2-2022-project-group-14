@@ -20,7 +20,7 @@ router.post('/register', (req, res) => {
 });
 
 /* Login a user */
-router.post('/login', (req, res) => {
+router.get('/login', (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 
