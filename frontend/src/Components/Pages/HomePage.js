@@ -73,6 +73,7 @@ const homePage = `
 <div class="d-flex justify-content-between">
   <div class="col-2 colonneLeft">
     <div class="shadow mb-5 bg-body rounded" id="innerColLeft">
+    <p >Liste des taches </p>
     <table>
     </table>    
     </div>
@@ -96,21 +97,12 @@ const homePage = `
   </div>
   <div class="col-2 colonneRight">
     <div class="shadow mb-5 bg-body rounded" id="innerColRight">
-      <p>Ennemi n°1</p>
-      <p>Ennemi n°2</p>
-      <p>Ennemi n°3</p>  
-      <p>Ennemi n°4</p>  
-      <p>Ennemi n°5</p>  
-      <p>Ennemi n°6</p>  
-      <p>Ennemi n°7</p>
-      <p>Ennemi n°8</p>  
-      <p>Ennemi n°9</p>  
-      <p>Ennemi n°10</p>    
-      <p>Ennemi n°11</p>  
-      <p>Ennemi n°12</p>  
-      <p>Ennemi n°13</p>  
-      <p>Ennemi n°14</p>
-      <p>Ennemi n°15</p>  
+    <input 
+       type="button"
+       value="fight-btn"
+       id="fight-btn">
+    <table id="table-ennemis" >
+    </table>  
     </div>
     <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
       <div id="userPicture">
@@ -137,6 +129,7 @@ const HomePage = () => {
   
   
   getJSONTasksAndDisplay();
+  getJSONEnnemiesAndDisplay();
   renderTaskForm();
 
 // ---------------------------------------------------------------------------
@@ -201,45 +194,45 @@ partieDroite.appendChild(buttonEnnemy);
 
 
 
-  async function getJSONTasksAndDisplay() {
+ async function getJSONTasksAndDisplay() {
     
-      const response = await fetch('/api/taches');
-      const data = await response.json();
-    
-      
-      // Create a table element
-      const table = document.querySelector('table');
-  
-      // eslint-disable-next-line no-restricted-syntax
-      for(const key of Object.keys(data)) {
+  const response = await fetch('/api/taches');
+  const data = await response.json();
 
-        const row = document.createElement('tr');
-        const valueCel = document.createElement('td');
-        const valueCelDelete = document.createElement('td2');
-        valueCel.datavalue = data[key];
-        valueCel.textContent = JSON.stringify(data[key].title);
-        valueCelDelete.textContent = "Delete Task";
-        valueCelDelete.id = "td2";
-        valueCelDelete.datavalue = data[key].id;
-        // eslint-disable-next-line func-names
-        valueCelDelete.addEventListener("click", function() { 
-          const id = this.datavalue;
-          fetch(`/api/taches/${id}`, {
-            method: 'DELETE'
-          })
-          window.location.reload()
-        });
-        
-        // eslint-disable-next-line func-names
-        valueCel.addEventListener("click", function() { 
-          document.getElementById("displayTache").innerHTML = this.datavalue.title;
-          document.getElementById("displayContenu").innerHTML = this.datavalue.content;
-        });
-        row.appendChild(valueCel);
-        row.appendChild(valueCelDelete);
-        table.appendChild(row);
-      }
+  
+  // Create a table element
+  const table = document.querySelector('table');
+
+  // eslint-disable-next-line no-restricted-syntax
+  for(const key of Object.keys(data)) {
+
+    const row = document.createElement('tr');
+    const valueCel = document.createElement('td');
+    const valueCelDelete = document.createElement('td2');
+    valueCel.datavalue = data[key];
+    valueCel.textContent = JSON.stringify(data[key].title);
+    valueCelDelete.textContent = "Delete Task";
+    valueCelDelete.id = "td2";
+    valueCelDelete.datavalue = data[key].id;
+    // eslint-disable-next-line func-names
+    valueCelDelete.addEventListener("click", function() { 
+      const id = this.datavalue;
+      fetch(`/api/taches/${id}`, {
+        method: 'DELETE'
+      })
+      window.location.reload()
+    });
+    
+    // eslint-disable-next-line func-names
+    valueCel.addEventListener("click", function() { 
+      document.getElementById("displayTache").innerHTML = this.datavalue.title;
+      document.getElementById("displayContenu").innerHTML = this.datavalue.content;
+    });
+    row.appendChild(valueCel);
+    row.appendChild(valueCelDelete);
+    table.appendChild(row);
   }
+}
   
   function renderTaskForm() {
     const divForm = document.getElementById('innerColLeft2');
@@ -329,6 +322,31 @@ partieDroite.appendChild(buttonEnnemy);
     .then(response => response.json())
 
   }
+
+// ------------------------------------ENNEMIS TABLE ---------------------------------------
+*/
+
+ async function getJSONEnnemiesAndDisplay() {
+    
+  const response = await fetch('/api/auths/readAllEnemies/');
+  const data = await response.json();
+
+  
+  // Create a table element
+  const table = document.getElementById('table-ennemis');
+
+  // eslint-disable-next-line no-restricted-syntax
+  for(const key of Object.keys(data)) {
+
+    const row = document.createElement('tr');
+    const valueCel = document.createElement('td');
+    
+    valueCel.datavalue = data[key];
+    valueCel.textContent = JSON.stringify(data[key].name);
+    row.appendChild(valueCel);
+    table.appendChild(row);
+  }
+}
 
 
 // ---------------------------------------------------------------------------

@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ### Login
-GET {{baseUrl}}/auths/login/
+GET {{baseUrl}}/auths/login/:username/:password
 Content-Type: application/json
  
 {
