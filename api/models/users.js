@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
-const { createPlayerCharacter } = require('./playerCharacters');
+const { createPlayerCharacter, getXP, getPlayer } = require('./playerCharacters');
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -250,7 +250,7 @@ function removeEnemy() {
   return enemy;
 }
 
-// 
+//  
 function fight() {
  // Check if user is authenticated
  if (!authenticatedUser) return undefined;
@@ -264,7 +264,7 @@ function fight() {
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
 
   // get le joueur de chez efe
-  const player = getPlayer();
+  const player = getPlayer(returnId());
 
   while (player.HP > 0 && firstEnemy.HP > 0) {
     // Calculate the player's and enemy's remaining hit points after combat

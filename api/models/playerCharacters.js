@@ -8,7 +8,7 @@ const jsonDbPath = path.join(__dirname, '/../data/PlayerCharacters.json');
 
 const listPlayerCharacters = [];
 
-// create ennemies
+// create playerCharacter
 function createPlayerCharacter(currentUserID) {
   const list = parse(jsonDbPath, listPlayerCharacters);
 
@@ -77,7 +77,18 @@ function getXP(userID, taskDifficulty, monsterLevel) {
   return playerCharacter;
 }
 
+
+
+/* Prototype de get User -- A Vérifier */
+function getPlayer(userID) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === userID);
+  return playerCharacter;
+}
+
+
 module.exports = {
   createPlayerCharacter,
   getXP,
+  getPlayer,
 };
