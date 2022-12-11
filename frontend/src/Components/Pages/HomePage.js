@@ -138,6 +138,41 @@ const HomePage = () => {
   
   getJSONTasksAndDisplay();
   renderTaskForm();
+
+// ---------------------------------------------------------------------------
+ // Création de la partie qui contiendra le header
+const header = document.querySelector('header');
+const partieGauche = document.querySelector('div');
+const partieDroite = document.querySelector('div');
+header.appendChild(partieGauche);
+header.appendChild(partieDroite);
+
+// ajout des bouttons modals dans la partie de gauche du header
+const buttonRegister = document.createElement('button');
+buttonRegister.className = 'btn btn-primary';
+buttonRegister.setAttribute('data-bs-toggle', 'modal');
+buttonRegister.setAttribute('data-bs-target', '#staticBackdrop');
+buttonRegister.innerHTML = 'Login modal';
+partieGauche.appendChild(buttonRegister);
+const buttonLogin = document.createElement('button');
+buttonLogin.className = 'btn btn-primary';
+buttonLogin.setAttribute('data-bs-toggle', 'modal');
+buttonLogin.setAttribute('data-bs-target', '#staticBackdrop2');
+buttonLogin.innerHTML = 'Register modal';
+partieGauche.appendChild(buttonLogin);
+
+// ajout du titre dans la partie de droite du header
+const buttonEnnemy = document.createElement('button');
+buttonEnnemy.className = 'btn btn-primary';
+buttonEnnemy.type = 'button';
+buttonEnnemy.setAttribute('data-bs-toggle', 'offcanvas');
+buttonEnnemy.setAttribute('data-bs-target', '#offcanvasRight');
+buttonEnnemy.setAttribute('aria-controls', 'offcanvasRight');
+buttonEnnemy.innerHTML = 'Ennemis'
+partieDroite.appendChild(buttonEnnemy);
+
+
+
 // ---------------------------------------------------------------------------
 
  // Création de la partie qui contiendra les 3 sections
@@ -296,7 +331,7 @@ const HomePage = () => {
   inputRadioCheck1.type = 'radio';
   inputRadioCheck1.name = 'flexRadioDefault';
   inputRadioCheck1.id = 'flexRadioDefault1';
-  /* inputRadioCheck.checked; Il faut trouver comment passer le input en check ! */
+  inputRadioCheck.checked; Il faut trouver comment passer le input en check !
   divBouttonRadio1.appendChild(inputRadioCheck1);
   
   const labelRadioCheck1 = document.querySelector('label'); // Création du label du bouton radio 1 !
@@ -362,11 +397,32 @@ const HomePage = () => {
 
  // ---------------------------------------------------------------------------
 
-  // Création de la colonne de droite
+  // Création de l'offCanvas
+  const offCanvas = document.querySelector('div');
+  offCanvas.className = 'offcanvas offcanvas-end';
+  offCanvas.tabIndex = '-1';
+  offCanvas.id = 'offcanvasRight';
+  offCanvas.ariaLabelledby = 'offcanvasRightLabel';
+  mainWrapper.appendChild(offCanvas);
 
- const mainRightRow = document.querySelector('div');
- mainRightRow.className = 'col-2 colonneRight';
- mainWrapper.appendChild(mainRightRow);
+  // Création interne de l'offCanvas
+  const offCanvasHeader = document.querySelector('div');
+  offCanvasHeader.className = 'offcanvas-header';
+  offCanvas.appendChild(offCanvasHeader);
+  const offCanvasTitle = document.querySelector('h5');
+  offCanvasTitle.id = 'offcanvasRightLabel';
+  offCanvasTitle.innerText = 'partie jeu !';
+  offCanvasHeader.appendChild(offCanvasTitle);
+  const offCanvasButton = document.querySelector('button');
+  offCanvasButton.className = 'btn-close text-reset';
+  offCanvasButton.type = 'button';
+  offCanvasButton.dataBsDismiss = 'offcanvas';
+  offCanvasButton.ariaLabel = 'Close';
+  offCanvasHeader.appendChild(offCanvasButton);
+  const offCanvasBody = document.querySelector('div');
+  offCanvasBody.className = 'offcanvas-body';
+  offCanvas.appendChild(offCanvasBody);
+
  
  // Création de la première section 
 
@@ -375,14 +431,14 @@ const HomePage = () => {
  firstInnerRightRow.id = 'innerColRight';
 
  // Il faut encore ajouter les ennemis !
- mainWrapper.appendChild(firstInnerRightRow);
+ offCanvasBody.appendChild(firstInnerRightRow);
 
  // Création de la seconde section
 
  const secondInnerRightRow = document.querySelector('div');
  secondInnerRightRow.className = 'd-flex justify-content-between shadow mb-5 bg-body rounded';
  secondInnerRightRow.id = 'innerColRight2';
- mainRightRow.appendChild(secondInnerRightRow);
+ offCanvasBody.appendChild(secondInnerRightRow);
 
  // Rajout de la div pour l'image
  const divUser = document.querySelector('div');
