@@ -86,7 +86,7 @@ const homePage = `
   
   <div class="col-7 colonne">
     <div class="shadow p-3 mb-5 bg-body rounded">
-    <p >Tâche Selectionée</p>
+    <p >Tâche Selectionée </p>
     <p id="displayTache" ></p>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded">
@@ -215,15 +215,28 @@ partieDroite.appendChild(buttonEnnemy);
 
         const row = document.createElement('tr');
         const valueCel = document.createElement('td');
+        const valueCelDelete = document.createElement('td2');
         valueCel.datavalue = data[key];
         valueCel.textContent = JSON.stringify(data[key].title);
+        valueCelDelete.textContent = "Delete Task";
+        valueCelDelete.id = "td2";
+        valueCelDelete.datavalue = data[key].id;
+        // eslint-disable-next-line func-names
+        valueCelDelete.addEventListener("click", function() { 
+          const id = this.datavalue;
+          fetch(`/api/taches/${id}`, {
+            method: 'DELETE'
+          })
+          window.location.reload()
+        });
+        
         // eslint-disable-next-line func-names
         valueCel.addEventListener("click", function() { 
           document.getElementById("displayTache").innerHTML = this.datavalue.title;
           document.getElementById("displayContenu").innerHTML = this.datavalue.content;
         });
         row.appendChild(valueCel);
-
+        row.appendChild(valueCelDelete);
         table.appendChild(row);
       }
   }
@@ -268,8 +281,8 @@ partieDroite.appendChild(buttonEnnemy);
     form.appendChild(difficulte1);
     form.appendChild(submit);
     divForm.appendChild(form);
-    form.addEventListener('submit', addTask );
-  
+    form.addEventListener('submit', addTask);
+    
   }
 
   // Add task 
@@ -298,9 +311,22 @@ partieDroite.appendChild(buttonEnnemy);
   
     const newTask = await response.json();
     
-    
+    window.location.reload()
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
+  
+  }
+
+  /*
+   // Delete task 
+   // eslint-disable-next-line no-unused-vars
+  function deleteTask(e) {
+    e.preventDefault();
+  
+    fetch(`/api/taches/${e}`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
 
   }
 
@@ -331,14 +357,14 @@ partieDroite.appendChild(buttonEnnemy);
   inputRadioCheck1.type = 'radio';
   inputRadioCheck1.name = 'flexRadioDefault';
   inputRadioCheck1.id = 'flexRadioDefault1';
-  inputRadioCheck.checked; Il faut trouver comment passer le input en check !
-  divBouttonRadio1.appendChild(inputRadioCheck1);
+ /* inputRadioCheck.checked;  Il faut trouver comment passer le input en check ! */
+  // divBouttonRadio1.appendChild(inputRadioCheck1);
   
   const labelRadioCheck1 = document.querySelector('label'); // Création du label du bouton radio 1 !
   labelRadioCheck1.className = 'form-check-label';
   /* labelRadioCheck1.for || Comment fait on le for ? */
   labelRadioCheck1.innerText = 'Default radio';
-  divBouttonRadio1.appendChild(labelRadioCheck1);
+  // divBouttonRadio1.appendChild(labelRadioCheck1);
 
   const divBouttonRadio2= document.querySelector('div'); // Création de la div du second boutton radio
   divBouttonRadio2.className = 'form-check';
