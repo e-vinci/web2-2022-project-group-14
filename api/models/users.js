@@ -21,7 +21,6 @@ function login(username, password) {
   if (!userFound) return undefined;
   if (userFound.password !== password) return undefined;
 
-<<<<<<< HEAD
   // Vérifie si l'utilisateur a une liste d'ennemis existante
   let {enemies} = userFound;
   if (!enemies) {
@@ -38,9 +37,6 @@ function login(username, password) {
   }
 
   // Créez un jeton JWT
-=======
-  // create a JWT token
->>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
   const token = jwt.sign(
     {
       id: userFound.id,
@@ -56,7 +52,6 @@ function login(username, password) {
   authenticatedUser = {
     username,
     token,
-    enemies,
   };
 
   return authenticatedUser;
@@ -95,7 +90,6 @@ function register(username, password) {
   authenticatedUser = {
     username,
     token,
-    enemies,
   };
 
   // décodez le jeton pour obtenir l'ID
@@ -152,7 +146,6 @@ function returnId() {
   return id;
 }
 
-<<<<<<< HEAD
 
 /*-----------------------------------*/
 
@@ -311,20 +304,14 @@ function fight() {
 /*-----------------------------------*/
 
 
-=======
->>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   returnUser,
   returnId,
-<<<<<<< HEAD
   fight,
   addEnemy,
   removeEnemy,
   readAllEnemies,
 };
-=======
-};
->>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
