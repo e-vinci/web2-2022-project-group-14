@@ -1,10 +1,10 @@
-const jwtDecode = require('jwt-decode');
+const jwtDecode = require('jwt-decode')
 
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
-const { createPlayerCharacter, getXP, getPlayer } = require('./playerCharacters');
+const { getXP, getPlayer} = require('./playerCharacters');
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -14,7 +14,13 @@ const jsonDbPath = path.join(__dirname, '/../data/users.json');
 
 let authenticatedUser = null;
 
-const defaultUsers = [];
+const defaultUsers = [
+  {
+    id: 1,
+    username: 'admin',
+    password: 'admin',
+  },
+];
 
 function login(username, password) {
   const userFound = readOneUserFromUsername(username);
@@ -41,7 +47,6 @@ function login(username, password) {
     {
       id: userFound.id,
       username: userFound.username,
-      enemies, // incluez la liste d'ennemis dans le JWT
     },
     jwtSecret,
     {
@@ -52,6 +57,7 @@ function login(username, password) {
   authenticatedUser = {
     username,
     token,
+    enemies,
   };
 
   return authenticatedUser;
@@ -60,8 +66,6 @@ function login(username, password) {
 function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
-
-  const createdUser = createOneUser(username, password);
 
   // Créez une nouvelle liste d'ennemis pour le nouvel utilisateur
   const enemies = [
@@ -74,12 +78,13 @@ function register(username, password) {
     },
   ];
 
+  const createdUser = createOneUser(username, password, enemies);
+
   // Créez un jeton JWT
   const token = jwt.sign(
     {
       id: createdUser.id,
       username: createdUser.username,
-      enemies, // incluez la liste d'ennemis dans le JWT
     },
     jwtSecret,
     {
@@ -90,14 +95,13 @@ function register(username, password) {
   authenticatedUser = {
     username,
     token,
+    enemies,
   };
 
   // décodez le jeton pour obtenir l'ID
   const decodedToken = jwtDecode(token, jwtSecret);
-  const { id } = decodedToken;
-  console.log('id', id);
-
-  createPlayerCharacter(id);
+  const {id} = decodedToken;
+  console.log("id", id);
 
   return authenticatedUser;
 }
@@ -110,13 +114,14 @@ function readOneUserFromUsername(username) {
   return users[indexOfUserFound];
 }
 
-function createOneUser(username, password) {
+function createOneUser(username, password, enemies) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const createdUser = {
     id: getNextId(),
     username,
     password,
+    enemies,
   };
 
   users.push(createdUser);
@@ -141,8 +146,8 @@ function returnUser() {
 
 function returnId() {
   const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const { id } = decodedToken;
-  console.log('id', id);
+  const {id} = decodedToken;
+  console.log("id", id);
   return id;
 }
 
@@ -159,37 +164,31 @@ function calcuateHP(lvl){
 function calculateAttack(lvl){
   const attack = lvl + lvl;
   return attack;
-  };
+};
   
   // use library to create a random name
 function randomName(){
   const name = "enemy";
   return name;
-  };
+};
 
-/* Function -> Display all the enemies */
 function readAllEnemies() {
   // Check if user is authenticated
   if (!authenticatedUser) return undefined;
-
-  // Decode JWT to get user's enemies list
-  const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const {enemies} = decodedToken;
-
+  const {enemies} = authenticatedUser;
   return enemies;
 }
 
 function addEnemy() {
   // Check if user is authenticated
   if (!authenticatedUser) return undefined;
+  const users = parse(jsonDbPath, defaultUsers);
 
-  // Decode JWT to get user's enemies list
-  const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const {enemies} = decodedToken;
+  const {enemies} = authenticatedUser;
 
   // Create new enemy object
   // Get the last enemy in the list  
-  const lastEnemy = enemies.slice(-1)[0];
+  const lastEnemy = enemies[enemies.length - 1];
 
   // Get the level of the last enemy  
   const lvl = lastEnemy.lvl + 1;
@@ -204,67 +203,52 @@ function addEnemy() {
 
   // Add new enemy to user's enemies list
   enemies.push(newEnemy);
+  authenticatedUser.enemies = enemies;
 
-  // Update JWT with new enemies list
-  const updatedToken = jwt.sign(
-    {
-      id: decodedToken.id,
-      username: decodedToken.username,
-      enemies,
-    },
-    jwtSecret,
-    {
-      expiresIn: lifetimeJwt,
-    },
-  );
+  // Update user's enemies list in the database
+  const indexOfUserFound = users.findIndex((user) => 
+  user.username === authenticatedUser.username);
+  users[indexOfUserFound].enemies = enemies;
 
-  authenticatedUser.token = updatedToken;
+  serialize(jsonDbPath, users);
   return newEnemy;
 }
 
 function removeEnemy() {
-   // Check if user is authenticated
-   if (!authenticatedUser) return undefined;
+  // Check if user is authenticated
+  if (!authenticatedUser) return undefined;
+  const users = parse(jsonDbPath, defaultUsers);
 
-   // Decode JWT to get user's enemies list
-   const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-   const {enemies} = decodedToken;
-
+  const {enemies} = authenticatedUser;
   // delete the first enemy
   const enemy = enemies.shift();
+  authenticatedUser.enemies = enemies;
 
-  // Update JWT with new enemies list
-  const updatedToken = jwt.sign(
-    {
-      id: decodedToken.id,
-      username: decodedToken.username,
-      enemies,
-    },
-    jwtSecret,
-    {
-      expiresIn: lifetimeJwt,
-    },
-  );
-
-  authenticatedUser.token = updatedToken;
+  // Update user's enemies list in the database
+  const indexOfUserFound = users.findIndex((user) => 
+  user.username === authenticatedUser.username);
+  users[indexOfUserFound].enemies = enemies;
+  
+  serialize(jsonDbPath, users);
   return enemy;
 }
 
-//  
+// 
 function fight() {
  // Check if user is authenticated
  if (!authenticatedUser) return undefined;
 
  // Decode JWT to get user's enemies list
- const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
- const {enemies} = decodedToken;
+ /* const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
+ const {enemies} = decodedToken; */
 
+  const {enemies} = authenticatedUser;
   // get the first enemy
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
 
   // get le joueur de chez efe
-  const player = getPlayer(returnId());
+  const player = getPlayer();
 
   while (player.HP > 0 && firstEnemy.HP > 0) {
     // Calculate the player's and enemy's remaining hit points after combat
@@ -284,19 +268,6 @@ function fight() {
   removeEnemy();
   getXP(returnId(),0,firstEnemy.lvl);
 
-  const updatedToken = jwt.sign(
-    {
-      id: decodedToken.id,
-      username: decodedToken.username,
-      enemies,
-    },
-    jwtSecret,
-    {
-      expiresIn: lifetimeJwt,
-    },
-  );
-
-  authenticatedUser.token = updatedToken;
   return firstEnemy;
 }
 
