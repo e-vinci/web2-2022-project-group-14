@@ -2,7 +2,7 @@ const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
 // eslint-disable-next-line no-unused-vars
-const { returnId } = require('./users');
+// const { returnId } = require('./users');
 
 const jsonDbPath = path.join(__dirname, '/../data/PlayerCharacters.json');
 

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
-const { getXP, getPlayer} = require('./playerCharacters');
+const { getXP, getPlayer, createPlayerCharacter } = require('./playerCharacters');
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -71,11 +71,18 @@ function register(username, password) {
   const enemies = [
     {
       id: uuidv4(),
-      name: 'premier',
+      name: 'CogneDure',
       lvl: 1,
       HP: calcuateHP(1),
       attack: calculateAttack(1),
     },
+    {
+      id: uuidv4(),
+      name: 'FrappeFort',
+      lvl: 1,
+      HP: calcuateHP(1),
+      attack: calculateAttack(1),
+    }
   ];
 
   const createdUser = createOneUser(username, password, enemies);
@@ -91,6 +98,8 @@ function register(username, password) {
       expiresIn: lifetimeJwt,
     },
   );
+
+  
 
   authenticatedUser = {
     username,
@@ -125,7 +134,7 @@ function createOneUser(username, password, enemies) {
   };
 
   users.push(createdUser);
-
+  createPlayerCharacter(createdUser.id);
   serialize(jsonDbPath, users);
 
   return createdUser;
