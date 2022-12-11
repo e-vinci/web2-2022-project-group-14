@@ -259,10 +259,10 @@ function fight() {
     player.HP = playerHP;
     firstEnemy.HP = enemyHP;
   }
-
+  
   // If player dies, stop execution
   if (player.HP <= 0) return undefined;
-
+  
   // If the enemy dies, add a new enemy and remove the current enemy
   addEnemy();
   removeEnemy();

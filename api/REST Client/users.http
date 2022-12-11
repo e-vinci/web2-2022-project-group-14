@@ -33,3 +33,9 @@ Content-Type: application/json
 ### readAllEnemies
 GET {{baseUrl}}/auths/readAllEnemies/
 Content-Type: application/json
+
+
+### fight
+POST {{baseUrl}}/auths/fight/
+Content-Type: application/json
+

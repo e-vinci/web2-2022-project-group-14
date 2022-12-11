@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, addEnemy,removeEnemy,readAllEnemies } = require('../models/users');
+const { register, login, addEnemy,removeEnemy,readAllEnemies,fight } = require('../models/users');
 
 const router = express.Router();
 
@@ -55,6 +55,12 @@ router.get('/readAllEnemies', (req, res) => {
   return res.json(authenticatedUser);
 });
 
+/* fight */
+router.post('/fight', (req, res) => {
+  const authenticatedUser = fight();
+  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  return res.json(authenticatedUser);
+});
 
 
 module.exports = router;
