@@ -7,7 +7,7 @@ POST {{baseUrl}}/auths/register/
 Content-Type: application/json
 
 {
-    "username": "nomRandom9",
+    "username": "user1",
     "password": "test"
 }
 
@@ -16,6 +16,20 @@ POST {{baseUrl}}/auths/login/
 Content-Type: application/json
  
 {
-    "username" : "nomRandom9",
+    "username" : "user1",
     "password" : "test"
 }
+
+### addEnemy
+POST {{baseUrl}}/auths/addEnemy/
+Content-Type: application/json
+
+
+### removeEnemy
+POST {{baseUrl}}/auths/removeEnemy/
+Content-Type: application/json
+
+
+### readAllEnemies
+GET {{baseUrl}}/auths/readAllEnemies/
+Content-Type: application/json

@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login } = require('../models/users');
+const { register, login, addEnemy,removeEnemy,readAllEnemies } = require('../models/users');
 
 const router = express.Router();
 
@@ -30,8 +30,31 @@ router.post('/login', (req, res) => {
 
   if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
 
-
   return res.json(authenticatedUser);
 });
+
+
+/* addEnemy */
+router.post('/addEnemy', (req, res) => {
+  const authenticatedUser = addEnemy();
+  if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  return res.json(authenticatedUser);
+});
+
+/* removeEnemy */
+router.post('/removeEnemy', (req, res) => {
+  const authenticatedUser = removeEnemy();
+  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  return res.json(authenticatedUser);
+});
+
+/* readAllEnemies */
+router.get('/readAllEnemies', (req, res) => {
+  const authenticatedUser = readAllEnemies();
+  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  return res.json(authenticatedUser);
+});
+
+
 
 module.exports = router;
