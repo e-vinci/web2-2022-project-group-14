@@ -81,7 +81,6 @@ function valideATask(id) {
   console.log('FoundIndex = ');
   console.log(foundIndex);
   getXP(returnId() ,list[foundIndex].difficulte, 0);
-  return removeATask(id);
 }
 
 module.exports = {
