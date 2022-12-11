@@ -79,10 +79,18 @@ function register(username, password) {
     {
       id: uuidv4(),
       name: 'FrappeFort',
-      lvl: 1,
-      HP: calcuateHP(1),
-      attack: calculateAttack(1),
-    }
+      lvl: 2,
+      HP: calcuateHP(2),
+      attack: calculateAttack(2),
+    },
+    {
+      id: uuidv4(),
+      name: 'Ombre Fatale',
+      lvl: 3,
+      HP: calcuateHP(3),
+      attack: calculateAttack(3),
+    },
+
   ];
 
   const createdUser = createOneUser(username, password, enemies);
