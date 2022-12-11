@@ -1,10 +1,10 @@
-const jwtDecode = require('jwt-decode')
+const jwtDecode = require('jwt-decode');
 
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
-
+const { createPlayerCharacter } = require('./playerCharacters');
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -14,19 +14,14 @@ const jsonDbPath = path.join(__dirname, '/../data/users.json');
 
 let authenticatedUser = null;
 
-const defaultUsers = [
-  {
-    id: 1,
-    username: 'admin',
-    password: 'admin',
-  },
-];
+const defaultUsers = [];
 
 function login(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (!userFound) return undefined;
   if (userFound.password !== password) return undefined;
 
+<<<<<<< HEAD
   // Vérifie si l'utilisateur a une liste d'ennemis existante
   let {enemies} = userFound;
   if (!enemies) {
@@ -43,6 +38,9 @@ function login(username, password) {
   }
 
   // Créez un jeton JWT
+=======
+  // create a JWT token
+>>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
   const token = jwt.sign(
     {
       id: userFound.id,
@@ -102,8 +100,10 @@ function register(username, password) {
 
   // décodez le jeton pour obtenir l'ID
   const decodedToken = jwtDecode(token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
+
+  createPlayerCharacter(id);
 
   return authenticatedUser;
 }
@@ -147,11 +147,12 @@ function returnUser() {
 
 function returnId() {
   const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
   return id;
 }
 
+<<<<<<< HEAD
 
 /*-----------------------------------*/
 
@@ -310,14 +311,20 @@ function fight() {
 /*-----------------------------------*/
 
 
+=======
+>>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   returnUser,
   returnId,
+<<<<<<< HEAD
   fight,
   addEnemy,
   removeEnemy,
   readAllEnemies,
 };
+=======
+};
+>>>>>>> 10b0c2631de1ed17110d5a442397b76ba1ba96c3
