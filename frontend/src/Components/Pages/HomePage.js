@@ -50,7 +50,6 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       FATHER SUCKERS ! 
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
 
         <label for="username"><b>Username</b></label>
@@ -213,7 +212,6 @@ partieDroite.appendChild(buttonEnnemy);
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
     const valueCelDelete = document.createElement('button');
-    valueCelDelete.className="btn btn-primary";
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title);
     valueCelDelete.textContent = "Delete Task";
@@ -221,7 +219,7 @@ partieDroite.appendChild(buttonEnnemy);
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
     let buttonId = null;
-     
+    
     // delete the task 
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 

@@ -266,7 +266,7 @@ function fight() {
   // get the first enemy
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
-/*
+
   // Ne fonctionne pas encore
   const player = getPlayer();
 
@@ -286,8 +286,8 @@ function fight() {
     console.log(player.currentHP);
     return player.currentHP;
   }
-*/
 
+/*
   let playerHP = 100;
   const playerAttack = 100;
 
@@ -307,7 +307,7 @@ function fight() {
     console.log(playerHP);
     return playerHP;
   }
-  
+  */
   
   // If the enemy dies, add a new enemy and remove the current enemy
   if (firstEnemy.HP <= 0){
