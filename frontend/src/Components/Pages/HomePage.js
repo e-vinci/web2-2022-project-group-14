@@ -367,6 +367,25 @@ partieDroite.appendChild(buttonEnnemy);
   }
 }
 
+async function figth(e) {
+  e.preventDefault();
+
+  const jsonOptions = {
+    method: 'POST'
+  };
+
+  const response = await fetch('/api/users', jsonOptions);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  const newFight = await response.json();
+  
+  window.location.reload()
+  // eslint-disable-next-line no-console
+  console.log('task add : ',newFight);
+    
+}
+
 
 // ---------------------------------------------------------------------------
 

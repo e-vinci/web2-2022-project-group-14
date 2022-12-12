@@ -3,6 +3,7 @@ const jwtDecode = require('jwt-decode')
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
+const Chance = require('chance');
 const { parse, serialize } = require('../utils/json');
 const { getXP, getPlayer, createPlayerCharacter } = require('./playerCharacters');
 
@@ -185,8 +186,10 @@ function calculateAttack(lvl){
   
   // use library to create a random name
 function randomName(){
-  const name = "enemy";
-  return name;
+  const chance = new Chance();
+  const random = chance.name();
+  console.log(random);
+  return random;
 };
 
 function readAllEnemies() {
@@ -263,7 +266,7 @@ function fight() {
   // get the first enemy
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
-
+/*
   // Ne fonctionne pas encore
   const player = getPlayer();
 
@@ -283,10 +286,10 @@ function fight() {
     console.log(player.currentHP);
     return player.currentHP;
   }
+*/
 
-/*
-  let playerHP = 1;
-  const playerAttack = 1;
+  let playerHP = 100;
+  const playerAttack = 100;
 
   while (playerHP > 0 && firstEnemy.hp > 0) {
     // Calculate the player's and enemy's remaining hit points after combat
@@ -304,7 +307,7 @@ function fight() {
     console.log(playerHP);
     return playerHP;
   }
-  */
+  
   
   // If the enemy dies, add a new enemy and remove the current enemy
   if (firstEnemy.hp <= 0){
