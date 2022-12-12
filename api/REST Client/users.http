@@ -16,6 +16,7 @@ GET {{baseUrl}}/auths/login/
 Content-Type: application/json
  
 {
+
     "username" : "user1",
     "password" : "test"
 }

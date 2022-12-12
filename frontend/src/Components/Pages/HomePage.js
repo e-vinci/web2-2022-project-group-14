@@ -68,7 +68,7 @@ const homePage = `
   </div>
 </div>
 
-
+<!-- Left part of website, 2 columns-->
 
 <div class="d-flex justify-content-between">
   <div class="col-2 colonneLeft">
@@ -87,13 +87,16 @@ const homePage = `
   
   <div class="col-7 colonne">
     <div class="shadow p-3 mb-5 bg-body rounded">
-    <p >Tâche Selectionée </p>
+    <p>Tâche Selectionée </p>
     <p id="displayTache" ></p>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded">
       <p>Contenu de la tache </p>
       <p id="displayContenu" ></p>
     </div>
+    <div class="shadow p-3 mb-5 bg-body rounded">
+      <button type="button" id="valideTaskButtonID"></button>
+  </div>
   </div>
   <div class="col-2 colonneRight">
     <div class="shadow mb-5 bg-body rounded" id="innerColRight">
@@ -205,29 +208,40 @@ partieDroite.appendChild(buttonEnnemy);
 
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
-
+    const button = document.getElementById("valideTaskButtonID");
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
-    const valueCelDelete = document.createElement('td2');
+    const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title);
     valueCelDelete.textContent = "Delete Task";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
+    button.datavalue = data[key].id;
+    let buttonId = null;
+    
+    // delete the task 
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 
-      const id = this.datavalue;
-      fetch(`/api/taches/${id}`, {
-        method: 'DELETE'
-      })
-      window.location.reload()
+      deleteTask(this.datavalue);
     });
-    
+
+    // Display the task title, content
     // eslint-disable-next-line func-names
     valueCel.addEventListener("click", function() { 
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
+      document.getElementById("valideTaskButtonID").innerHTML = "Valider la tache !" ;
+      buttonId = this.datavalue.id;
     });
+
+    
+    // eslint-disable-next-line func-names
+    button.addEventListener("click", () => { 
+      valideTask(buttonId);
+      deleteTask(buttonId);
+    });
+    
     row.appendChild(valueCel);
     row.appendChild(valueCelDelete);
     table.appendChild(row);
@@ -310,21 +324,25 @@ partieDroite.appendChild(buttonEnnemy);
   
   }
 
-  /*
    // Delete task 
-   // eslint-disable-next-line no-unused-vars
   function deleteTask(e) {
-    e.preventDefault();
-  
     fetch(`/api/taches/${e}`, {
       method: 'DELETE'
     })
-    .then(response => response.json())
+    .then(response => response.json());
+    window.location.reload();
+  }
 
+  // Valide task 
+  function valideTask(e) {
+    fetch(`/api/taches/valide/${e}`, {
+      method: 'POST'
+    })
+    .then(response => response.json());
   }
 
 // ------------------------------------ENNEMIS TABLE ---------------------------------------
-*/
+
 
  async function getJSONEnnemiesAndDisplay() {
     
