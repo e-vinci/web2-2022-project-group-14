@@ -1,6 +1,7 @@
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
+const { returnId } = require('./users');
 // eslint-disable-next-line no-unused-vars
 // const { returnId } = require('./users');
 
@@ -80,9 +81,9 @@ function getXP(userID, taskDifficulty, monsterLevel) {
 
 
 /* Prototype de get User -- A Vérifier */
-function getPlayer(userID) {
+function getPlayer(id) {
   const list = parse(jsonDbPath, listPlayerCharacters);
-  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === userID);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
   return playerCharacter;
 }
 

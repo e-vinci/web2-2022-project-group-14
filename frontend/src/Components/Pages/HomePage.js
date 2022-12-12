@@ -95,7 +95,7 @@ const homePage = `
       <p id="displayContenu" ></p>
     </div>
     <div class="shadow p-3 mb-5 bg-body rounded">
-      <button type="button" id="valideTaskButtonID"></button>
+      <button type="button" class="btn btn-primary" id="valideTaskButtonID"></button>
   </div>
   </div>
   <div class="col-2 colonneRight">
@@ -213,6 +213,7 @@ partieDroite.appendChild(buttonEnnemy);
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
     const valueCelDelete = document.createElement('button');
+    valueCelDelete.className="btn btn-primary";
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title);
     valueCelDelete.textContent = "Delete Task";
@@ -220,7 +221,7 @@ partieDroite.appendChild(buttonEnnemy);
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
     let buttonId = null;
-    
+     
     // delete the task 
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 

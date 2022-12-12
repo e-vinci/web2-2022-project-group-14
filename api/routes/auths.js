@@ -1,5 +1,6 @@
 const express = require('express');
-const { register, login, addEnemy,removeEnemy,readAllEnemies,fight } = require('../models/users');
+const { getPlayer } = require('../models/playerCharacters');
+const { register, login, addEnemy,removeEnemy,readAllEnemies,fight, returnId } = require('../models/users');
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.post('/register', (req, res) => {
 });
 
 /* Login a user */
-router.get('/login', (req, res) => {
+router.post('/login', (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 
@@ -29,7 +30,8 @@ router.get('/login', (req, res) => {
   const authenticatedUser = login(username, password);
 
   if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
-
+  let player = getPlayer(returnId());
+  console.log(player);
   return res.json(authenticatedUser);
 });
 
