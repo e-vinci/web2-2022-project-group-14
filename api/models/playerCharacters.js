@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 const { parse, serialize } = require('../utils/json');
 
 const jsonDbPath = path.join(__dirname, '/../data/PlayerCharacters.json');
-
 const listPlayerCharacters = [];
 
 // create playerCharacter
@@ -85,8 +84,17 @@ function getPlayer(id) {
 }
 
 
+function updateData(hp,id) {
+  const players = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = players.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  playerCharacter.currentHP = hp;
+  serialize(jsonDbPath, players);
+  return hp;
+}
+
 module.exports = {
   createPlayerCharacter,
   getXP,
   getPlayer,
+  updateData,
 };

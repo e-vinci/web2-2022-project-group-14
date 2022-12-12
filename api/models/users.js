@@ -5,7 +5,7 @@ const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const Chance = require('chance');
 const { parse, serialize } = require('../utils/json');
-const { getXP, getPlayer, createPlayerCharacter } = require('./playerCharacters');
+const { getXP, getPlayer, createPlayerCharacter,updateData } = require('./playerCharacters');
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -174,13 +174,13 @@ function returnId() {
 
 // calculate HP
 function calcuateHP(lvl){
-  const HP = lvl + (lvl *1,2);
+  const HP = lvl;
   return HP;
   };
   
   // calculate attack
 function calculateAttack(lvl){
-  const attack = lvl + (lvl *1,8);
+  const attack = lvl;
   return attack;
 };
   
@@ -258,17 +258,14 @@ function fight() {
  // Check if user is authenticated
  if (!authenticatedUser) return "Joueur non authentifié";
 
- // Decode JWT to get user's enemies list
- /* const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
- const {enemies} = decodedToken; */
-
   const {enemies} = authenticatedUser;
   // get the first enemy
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
 
   // Ne fonctionne pas encore
-  const player = getPlayer();
+  const player = getPlayer(returnId());
+  const playerMaxHP = player.currentHP;
 
   while (player.currentHP > 0 && firstEnemy.HP > 0) {
     // Calculate the player's and enemy's remaining hit points after combat
@@ -280,12 +277,13 @@ function fight() {
     firstEnemy.HP = enemyHP;
   }
   
+
   // If player dies, stop execution
   if (player.currentHP <= 0){
-    player.currentHP = 0;
-    console.log(player.currentHP);
-    return player.currentHP;
+    player.currentHP = playerMaxHP;
   }
+
+  updateData(player.currentHP, returnId());
 
 /*
   let playerHP = 100;
@@ -313,7 +311,8 @@ function fight() {
   if (firstEnemy.HP <= 0){
   addEnemy();
   removeEnemy();
-  // getXP(returnId(),0,firstEnemy.lvl);
+  getXP(returnId(),0,firstEnemy.lvl);
+  player.currentHP = player.maxHP;
   return firstEnemy
   }
   return 0;

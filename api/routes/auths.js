@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
   const authenticatedUser = login(username, password);
 
   if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
-  let player = getPlayer(returnId());
+  const player = getPlayer(returnId());
   console.log(player);
   return res.json(authenticatedUser);
 });
