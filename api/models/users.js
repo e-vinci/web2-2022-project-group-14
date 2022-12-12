@@ -217,7 +217,7 @@ function addEnemy() {
     id: uuidv4(),
     name : randomName(), 
     lvl,
-    hp : calcuateHP(lvl),
+    HP : calcuateHP(lvl),
     attack : calculateAttack(lvl),
   };
 
@@ -256,7 +256,7 @@ function removeEnemy() {
 // 
 function fight() {
  // Check if user is authenticated
- if (!authenticatedUser) return undefined;
+ if (!authenticatedUser) return "Joueur non authentifié";
 
  // Decode JWT to get user's enemies list
  /* const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
@@ -291,14 +291,14 @@ function fight() {
   let playerHP = 100;
   const playerAttack = 100;
 
-  while (playerHP > 0 && firstEnemy.hp > 0) {
+  while (playerHP > 0 && firstEnemy.HP > 0) {
     // Calculate the player's and enemy's remaining hit points after combat
     const playerhp = playerHP - firstEnemy.attack;
-    const enemyHP = firstEnemy.hp - playerAttack;
+    const enemyHP = firstEnemy.HP - playerAttack;
 
     // Update player and enemy HP
     playerHP = playerhp;
-    firstEnemy.hp = enemyHP;
+    firstEnemy.HP = enemyHP;
   }
 
   // If player dies, stop execution
@@ -310,12 +310,13 @@ function fight() {
   
   
   // If the enemy dies, add a new enemy and remove the current enemy
-  if (firstEnemy.hp <= 0){
+  if (firstEnemy.HP <= 0){
   addEnemy();
   removeEnemy();
-  getXP(returnId(),0,firstEnemy.lvl);
+  // getXP(returnId(),0,firstEnemy.lvl);
+  return firstEnemy
   }
-  return firstEnemy;
+  return 0;
 }
 
 

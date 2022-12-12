@@ -133,6 +133,7 @@ const HomePage = () => {
   
   getJSONTasksAndDisplay();
   getJSONEnnemiesAndDisplay();
+  fight();
   renderTaskForm();
 
 // ---------------------------------------------------------------------------
@@ -366,24 +367,20 @@ partieDroite.appendChild(buttonEnnemy);
   }
 }
 
-async function figth(e) {
-  e.preventDefault();
 
-  const jsonOptions = {
-    method: 'POST'
-  };
-
-  const response = await fetch('/api/users', jsonOptions);
-
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-  const newFight = await response.json();
-  
-  window.location.reload()
-  // eslint-disable-next-line no-console
-  console.log('task add : ',newFight);
-    
+// fight button 
+async function fight() {
+  const fights = document.getElementById('fight-btn');
+  fights.innerHTML = 'fight';
+  fights.addEventListener('click', () => {
+    fetch('/api/auths/fight', {
+      method: 'POST'
+    })
+    .then(response => response.json());
+    window.location.reload();
+  });
 }
+
 
 
 // ---------------------------------------------------------------------------
