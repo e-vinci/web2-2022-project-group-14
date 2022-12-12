@@ -220,7 +220,7 @@ partieDroite.appendChild(buttonEnnemy);
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
     let buttonId = null;
-    
+     
     // delete the task 
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 
