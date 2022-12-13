@@ -2,12 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 // import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
-import userPicture from '../../img/profile.png';
+
 
 
 const homePage = `
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
   Login modal
 </button>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
@@ -16,7 +16,8 @@ const homePage = `
 
 <!-- login modal -->
 
-<div class="modal fade" id="#staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -24,12 +25,11 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="usename" id="usernameL" required>
-      <br>
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" id="passwordL" required>
-    <label>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="usename" id="usernameL" required>
+        <br>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" id="passwordL" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -50,8 +50,6 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
-
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="usename" id="usernameR" required>
         <br>
@@ -66,6 +64,8 @@ const homePage = `
     </div>
   </div>
 </div>
+
+<!-- header
 
 <!-- Left part of website, 2 columns-->
 
