@@ -314,21 +314,6 @@ const HomePage = () => {
     row.appendChild(valueCelHP);
     row.appendChild(valueCelAttack);
     table.appendChild(row);
-
-
-    /*
-    const row = document.createElement('tr');
-    const valueCel = document.createElement('td');
-
-    const valueCelDelete = document.createElement('button');
-    valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].title);
-    valueCelDelete.textContent = "Delete Task";
-    valueCelDelete.id = "td2";
-    valueCelDelete.datavalue = data[key].id;
-    button.datavalue = data[key].id;
-    let buttonId = null;
-    */
   }
 }
 
