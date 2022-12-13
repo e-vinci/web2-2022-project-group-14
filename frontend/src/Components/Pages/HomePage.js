@@ -25,15 +25,15 @@ const homePage = `
       </div>
       <div class="modal-body">
       <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="usename" id="username" required>
+      <input type="text" placeholder="Enter Username" name="usename" id="usernameL" required>
       <br>
       <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" id="password" required>
+      <input type="password" placeholder="Enter Password" name="password" id="passwordL" required>
     <label>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-primary" id="buttonL" >Login</button>
       </div>
     </div>
   </div>
@@ -53,15 +53,15 @@ const homePage = `
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> register modal</button>
 
         <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="usename" id="username" required>
+        <input type="text" placeholder="Enter Username" name="usename" id="usernameR" required>
         <br>
         <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+        <input type="password" placeholder="Enter Password" name="password" id="passwordR" required>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-primary" id="buttonR" >Register</button>
       </div>
     </div>
   </div>
@@ -129,11 +129,13 @@ const HomePage = () => {
   
   main.innerHTML = homePage;
   
-  
+  login();
+  register();
   getJSONTasksAndDisplay();
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
+  
 
 // ---------------------------------------------------------------------------
  // Création de la partie qui contiendra le header
@@ -551,7 +553,54 @@ secondProgressBar.innerText = '75%';
 divProgressBares.appendChild(divSecondProgressBar);
 divSecondProgressBar.appendChild(secondProgressBar);
 
+async function login() {
 
+  const registerBtn = document.getElementById('buttonL');
+
+  registerBtn.addEventListener('click', async () => {
+    const username = document.querySelector('#usernameL').value;
+    const password = document.querySelector('#passwordL').value;
+    const response = await fetch('/api/auths/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    window.location.reload();
+  });
+}
+
+
+async function register() {
+
+  const registerBtn = document.getElementById('buttonR');
+
+  registerBtn.addEventListener('click', async () => {
+    const username = document.querySelector('#usernameR').value;
+    const password = document.querySelector('#passwordR').value;
+    const response = await fetch('/api/auths/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    window.location.reload();
+  });
+}
 // FIN  
 };
     
@@ -574,66 +623,5 @@ async function onLogin(e) {
   };
 };
 */
-
-
-
-async function login(e) {
-  e.preventDefault();
-
-  const username = document.querySelector('#username').value;
-  const password = document.querySelector('#password').value;
-
-  const jsonOptions = {
-    method: 'GET',
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const response = await fetch('/api/auths', jsonOptions);
-
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-  const loggedUser = await response.json();
-  
-  // eslint-disable-next-line no-console
-  console.log('task add : ',loggedUser);
-}
-
-
-async function register(e) {
-  e.preventDefault();
-
-  const username = document.querySelector('#username').value;
-  const password = document.querySelector('#password').value;
-
-  const jsonOptions = {
-    method: 'POST',
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const response = await fetch('/api/auths', jsonOptions);
-
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-  const authenticatedUser = await response.json();
-  
-  // eslint-disable-next-line no-console
-  console.log('User add : ', authenticatedUser);
-}
-
-login();
-register();
-
 
 export default HomePage;
