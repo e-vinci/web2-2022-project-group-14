@@ -578,29 +578,6 @@ async function login() {
 }
 
 
-async function register() {
-
-  const registerBtn = document.getElementById('buttonR');
-
-  registerBtn.addEventListener('click', async () => {
-    const username = document.querySelector('#usernameR').value;
-    const password = document.querySelector('#passwordR').value;
-    const response = await fetch('/api/auths/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-    window.location.reload();
-  });
-}
 // FIN  
 };
     
