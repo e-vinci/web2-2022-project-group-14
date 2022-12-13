@@ -92,9 +92,57 @@ function updateData(hp,id) {
   return hp;
 }
 
+// method to get currentxp
+function getCurrentXP(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.currentXP;
+}
+
+// method to get XPToLvlUp
+function getXPToLvlUp(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.XPToLvlUp;
+}
+
+// method to get currentHP
+function getCurrentHP(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.currentHP;
+}
+
+// method to get maxHP
+function getMaxHP(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.maxHP;
+}
+
+// method to get level
+function getLevel(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.level;
+}
+
+// method to get attack
+function getAttack(id) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  return playerCharacter.attack;
+}
+
 module.exports = {
   createPlayerCharacter,
   getXP,
   getPlayer,
   updateData,
+  getCurrentXP,
+  getCurrentHP,
+  getMaxHP,
+  getLevel,
+  getAttack,
+  getXPToLvlUp,
 };
