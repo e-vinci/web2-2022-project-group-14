@@ -72,24 +72,38 @@ function register(username, password) {
   const enemies = [
     {
       id: uuidv4(),
-      name: 'CogneDure',
+      name: 'Margit le déchu',
       lvl: 1,
       HP: calcuateHP(1),
       attack: calculateAttack(1),
     },
     {
       id: uuidv4(),
-      name: 'FrappeFort',
+      name: 'Iudex Gundyr',
       lvl: 2,
       HP: calcuateHP(2),
       attack: calculateAttack(2),
     },
     {
       id: uuidv4(),
-      name: 'Ombre Fatale',
+      name: 'Lothric',
       lvl: 3,
       HP: calcuateHP(3),
       attack: calculateAttack(3),
+    },
+    {
+      id: uuidv4(),
+      name: 'Le roi sans nom',
+      lvl: 4,
+      HP: calcuateHP(4),
+      attack: calculateAttack(4),
+    },
+    {
+      id: uuidv4(),
+      name: 'Malenia, épée de Miquella',
+      lvl: 5,
+      HP: calcuateHP(5),
+      attack: calculateAttack(5),
     },
 
   ];
@@ -174,13 +188,19 @@ function returnId() {
 
 // calculate HP
 function calcuateHP(lvl){
-  const HP = lvl;
+  if (lvl%5 === 0){
+    return ((lvl + ((lvl/1,5) * 2))*2);
+  }
+  const HP = lvl + ((lvl/1,5) * 2);
   return HP;
   };
   
   // calculate attack
 function calculateAttack(lvl){
-  const attack = lvl;
+  if (lvl%5 === 0){
+    return ((lvl + (lvl * 2))*2);
+  }
+  const attack = lvl + (lvl * 2);
   return attack;
 };
   
@@ -281,31 +301,10 @@ function fight() {
   // If player dies, stop execution
   if (player.currentHP <= 0){
     player.currentHP = playerMaxHP;
+    firstEnemy.HP = calcuateHP(firstEnemy.lvl);
   }
 
   updateData(player.currentHP, returnId());
-
-/*
-  let playerHP = 100;
-  const playerAttack = 100;
-
-  while (playerHP > 0 && firstEnemy.HP > 0) {
-    // Calculate the player's and enemy's remaining hit points after combat
-    const playerhp = playerHP - firstEnemy.attack;
-    const enemyHP = firstEnemy.HP - playerAttack;
-
-    // Update player and enemy HP
-    playerHP = playerhp;
-    firstEnemy.HP = enemyHP;
-  }
-
-  // If player dies, stop execution
-  if (playerHP <= 0){
-    playerHP = 0;
-    console.log(playerHP);
-    return playerHP;
-  }
-  */
   
   // If the enemy dies, add a new enemy and remove the current enemy
   if (firstEnemy.HP <= 0){

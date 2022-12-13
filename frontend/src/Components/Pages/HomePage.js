@@ -320,10 +320,21 @@ const HomePage = () => {
 
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
+    const valueCelHP = document.createElement('td');
+    const valueCelAttack = document.createElement('td');
     
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].name);
+    valueCelHP.datavalue  = data[key];
+    valueCelHP.textContent = "HP : "
+    valueCelHP.textContent += JSON.stringify(data[key].HP);
+    valueCelAttack.datavalue  = data[key];
+    valueCelAttack.textContent = "Attack : "
+    valueCelAttack.textContent += JSON.stringify(data[key].attack);
+
     row.appendChild(valueCel);
+    row.appendChild(valueCelHP);
+    row.appendChild(valueCelAttack);
     table.appendChild(row);
   }
 }
