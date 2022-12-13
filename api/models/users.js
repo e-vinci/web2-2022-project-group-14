@@ -284,28 +284,6 @@ function fight() {
   }
 
   updateData(player.currentHP, returnId());
-
-/*
-  let playerHP = 100;
-  const playerAttack = 100;
-
-  while (playerHP > 0 && firstEnemy.HP > 0) {
-    // Calculate the player's and enemy's remaining hit points after combat
-    const playerhp = playerHP - firstEnemy.attack;
-    const enemyHP = firstEnemy.HP - playerAttack;
-
-    // Update player and enemy HP
-    playerHP = playerhp;
-    firstEnemy.HP = enemyHP;
-  }
-
-  // If player dies, stop execution
-  if (playerHP <= 0){
-    playerHP = 0;
-    console.log(playerHP);
-    return playerHP;
-  }
-  */
   
   // If the enemy dies, add a new enemy and remove the current enemy
   if (firstEnemy.HP <= 0){
