@@ -308,7 +308,7 @@ const HomePage = () => {
     valueCelHP.textContent += JSON.stringify(data[key].HP);
     valueCelAttack.datavalue  = data[key];
     valueCelAttack.textContent = "Attack : "
-    valueCelAttack.textContent += JSON.stringify(data[key].HP);
+    valueCelAttack.textContent += JSON.stringify(data[key].attack);
 
     row.appendChild(valueCel);
     row.appendChild(valueCelHP);
