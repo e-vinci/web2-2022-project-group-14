@@ -298,11 +298,37 @@ const HomePage = () => {
 
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
+    const valueCelHP = document.createElement('td');
+    const valueCelAttack = document.createElement('td');
     
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].name);
+    valueCelHP.datavalue  = data[key];
+    valueCelHP.textContent = "HP : "
+    valueCelHP.textContent += JSON.stringify(data[key].HP);
+    valueCelAttack.datavalue  = data[key];
+    valueCelAttack.textContent = "Attack : "
+    valueCelAttack.textContent += JSON.stringify(data[key].HP);
+
     row.appendChild(valueCel);
+    row.appendChild(valueCelHP);
+    row.appendChild(valueCelAttack);
     table.appendChild(row);
+
+
+    /*
+    const row = document.createElement('tr');
+    const valueCel = document.createElement('td');
+
+    const valueCelDelete = document.createElement('button');
+    valueCel.datavalue = data[key];
+    valueCel.textContent = JSON.stringify(data[key].title);
+    valueCelDelete.textContent = "Delete Task";
+    valueCelDelete.id = "td2";
+    valueCelDelete.datavalue = data[key].id;
+    button.datavalue = data[key].id;
+    let buttonId = null;
+    */
   }
 }
 
