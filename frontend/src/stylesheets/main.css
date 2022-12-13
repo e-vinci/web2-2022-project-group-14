@@ -1,31 +1,50 @@
 
 main{
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
-.colonneLeft{
+
+#header{
+    background-color: red;
+    z-index: 10000000;
+}
+
+.btnHeaderText{
+    font-weight: bold;
+    color: black;
+}
+
+#rightPartHeader{
+    
+}
+
+
+#colonneLeft{
     margin-left: 10px;
+    background-color: grey;
+}
+
+#centralColonne{
+    background-color: yellow;
 }
 
 #innerColLeft{
-    padding: 10px;
+
 }
 
 #innerColLeft2{
-    padding: 10px;
+
 }
 
 .colonneRight{
-    margin-right: 10px;
+
 }
 
 #innerColRight{
-    padding: 10px;
+
 }
 
 #innerColRight2{
-    padding: 10px;
+
 }
 
 table tr td  {

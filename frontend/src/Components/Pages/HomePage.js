@@ -6,14 +6,6 @@ import '../../stylesheets/main.css';
 
 
 const homePage = `
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-  Login modal
-</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-  Register modal
-</button>
-
 <!-- login modal -->
 
 
@@ -65,47 +57,76 @@ const homePage = `
   </div>
 </div>
 
-<!-- header
+<!-- header -->
+
+<nav class="align-items-center" id="header">
+  <div class="d-flex justify-content-around shadow rounded" id="header">
+      <div id="leftPartHeader" class="align-items-center">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+      <p class="btnHeaderText">Login</p>
+      </button>
+      <div class="vr"></div>
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+      <p class="btnHeaderText">Register</p>
+      </button>
+    </div>
+    <div id="rightPartHeader">
+      <div class="navbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
 
 <!-- Left part of website, 2 columns-->
 
-<div class="d-flex justify-content-between">
-  <div class="col-2 colonneLeft">
-    <div class="shadow mb-5 bg-body rounded" id="innerColLeft">
+<div class="d-flex container-fluid">
+  <div class="col-4" id="colonneLeft">
+    <div class="shadow bg-body rounded" id="innerColLeft">
     <p >Liste des taches </p>
     <table>
     </table>    
     </div>
-    <div class="shadow mb-5 bg-body rounded" id="innerColLeft2">
+    <div class="shadow rounded" id="innerColLeft2">
       <div>
         <h3>Créer tâche :</h3>
         <form id="taskForm">
       </div>
     </div>
   </div>
+
+  <!-- central part -->
   
-  <div class="col-7 colonne">
-    <div class="shadow p-3 mb-5 bg-body rounded">
+  <div class="col-8 p-3" id="centralColonne">
+    <div class="shadow mb-5 bg-body rounded">
     <p>Tâche Selectionée </p>
     <p id="displayTache" ></p>
     </div>
-    <div class="shadow p-3 mb-5 bg-body rounded">
+    <div class="shadow  mb-5 bg-body rounded">
       <p>Contenu de la tache </p>
       <p id="displayContenu" ></p>
     </div>
-    <div class="shadow p-3 mb-5 bg-body rounded">
+    <div class="shadow mb-5 bg-body rounded">
       <button type="button" class="btn btn-primary" id="valideTaskButtonID"></button>
   </div>
   </div>
-  <div class="col-2 colonneRight">
-    <div class="shadow mb-5 bg-body rounded" id="innerColRight">
-    <input 
-       type="button"
-       value="fight-btn"
-       id="fight-btn">
-    <table id="table-ennemis" >
-    </table>  
-    </div>
+
+  <!-- right part -->
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    
+  <div class="shadow mb-5 bg-body rounded" id="innerColRight">
+      <input type="button" value="fight-btn" id="fight-btn">
+      <table id="table-ennemis" >
+      </table>  
+      </div>
     <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
       <div id="userPicture">
        <img src="../../img/profile.png">
@@ -118,7 +139,8 @@ const homePage = `
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
       </div>
-    </div>
+    </div>   
+  </div>
   </div>
 </div>
 
