@@ -121,7 +121,7 @@ const homePage = `
   </div>
   <div class="offcanvas-body">
     
-  <div class="shadow mb-5 bg-body rounded" id="innerColRight">
+  <div class=" mb-5" id="innerColRight">
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
@@ -132,9 +132,11 @@ const homePage = `
        <img src="../img/profile.png" class="img-fluid img-thumbnail">
       </div>
       <div id="progressesBar">
-        <div class="progress">
+        <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
+        <div class=" progress mb-3">
           <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>
+        <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
