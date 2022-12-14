@@ -82,16 +82,16 @@ const homePage = `
 
 <!-- Left part of website, 2 columns-->
 
-<div class="d-flex container-fluid">
-  <div class="col-4" id="colonneLeft">
-    <div class="shadow bg-body rounded" id="innerColLeft">
-    <p >Liste des taches </p>
-    <table>
-    </table>    
+<div class="d-flex">
+  <div class="col-4 pt-2" id="colonneLeft">
+    <div class="m-auto" id="innerColLeft">
+      <h3 class="pb-3 text-center">Liste de vos taches </h3>
+      <table class="m-auto">
+      </table>    
     </div>
-    <div class="shadow rounded" id="innerColLeft2">
+    <div class="rounded pt-5" id="innerColLeft2">
       <div>
-        <h3>Créer tâche :</h3>
+        <h3 class="text-center">Créer une tâche</h3>
         <form id="taskForm">
       </div>
     </div>
@@ -100,16 +100,15 @@ const homePage = `
   <!-- central part -->
   
   <div class="col-8 p-3" id="centralColonne">
+   <h3 class="m-auto text-center mb-4">Tâche Selectionée </h3>
     <div class="shadow mb-5 bg-body rounded">
-    <p>Tâche Selectionée </p>
-    <p id="displayTache" ></p>
+      <p id="displayTache" ></p>
     </div>
-    <div class="shadow  mb-5 bg-body rounded">
-      <p>Contenu de la tache </p>
-      <p id="displayContenu" ></p>
+    <h3 class="m-auto text-center mb-4">Contenu de la tache </h3>
+    <div class="shadow mb-5 bg-body text-justify" id="displayContenu" ></p>
     </div>
-    <div class="shadow mb-5 bg-body rounded">
-      <button type="button" class="btn btn-primary" id="valideTaskButtonID"></button>
+    <div class="mb-5 m-auto">
+      <button type="button" class="btn btn-primary" id="valideTaskButtonID">Validé la tâche !</button>
   </div>
   </div>
 
@@ -117,15 +116,15 @@ const homePage = `
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <h5 class="offcanvas-title m-auto " id="offcanvasRightLabel">Combattez vos ennemis !</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     
-  <div class="shadow mb-5 bg-body rounded" id="innerColRight">
-      <input type="button" value="fight-btn" id="fight-btn">
-      <table id="table-ennemis" >
+  <div class="mb-5  rounded" id="innerColRight">
+      <table class="m-auto" id="table-ennemis" >
       </table>  
+      <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
       </div>
     <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
       <div id="userPicture">
@@ -193,7 +192,8 @@ const HomePage = () => {
     valueCel.addEventListener("click", function() { 
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
-      document.getElementById("valideTaskButtonID").innerHTML = "Valider la tache !" ;
+      document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
+      document.getElementById("valideTaskButtonID").className = "text-justify";
       buttonId = this.datavalue.id;
     });
 
