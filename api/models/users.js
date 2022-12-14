@@ -313,12 +313,13 @@ function fight() {
     removeEnemy();
     getXP(returnId(),0,firstEnemy.lvl);
     player.currentHP = player.maxHP;
-    // if (playerdead === true){
-    //  return 0;
-    // }
-    return firstEnemy;
+    if (playerdead === true){
+      return "Tu es mort mais tu as gagné";
+    }
+    return "Tu as gagné";
   }
-  return 0;
+
+  return "Tu as perdu";
 }
 
 

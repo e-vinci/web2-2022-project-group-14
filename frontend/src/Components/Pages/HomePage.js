@@ -122,9 +122,9 @@ const homePage = `
   <div class="offcanvas-body">
     
   <div class="shadow mb-5 bg-body rounded" id="innerColRight">
-      <input type="button" value="fight-btn" id="fight-btn">
       <table id="table-ennemis" >
-      </table>  
+      </table>
+      <p id="messageFight" ></p>
       <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
       </div>
     <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
@@ -344,22 +344,19 @@ const HomePage = () => {
 // fight button 
 async function fight() {
   const fights = document.getElementById('fight-btn');
-  // const message = document.querySelector('message');
+  const message = document.querySelector('#messageFight');
   fights.innerHTML = 'fight';
   fights.addEventListener('click', () => {
     fetch('/api/auths/fight', {
       method: 'POST'
     })
-    .then(response => response.json());
-    /* if( === 0){
-      message.innerHTML = 'you are dead but you win !';
-    }else{
-      if( === 1){
-      message.innerHTML = 'you win !';
-      }else{
-        message.innerHTML = 'you are dead loser!';
-      }
-    } */
+    .then(response => response.json())
+    .then(result => {
+      message.innerHTML = result;
+      setTimeout(() => {
+        message.innerHTML = '';
+      }, 9000);
+    });
     window.location.reload();
   });
 }
@@ -410,8 +407,8 @@ async function register() {
     });
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
     window.location.reload();
+
   });
 }
 
