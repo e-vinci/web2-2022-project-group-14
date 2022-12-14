@@ -121,9 +121,10 @@ const homePage = `
   </div>
   <div class="offcanvas-body">
     
-  <div class="mb-5  rounded" id="innerColRight">
-      <table class="m-auto" id="table-ennemis" >
-      </table>  
+  <div class="shadow mb-5 bg-body rounded" id="innerColRight">
+      <table id="table-ennemis" >
+      </table>
+      <p id="messageFight" > Pret a combatre ?</p>
       <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
       </div>
     <div  id="innerColRight2">
@@ -354,13 +355,21 @@ const HomePage = () => {
 // fight button 
 async function fight() {
   const fights = document.getElementById('fight-btn');
+  const message = document.querySelector('#messageFight');
   fights.innerHTML = 'fight';
   fights.addEventListener('click', () => {
     fetch('/api/auths/fight', {
       method: 'POST'
     })
-    .then(response => response.json());
-    window.location.reload();
+    .then(response => response.json())
+    .then(result => {
+      message.innerHTML = result;
+      setTimeout(() => {
+        message.innerHTML = 'Pret a combatre ?';
+      }, 9000);
+    });
+    setTimeout(() => {
+      window.location.reload();}, 1000);
   });
 }
 
@@ -410,8 +419,8 @@ async function register() {
     });
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
     window.location.reload();
+
   });
 }
 
