@@ -297,22 +297,26 @@ function fight() {
     firstEnemy.HP = enemyHP;
   }
   
-
+  let playerdead = false;
   // If player dies, stop execution
   if (player.currentHP <= 0){
     player.currentHP = playerMaxHP;
     firstEnemy.HP = calcuateHP(firstEnemy.lvl);
+    playerdead = true;
   }
 
   updateData(player.currentHP, returnId());
   
   // If the enemy dies, add a new enemy and remove the current enemy
   if (firstEnemy.HP <= 0){
-  addEnemy();
-  removeEnemy();
-  getXP(returnId(),0,firstEnemy.lvl);
-  player.currentHP = player.maxHP;
-  return firstEnemy
+    addEnemy();
+    removeEnemy();
+    getXP(returnId(),0,firstEnemy.lvl);
+    player.currentHP = player.maxHP;
+    // if (playerdead === true){
+    //  return 0;
+    // }
+    return firstEnemy;
   }
   return 0;
 }

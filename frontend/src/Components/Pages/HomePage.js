@@ -124,6 +124,7 @@ const homePage = `
     
   <div class="shadow mb-5 bg-body rounded" id="innerColRight">
       <input type="button" value="fight-btn" id="fight-btn">
+      <p id="message"></p>
       <table id="table-ennemis" >
       </table>  
       </div>
@@ -343,12 +344,22 @@ const HomePage = () => {
 // fight button 
 async function fight() {
   const fights = document.getElementById('fight-btn');
+  // const message = document.querySelector('message');
   fights.innerHTML = 'fight';
   fights.addEventListener('click', () => {
     fetch('/api/auths/fight', {
       method: 'POST'
     })
     .then(response => response.json());
+    /* if( === 0){
+      message.innerHTML = 'you are dead but you win !';
+    }else{
+      if( === 1){
+      message.innerHTML = 'you win !';
+      }else{
+        message.innerHTML = 'you are dead loser!';
+      }
+    } */
     window.location.reload();
   });
 }
