@@ -60,7 +60,7 @@ const homePage = `
 <!-- header -->
 
 <nav class="align-items-center" id="header">
-  <div class="d-flex justify-content-around shadow rounded" id="header">
+  <div class="d-flex justify-content-around" id="header">
       <div id="leftPartHeader" class="align-items-center">
       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
       <p class="btnHeaderText">Login</p>
@@ -101,13 +101,13 @@ const homePage = `
   
   <div class="col-8 p-3" id="centralColonne">
    <h3 class="m-auto text-center mb-4">Tâche Selectionée </h3>
-    <div class="shadow mb-5 bg-body rounded">
+    <div class="shadow mb-5 bg-body rounded text-justify">
       <p id="displayTache" ></p>
     </div>
     <h3 class="m-auto text-center mb-4">Contenu de la tache </h3>
-    <div class="shadow mb-5 bg-body text-justify" id="displayContenu" ></p>
+    <div class="shadow mb-5 bg-body" id="displayContenu" ></p>
     </div>
-    <div class="mb-5 m-auto">
+    <div class="mb-5 m-auto text-center">
       <button type="button" class="btn btn-primary" id="valideTaskButtonID">Validé la tâche !</button>
   </div>
   </div>
@@ -126,9 +126,9 @@ const homePage = `
       </table>  
       <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
       </div>
-    <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
+    <div  id="innerColRight2">
       <div id="userPicture">
-       <img src="../../img/profile.png">
+       <img src="../img/profile.png" class="img-fluid img-thumbnail">
       </div>
       <div id="progressesBar">
         <div class="progress">
@@ -220,12 +220,20 @@ const HomePage = () => {
     title.placeholder = 'title of your task';
     title.required = true;
     title.className = 'form-control mb-3';
+    /*
     const content = document.createElement('input');
     content.type = 'text';
     content.id = 'content';
     content.required = true;
     content.placeholder = 'Content of your task';
     content.className = 'form-control mb-3';
+    */
+    const textarea = document.createElement('textarea');
+    textarea.id = 'content';
+    textarea.className = 'form-control mb-3';
+    textarea.placeholder = 'Description of your task';
+    textarea.required = true;
+    textarea.className = 'form-control';
     const submit = document.createElement('input');
     submit.value = 'ajouter tache';
     submit.type = 'submit';
@@ -244,9 +252,12 @@ const HomePage = () => {
     difficulte1.appendChild(option1);
     difficulte1.appendChild(option2);
     difficulte1.appendChild(option3);
-    difficulte1.className = 'form-control mb-3';
+    difficulte1.className = 'form-control mt-3 mb-3';
     form.appendChild(title);
+    /*
     form.appendChild(content);
+    */
+    form.appendChild(textarea);
     form.appendChild(difficulte1);
     form.appendChild(submit);
     divForm.appendChild(form);
