@@ -357,7 +357,8 @@ async function fight() {
         message.innerHTML = 'Pret a combatre ?';
       }, 9000);
     });
-    // window.location.reload();
+    setTimeout(() => {
+      window.location.reload();}, 1000);
   });
 }
 

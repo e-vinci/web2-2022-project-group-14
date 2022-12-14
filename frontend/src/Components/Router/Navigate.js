@@ -8,8 +8,11 @@
 
 const Navigate = (toUri) => {
   const fromUri = window.location.pathname;
-  if (fromUri === toUri) return;
-
+  if (fromUri === toUri) {
+    // eslint-disable-next-line no-console
+    console.log("ici1");
+    return;
+  }
   window.history.pushState({}, '', toUri);
   const popStateEvent = new PopStateEvent('popstate', { state: {} });
   dispatchEvent(popStateEvent);
