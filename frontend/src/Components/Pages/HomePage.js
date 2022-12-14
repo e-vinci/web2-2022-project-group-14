@@ -124,7 +124,7 @@ const homePage = `
   <div class="shadow mb-5 bg-body rounded" id="innerColRight">
       <table id="table-ennemis" >
       </table>
-      <p id="messageFight" ></p>
+      <p id="messageFight" > Pret a combatre ?</p>
       <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
       </div>
     <div class="d-flex justify-content-between shadow mb-5 bg-body rounded" id="innerColRight2">
@@ -354,10 +354,10 @@ async function fight() {
     .then(result => {
       message.innerHTML = result;
       setTimeout(() => {
-        message.innerHTML = '';
+        message.innerHTML = 'Pret a combatre ?';
       }, 9000);
     });
-    window.location.reload();
+    // window.location.reload();
   });
 }
 
