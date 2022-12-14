@@ -86,11 +86,11 @@ const homePage = `
   <div class="col-4 pt-2" id="colonneLeft">
     <div class="m-auto" id="innerColLeft">
       <h3 class="pb-3 text-center">Liste de vos taches </h3>
-      <table class="m-auto">
+      <table>
       </table>    
     </div>
-    <div class="rounded pt-5" id="innerColLeft2">
-      <div>
+    <div class="pt-5 m-auto" id="innerColLeft2">
+      <div class="m-auto">
         <h3 class="text-center">Créer une tâche</h3>
         <form id="taskForm">
       </div>
@@ -125,7 +125,7 @@ const homePage = `
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
-      <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
+      <input class="mt-3 btn btn-primary text-align-center m-auto" type="button" value="Combattez !" id="fight-btn">
       </div>
     <div  id="innerColRight2">
       <div id="userPicture">
@@ -169,6 +169,7 @@ const HomePage = () => {
   
   // Create a table element
   const table = document.querySelector('table');
+  table.className="m-auto";
 
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
@@ -178,7 +179,8 @@ const HomePage = () => {
     const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title);
-    valueCelDelete.textContent = "Delete Task";
+    valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
+    valueCelDelete.className = "btn";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
@@ -196,7 +198,7 @@ const HomePage = () => {
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
-      document.getElementById("valideTaskButtonID").className = "text-justify";
+      document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
       buttonId = this.datavalue.id;
     });
 
@@ -216,7 +218,7 @@ const HomePage = () => {
   function renderTaskForm() {
     const divForm = document.getElementById('innerColLeft2');
     const form = document.createElement('form');
-    form.className = 'p-5';
+    form.className = 'm-auto text-center p-5';
     const title = document.createElement('input');
     title.type = 'text';
     title.id = 'title';
@@ -238,9 +240,9 @@ const HomePage = () => {
     textarea.required = true;
     textarea.className = 'form-control';
     const submit = document.createElement('input');
-    submit.value = 'ajouter tache';
+    submit.value = 'ajouter tâche';
     submit.type = 'submit';
-    submit.className = 'btn btn-danger';
+    submit.className = 'btn btn-primary text-align-center m-auto';
     const difficulte1 = document.createElement('select');
     difficulte1.id = 'select';
     const option1 = document.createElement('option');
