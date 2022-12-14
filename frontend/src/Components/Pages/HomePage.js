@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
+import profileImage from '../../img/po.png';
 // import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
@@ -129,7 +130,6 @@ const homePage = `
       </div>
     <div  id="innerColRight2">
       <div id="userPicture">
-       <img src="../img/profile.png" class="img-fluid img-thumbnail">
       </div>
       <div id="progressesBar">
         <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
@@ -159,6 +159,9 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
+
+  const div = document.getElementById('userPicture');
+  renderProfileImage(div, profileImage, 'test');
   
 
  async function getJSONTasksAndDisplay() {
@@ -377,8 +380,14 @@ async function fight() {
   });
 }
 
-
-
+// render the profile image (to resize it you can use the height parameter)
+function renderProfileImage(wrapper, url) {
+  const image = new Image();
+  image.src = url;
+  image.height = 100;
+  image.class = "img-fluid img-thumbnail";
+  wrapper.appendChild(image);
+}
 
 async function login() {
 
