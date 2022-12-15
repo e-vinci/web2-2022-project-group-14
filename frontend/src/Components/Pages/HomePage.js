@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
-import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
+import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
 
@@ -414,7 +414,7 @@ async function login() {
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
-    setAuthenticatedUser(authenticatedUser);
+    setAuthenticatedUser(response.json());
 
     window.location.reload();
   });
@@ -438,7 +438,7 @@ async function register() {
       },
     });
 
-    setAuthenticatedUser(authenticatedUser);
+    setAuthenticatedUser(response.json());
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     window.location.reload();
