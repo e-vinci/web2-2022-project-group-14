@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
-// import {setAuthenticatedUser} from '../../utils/auths'
+import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
 
@@ -394,6 +394,10 @@ async function login() {
       },
     });
 
+    let user = response.json;
+
+    setAuthenticatedUser(user);
+
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
     window.location.reload();
@@ -417,6 +421,10 @@ async function register() {
         'Content-Type': 'application/json',
       },
     });
+
+    let user = response.json;
+
+    setAuthenticatedUser(user);
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     window.location.reload();
