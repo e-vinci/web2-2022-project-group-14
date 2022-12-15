@@ -2,11 +2,14 @@ html,body {
     height: 100%;
     margin: auto 0;
     padding:0;
+    background-image : url(../img/backround4.jpg);
+    background-size : cover;
 }
 
 
 #header{
-    background-color: #FA7F5A;
+    /* background-color: #FA7F5A; */
+    background-color: #EEEBF7;
     z-index: 1000;
 }
 
@@ -61,3 +64,4 @@ margin-left: 1%;
 margin-right: 1%;
 }
 */
+

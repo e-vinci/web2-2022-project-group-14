@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
-import profileImage from '../../img/po.png';
+import profileImage from '../../img/profile.png';
 // import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
@@ -148,11 +148,15 @@ const homePage = `
 
      `;
 
+     
+
 const HomePage = () => {
   const main = document.querySelector('main');
+
   
   main.innerHTML = homePage;
   
+
   login();
   register();
   getJSONTasksAndDisplay();
@@ -206,6 +210,7 @@ const HomePage = () => {
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
       document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
+      document.getElementById("valideTaskButtonID").className = "mb-5 m-auto text-center btn btn-primary";
       buttonId = this.datavalue.id;
     });
 
@@ -221,6 +226,9 @@ const HomePage = () => {
     table.appendChild(row);
   }
 }
+
+
+
   
   function renderTaskForm() {
     const divForm = document.getElementById('innerColLeft2');
