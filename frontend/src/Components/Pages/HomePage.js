@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
+import profileImage from '../../img/po.png';
 // import {setAuthenticatedUser} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
@@ -86,11 +87,11 @@ const homePage = `
   <div class="col-4 pt-2" id="colonneLeft">
     <div class="m-auto" id="innerColLeft">
       <h3 class="pb-3 text-center">Liste de vos taches </h3>
-      <table class="m-auto">
+      <table>
       </table>    
     </div>
-    <div class="rounded pt-5" id="innerColLeft2">
-      <div>
+    <div class="pt-5 m-auto" id="innerColLeft2">
+      <div class="m-auto">
         <h3 class="text-center">Créer une tâche</h3>
         <form id="taskForm">
       </div>
@@ -100,15 +101,15 @@ const homePage = `
   <!-- central part -->
   
   <div class="col-8 p-3" id="centralColonne">
-   <h3 class="m-auto text-center mb-4">Tâche Selectionée </h3>
+   <h3 class="m-auto text-center mb-4" id="tache" ></h3>
     <div class="shadow mb-5 bg-body rounded text-justify">
       <p id="displayTache" ></p>
     </div>
-    <h3 class="m-auto text-center mb-4">Contenu de la tache </h3>
+    <h3 class="m-auto text-center mb-4" id="contenu" ></h3>
     <div class="shadow mb-5 bg-body" id="displayContenu" ></p>
     </div>
     <div class="mb-5 m-auto text-center">
-      <button type="button" class="btn btn-primary" id="valideTaskButtonID">Validé la tâche !</button>
+      <button type="button" class="btn btn-primary" id="valideTaskButtonID" style="display:none" ></button>
   </div>
   </div>
 
@@ -121,20 +122,21 @@ const homePage = `
   </div>
   <div class="offcanvas-body">
     
-  <div class="shadow mb-5 bg-body rounded" id="innerColRight">
+  <div class=" mb-5" id="innerColRight">
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
-      <input class="mt-5" type="button" value="fight-btn" id="fight-btn">
+      <input class="mt-3 btn btn-primary text-align-center m-auto" type="button" value="Combattez !" id="fight-btn">
       </div>
     <div  id="innerColRight2">
       <div id="userPicture">
-       <img src="../img/profile.png" class="img-fluid img-thumbnail">
       </div>
       <div id="progressesBar">
-        <div class="progress">
+        <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
+        <div class=" progress mb-3">
           <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>
+        <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
@@ -157,6 +159,9 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
+
+  const div = document.getElementById('userPicture');
+  renderProfileImage(div, profileImage, 'test');
   
 
  async function getJSONTasksAndDisplay() {
@@ -167,6 +172,7 @@ const HomePage = () => {
   
   // Create a table element
   const table = document.querySelector('table');
+  table.className="m-auto";
 
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
@@ -176,7 +182,8 @@ const HomePage = () => {
     const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title);
-    valueCelDelete.textContent = "Delete Task";
+    valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
+    valueCelDelete.className = "btn";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
@@ -191,10 +198,14 @@ const HomePage = () => {
     // Display the task title, content
     // eslint-disable-next-line func-names
     valueCel.addEventListener("click", function() { 
+      document.getElementById("tache").innerText = "Tâche Selectionée : ";
+      document.getElementById("contenu").innerText = "Contenu de la tache : ";
+      document.getElementById("valideTaskButtonID").value = "valider la tache !";
+      document.getElementById("valideTaskButtonID").style.display = "block";
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
-      document.getElementById("valideTaskButtonID").className = "text-justify";
+      document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
       buttonId = this.datavalue.id;
     });
 
@@ -214,7 +225,7 @@ const HomePage = () => {
   function renderTaskForm() {
     const divForm = document.getElementById('innerColLeft2');
     const form = document.createElement('form');
-    form.className = 'p-5';
+    form.className = 'm-auto text-center p-5';
     const title = document.createElement('input');
     title.type = 'text';
     title.id = 'title';
@@ -236,9 +247,9 @@ const HomePage = () => {
     textarea.required = true;
     textarea.className = 'form-control';
     const submit = document.createElement('input');
-    submit.value = 'ajouter tache';
+    submit.value = 'ajouter tâche';
     submit.type = 'submit';
-    submit.className = 'btn btn-danger';
+    submit.className = 'btn btn-primary text-align-center m-auto';
     const difficulte1 = document.createElement('select');
     difficulte1.id = 'select';
     const option1 = document.createElement('option');
@@ -373,8 +384,14 @@ async function fight() {
   });
 }
 
-
-
+// render the profile image (to resize it you can use the height parameter)
+function renderProfileImage(wrapper, url) {
+  const image = new Image();
+  image.src = url;
+  image.height = 100;
+  image.class = "img-fluid img-thumbnail";
+  wrapper.appendChild(image);
+}
 
 async function login() {
 
