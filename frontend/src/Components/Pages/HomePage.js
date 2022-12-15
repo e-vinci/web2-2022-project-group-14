@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
+// eslint-disable-next-line no-unused-vars
 import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
 
@@ -374,7 +375,10 @@ async function login() {
     });
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
-    setAuthenticatedUser(response.json)
+    const user = response.json;
+
+    setAuthenticatedUser(user);
+    
     window.location.reload();
   });
 }
@@ -395,7 +399,9 @@ async function register() {
     });
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
-    setAuthenticatedUser(response.json)
+    const user = response.json;
+
+    setAuthenticatedUser(user);
     
     window.location.reload();
   });
