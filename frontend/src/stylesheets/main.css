@@ -1,7 +1,11 @@
 html,body {
     height: 100%;
-    margin: auto 0;
+    margin: 0;
     padding:0;
+}
+
+main{
+    flex: 1 0 auto;
 }
 
 
@@ -23,8 +27,8 @@ html,body {
 #colonneLeft{
 
     background-color: #EEEBF7;
-    z-index: 500;
     box-shadow: 1px 0px 5px grey;
+    flex: 1 0 auto;
 }
 
 

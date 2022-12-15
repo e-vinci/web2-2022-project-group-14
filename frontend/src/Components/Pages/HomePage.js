@@ -61,7 +61,7 @@ const homePage = `
 <!-- header -->
 
 <nav class="align-items-center" id="header">
-  <div class="d-flex justify-content-around" id="header">
+  <div class="d-flex justify-content-around">
       <div id="leftPartHeader" class="align-items-center">
       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
       <p class="btnHeaderText">Login</p>
@@ -126,9 +126,9 @@ const homePage = `
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
-      <input class="mt-3 btn btn-primary text-align-center m-auto" type="button" value="Combattez !" id="fight-btn">
+      <input class="mt-3 btn btn-primary" type="button" value="Combattez !" id="fight-btn">
       </div>
-    <div  id="innerColRight2">
+    <div class="pt-3" id="innerColRight2">
       <div id="userPicture">
       </div>
       <div id="progressesBar">
@@ -160,8 +160,8 @@ const HomePage = () => {
   fight();
   renderTaskForm();
 
-  const div = document.getElementById('userPicture');
-  renderProfileImage(div, profileImage, 'test');
+  const photoUser = document.getElementById('userPicture');
+  renderProfileImage(photoUser, profileImage, 'test');
   
 
  async function getJSONTasksAndDisplay() {
@@ -333,6 +333,7 @@ const HomePage = () => {
   
   // Create a table element
   const table = document.getElementById('table-ennemis');
+  table.className = 'table';
 
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
