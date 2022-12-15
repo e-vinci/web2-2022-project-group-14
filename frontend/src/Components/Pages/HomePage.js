@@ -1,10 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
-import {setAuthenticatedUser} from '../../utils/auths'
 import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
-
 
 const homePage = `
 <!-- login modal -->
@@ -144,11 +142,14 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
-  const div = document.getElementById('userPicture');
-  renderProfileImage(div, profileImage, 'test');
-  
+
+    if (isAuthenticated) {
+      const div = document.getElementById('userPicture');
+      renderProfileImage(div, profileImage, 'test');  
+    }
+
  async function getJSONTasksAndDisplay() {
-    
+  
   const response = await fetch('/api/taches');
   const data = await response.json();
   
@@ -374,7 +375,8 @@ async function login() {
       },
     });
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-    setAuthenticatedUser(response.json());
+
+    setAuthenticatedUser(response.json)
     window.location.reload();
   });
 }
@@ -393,8 +395,10 @@ async function register() {
         'Content-Type': 'application/json',
       },
     });
-    setAuthenticatedUser(response.json());
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    setAuthenticatedUser(response.json)
+    
     window.location.reload();
   });
 }
