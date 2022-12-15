@@ -101,15 +101,15 @@ const homePage = `
   <!-- central part -->
   
   <div class="col-8 p-3" id="centralColonne">
-   <h3 class="m-auto text-center mb-4">Tâche Selectionée </h3>
+   <h3 class="m-auto text-center mb-4" id="tache" ></h3>
     <div class="shadow mb-5 bg-body rounded text-justify">
       <p id="displayTache" ></p>
     </div>
-    <h3 class="m-auto text-center mb-4">Contenu de la tache </h3>
+    <h3 class="m-auto text-center mb-4" id="contenu" ></h3>
     <div class="shadow mb-5 bg-body" id="displayContenu" ></p>
     </div>
     <div class="mb-5 m-auto text-center">
-      <button type="button" class="btn btn-primary" id="valideTaskButtonID">Validé la tâche !</button>
+      <button type="button" class="btn btn-primary" id="valideTaskButtonID" style="display:none" ></button>
   </div>
   </div>
 
@@ -198,6 +198,10 @@ const HomePage = () => {
     // Display the task title, content
     // eslint-disable-next-line func-names
     valueCel.addEventListener("click", function() { 
+      document.getElementById("tache").innerText = "Tâche Selectionée : ";
+      document.getElementById("contenu").innerText = "Contenu de la tache : ";
+      document.getElementById("valideTaskButtonID").value = "valider la tache !";
+      document.getElementById("valideTaskButtonID").style.display = "block";
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
