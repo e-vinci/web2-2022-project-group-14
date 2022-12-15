@@ -1,15 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
-// import {setAuthenticatedUser} from '../../utils/auths'
+import {setAuthenticatedUser} from '../../utils/auths'
+import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
-
 
 
 const homePage = `
 <!-- login modal -->
-
-
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -31,10 +29,7 @@ const homePage = `
     </div>
   </div>
 </div>
-
-
 <!-- register modal -->
-
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -48,7 +43,6 @@ const homePage = `
         <br>
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="passwordR" required>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -57,9 +51,7 @@ const homePage = `
     </div>
   </div>
 </div>
-
 <!-- header -->
-
 <nav class="align-items-center" id="header">
   <div class="d-flex justify-content-around">
       <div id="leftPartHeader" class="align-items-center">
@@ -80,9 +72,7 @@ const homePage = `
     </div>
   </div>
 </nav>
-
 <!-- Left part of website, 2 columns-->
-
 <div class="d-flex">
   <div class="col-4 pt-2" id="colonneLeft">
     <div class="m-auto" id="innerColLeft">
@@ -97,24 +87,21 @@ const homePage = `
       </div>
     </div>
   </div>
-
   <!-- central part -->
   
   <div class="col-8 p-3" id="centralColonne">
-   <h3 class="m-auto text-center mb-4">Tâche Selectionée </h3>
+   <h3 class="m-auto text-center mb-4" id="tache" ></h3>
     <div class="shadow mb-5 bg-body rounded text-justify">
       <p id="displayTache" ></p>
     </div>
-    <h3 class="m-auto text-center mb-4">Contenu de la tache </h3>
+    <h3 class="m-auto text-center mb-4" id="contenu" ></h3>
     <div class="shadow mb-5 bg-body" id="displayContenu" ></p>
     </div>
     <div class="mb-5 m-auto text-center">
-      <button type="button" class="btn btn-primary" id="valideTaskButtonID">Validé la tâche !</button>
+      <button type="button" class="btn btn-primary" id="valideTaskButtonID" style="display:none" ></button>
   </div>
   </div>
-
   <!-- right part -->
-
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title m-auto " id="offcanvasRightLabel">Combattez vos ennemis !</h5>
@@ -145,9 +132,7 @@ const homePage = `
   </div>
   </div>
 </div>
-
      `;
-
 const HomePage = () => {
   const main = document.querySelector('main');
   
@@ -163,17 +148,14 @@ const HomePage = () => {
   const photoUser = document.getElementById('userPicture');
   renderProfileImage(photoUser, profileImage, 'test');
   
-
  async function getJSONTasksAndDisplay() {
     
   const response = await fetch('/api/taches');
   const data = await response.json();
-
   
   // Create a table element
   const table = document.querySelector('table');
   table.className="m-auto";
-
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
     const button = document.getElementById("valideTaskButtonID");
@@ -194,17 +176,19 @@ const HomePage = () => {
     valueCelDelete.addEventListener("click", function() { 
       deleteTask(this.datavalue);
     });
-
     // Display the task title, content
     // eslint-disable-next-line func-names
     valueCel.addEventListener("click", function() { 
+      document.getElementById("tache").innerText = "Tâche Selectionée : ";
+      document.getElementById("contenu").innerText = "Contenu de la tache : ";
+      document.getElementById("valideTaskButtonID").value = "valider la tache !";
+      document.getElementById("valideTaskButtonID").style.display = "block";
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
       document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
       buttonId = this.datavalue.id;
     });
-
     
     // eslint-disable-next-line func-names
     button.addEventListener("click", () => { 
@@ -272,7 +256,6 @@ const HomePage = () => {
     form.addEventListener('submit', addTask);
     
   }
-
   // Add task 
   async function addTask(e) {
     e.preventDefault();
@@ -304,7 +287,6 @@ const HomePage = () => {
     console.log('task add : ',newTask);
   
   }
-
    // Delete task 
   function deleteTask(e) {
     fetch(`/api/taches/${e}`, {
@@ -313,7 +295,6 @@ const HomePage = () => {
     .then(response => response.json());
     window.location.reload();
   }
-
   // Valide task 
   function valideTask(e) {
     fetch(`/api/taches/valide/${e}`, {
@@ -321,23 +302,16 @@ const HomePage = () => {
     })
     .then(response => response.json());
   }
-
 // ------------------------------------ENNEMIS TABLE ---------------------------------------
-
-
  async function getJSONEnnemiesAndDisplay() {
     
   const response = await fetch('/api/auths/readAllEnemies/');
   const data = await response.json();
-
   
   // Create a table element
   const table = document.getElementById('table-ennemis');
-  table.className = 'table';
-
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
-
     const row = document.createElement('tr');
     const valueCel = document.createElement('td');
     const valueCelHP = document.createElement('td');
@@ -351,15 +325,12 @@ const HomePage = () => {
     valueCelAttack.datavalue  = data[key];
     valueCelAttack.textContent = "Attack : "
     valueCelAttack.textContent += JSON.stringify(data[key].attack);
-
     row.appendChild(valueCel);
     row.appendChild(valueCelHP);
     row.appendChild(valueCelAttack);
     table.appendChild(row);
   }
 }
-
-
 // fight button 
 async function fight() {
   const fights = document.getElementById('fight-btn');
@@ -380,7 +351,6 @@ async function fight() {
       window.location.reload();}, 1000);
   });
 }
-
 // render the profile image (to resize it you can use the height parameter)
 function renderProfileImage(wrapper, url) {
   const image = new Image();
@@ -389,11 +359,8 @@ function renderProfileImage(wrapper, url) {
   image.class = "img-fluid img-thumbnail";
   wrapper.appendChild(image);
 }
-
 async function login() {
-
   const registerBtn = document.getElementById('buttonL');
-
   registerBtn.addEventListener('click', async () => {
     const username = document.querySelector('#usernameL').value;
     const password = document.querySelector('#passwordL').value;
@@ -407,17 +374,13 @@ async function login() {
         'Content-Type': 'application/json',
       },
     });
-
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
+    setAuthenticatedUser(response.json());
     window.location.reload();
   });
 }
-
 async function register() {
-
   const registerBtn = document.getElementById('buttonR');
-
   registerBtn.addEventListener('click', async () => {
     const username = document.querySelector('#usernameR').value;
     const password = document.querySelector('#passwordR').value;
@@ -431,14 +394,11 @@ async function register() {
         'Content-Type': 'application/json',
       },
     });
-
+    setAuthenticatedUser(response.json());
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     window.location.reload();
-
   });
 }
-
 // FIN  
 };
-
 export default HomePage;
