@@ -50,3 +50,5 @@ router.post('/valide/:id', (req, res) => {
   if (!valideATask) return res.sendStatus(404);
   return res.json(valide);
 });
+
+module.exports = router;
