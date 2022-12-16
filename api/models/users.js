@@ -358,7 +358,10 @@ function fight() {
   let playerdead = false;
   // If player dies, stop execution
   if (player.currentHP <= 0){
-    player.currentHP = playerMaxHP;
+    player.currentHP = playerMaxHP  - player.level;
+    if(player.currentHP <= 0){
+      player.currentHP = 0;
+    }
     firstEnemy.HP = calcuateHP(firstEnemy.lvl);
     playerdead = true;
   }
