@@ -1,4 +1,6 @@
 html,body {
+    background-image : url(../img/backround4.jpg);
+    background-size : cover;
     height: 100%;
     margin: 0;
     padding:0;
@@ -10,7 +12,7 @@ main{
 
 
 #header{
-    background-color: #FA7F5A;
+    background-color: #ecd977d5;
     z-index: 1000;
 }
 
