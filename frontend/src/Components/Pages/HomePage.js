@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
-import {setAuthenticatedUser} from '../../utils/auths'
-import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
-import Navigate from '../Router/Navigate'
+import {setAuthenticatedUser, /* isAuthenticated */} from '../../utils/auths'
+// import Navigate from '../Router/Navigate'
 
 const homePage = `
 <!-- login modal -->
@@ -282,7 +281,7 @@ const HomePage = () => {
     const newTask = await response.json();
     
     // window.location.reload()
-    NavigateTo('/');
+    HomePage();
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
   
@@ -293,8 +292,8 @@ const HomePage = () => {
       method: 'DELETE'
     })
     .then(response => response.json());
-    // window.location.reload();
-    NavigateTo('/');
+    window.location.reload();
+    // HomePage();
   }
   // Valide task 
   function valideTask(e) {
@@ -348,9 +347,8 @@ async function fight() {
         message.innerHTML = 'Pret a combatre ?';
       }, 9000);
     });
-    /*setTimeout(() => {
-      window.location.reload();}, 1000);*/
-      NavigateTo('/');
+    setTimeout(() => {
+      HomePage();}, 2000);
   });
 }
 
@@ -382,8 +380,12 @@ async function login() {
     const user = response.json;
 
     setAuthenticatedUser(user);
+    const modalL = document.getElementById('loginModal');
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(modalL)
+    modal.hide();
     // window.location.reload();
-    NavigateTo('/');
+    HomePage();
   });
 }
 
@@ -407,8 +409,13 @@ async function register() {
     const user = response.json;
 
     setAuthenticatedUser(user);
-    // window.location.reload(); 
-    NavigateTo('/');
+    // window.location.reload();
+    const modalR = document.getElementById('staticBackdrop2');
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(modalR)
+    modal.hide();
+    HomePage();
+
   });
 }
 // FIN  
