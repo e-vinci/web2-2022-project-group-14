@@ -27,6 +27,7 @@ const homePage = `
     </div>
   </div>
 </div>
+
 <!-- register modal -->
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -49,9 +50,51 @@ const homePage = `
     </div>
   </div>
 </div>
+
+<!-- how to modal -->
+<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Comment fonctionne le site ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut odio sed diam dictum mattis sit amet nec eros. Cras quis leo blandit, molestie ligula vel, tempor libero. Phasellus vulputate nibh lorem, eget malesuada odio ullamcorper ac. Pellentesque ac dui fringilla, consequat nunc sed, efficitur lectus. Sed dignissim pharetra magna et finibus. Cras lacus velit, aliquet at pellentesque eget, pharetra dapibus lectus. Donec feugiat, tortor ullamcorper lobortis gravida, odio massa convallis libero, venenatis feugiat metus dui in quam. Aliquam sit amet odio sed tellus porta sollicitudin eget eu tellus. Suspendisse a finibus risus, sed ornare elit.</p>
+        <p>Sed mattis, nunc sed accumsan rutrum, ipsum nibh feugiat dolor, sit amet dictum nisl arcu et lorem. Nullam imperdiet, massa vitae semper aliquet, tellus lorem tincidunt tortor, at feugiat arcu felis eu sem. Phasellus ornare mi vitae nulla feugiat, at efficitur massa semper. Maecenas quis odio eros. Curabitur id mollis diam. Maecenas blandit urna felis. Vestibulum euismod odio nec leo tincidunt, quis faucibus metus efficitur. Pellentesque tincidunt dolor hendrerit eleifend condimentum. Integer sem orci, gravida eget eleifend at, commodo sed eros. Nunc fermentum augue ex, a fermentum lacus tempor sed. Proin condimentum purus eget efficitur rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce eu urna enim. Praesent eu arcu vitae neque mollis vulputate ac consequat ex.</p>
+        <p>Ut consequat auctor commodo. Praesent pulvinar malesuada vulputate. Duis faucibus pulvinar elit, nec lacinia lectus malesuada a. Nam tincidunt justo ut vestibulum gravida. Praesent tincidunt odio cursus libero vestibulum, at placerat odio ultrices. Sed vestibulum, purus vel dictum semper, enim eros fringilla nibh, id suscipit enim metus eu erat. Nunc convallis ut nisi at vulputate. Quisque accumsan, urna sit amet pellentesque interdum, erat massa lobortis erat, quis tincidunt tellus nisl quis eros. Quisque metus erat, varius non est venenatis, cursus semper turpis.</p>
+        <p>Sed commodo sem at interdum faucibus. Ut fermentum gravida metus pellentesque congue. Donec eu velit in nisl iaculis molestie at id dui. Curabitur magna arcu, placerat quis interdum vitae, congue sit amet turpis. Morbi placerat rhoncus nulla, id dictum nibh commodo iaculis. Nulla sagittis, lectus sit amet consequat euismod, nunc est tincidunt erat, nec efficitur dui sapien id nibh. Sed lacinia ac justo ac hendrerit. In odio nisl, pulvinar at consequat vitae, posuere nec lectus. Nam eu purus purus. Cras id venenatis mauris. Morbi sagittis ex vel erat pellentesque, sit amet consequat metus efficitur.</p>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque euismod dapibus metus, a consectetur erat dictum at. Aliquam eleifend at nunc sed sollicitudin. Sed molestie velit quis malesuada mollis. Donec tristique molestie ipsum, vitae dictum tortor elementum rutrum. Nam et nisl imperdiet nunc ullamcorper fermentum. Cras nec odio justo. Donec non mi nec enim dictum facilisis. In sagittis bibendum augue maximus convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- header -->
 <nav class="align-items-center" id="header">
-  
+  <div class="d-flex justify-content-around">
+      <div id="leftPartHeader" class="align-items-center">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+          <p class="btnHeaderText">Login</p>
+        </button>
+      <div class="vr"></div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        <p class="btnHeaderText">Register</p>
+        </button>
+      <div class="vr"></div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"<p class="btnHeaderText">Comment ça fonctionne ? </p></button>
+      </div>
+    <div id="rightPartHeader">
+      <div class="navbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
 </nav>
 <!-- Left part of website, 2 columns-->
 <div class="d-flex">
