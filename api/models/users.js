@@ -64,6 +64,64 @@ function login(username, password) {
   return authenticatedUser;
 }
 
+
+function isLoggedIn() {
+  return authenticatedUser !== null;
+} 
+
+// display a different nav bar if the user is logged in
+function displayNav() {
+  if (isLoggedIn()) {
+    return `
+    <div class="d-flex justify-content-around">
+      <div id="leftPartHeader" class="align-items-center">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+        <p class="btnHeaderText">Login</p>
+        </button>
+        <div class="vr"></div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        <p class="btnHeaderText">Register</p>
+        </button>
+      </div>
+      <div id="rightPartHeader">
+        <div class="navbar">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    `;
+  } return `
+  <div class="d-flex justify-content-around">
+    <div id="leftPartHeader" class="align-items-center">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+      <p class="btnHeaderText">Login</p>
+      </button>
+      <div class="vr"></div>
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+      <p class="btnHeaderText">Register</p>
+      </button>
+    </div>
+    <div id="rightPartHeader">
+      <div class="navbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+    `;
+}
+
+// create a function to disconnect the user
+function disconnect() {
+  authenticatedUser = null;
+} 
+
+        
+
+
 function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
@@ -336,4 +394,5 @@ module.exports = {
   addEnemy,
   removeEnemy,
   readAllEnemies,
+  displayNav
 };

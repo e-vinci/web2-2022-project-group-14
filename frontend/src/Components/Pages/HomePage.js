@@ -52,24 +52,7 @@ const homePage = `
 </div>
 <!-- header -->
 <nav class="align-items-center" id="header">
-  <div class="d-flex justify-content-around">
-      <div id="leftPartHeader" class="align-items-center">
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-      <p class="btnHeaderText">Login</p>
-      </button>
-      <div class="vr"></div>
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-      <p class="btnHeaderText">Register</p>
-      </button>
-    </div>
-    <div id="rightPartHeader">
-      <div class="navbar">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
-  </div>
+  
 </nav>
 <!-- Left part of website, 2 columns-->
 <div class="d-flex">
