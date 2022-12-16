@@ -3,7 +3,7 @@ import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
 import {setAuthenticatedUser} from '../../utils/auths'
 import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
-// import Navigate from '../Router/Navigate'
+import Navigate from '../Router/Navigate'
 
 const homePage = `
 <!-- login modal -->
@@ -281,7 +281,8 @@ const HomePage = () => {
   
     const newTask = await response.json();
     
-    window.location.reload()
+    // window.location.reload()
+    NavigateTo('/');
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
   
@@ -292,7 +293,8 @@ const HomePage = () => {
       method: 'DELETE'
     })
     .then(response => response.json());
-    window.location.reload();
+    // window.location.reload();
+    NavigateTo('/');
   }
   // Valide task 
   function valideTask(e) {
@@ -346,10 +348,12 @@ async function fight() {
         message.innerHTML = 'Pret a combatre ?';
       }, 9000);
     });
-    setTimeout(() => {
-      window.location.reload();}, 1000);
+    /*setTimeout(() => {
+      window.location.reload();}, 1000);*/
+      NavigateTo('/');
   });
 }
+
 // render the profile image (to resize it you can use the height parameter)
 function renderProfileImage(wrapper, url) {
   const image = new Image();
@@ -378,10 +382,11 @@ async function login() {
     const user = response.json;
 
     setAuthenticatedUser(user);
-    
-    window.location.reload();
+    // window.location.reload();
+    NavigateTo('/');
   });
 }
+
 async function register() {
   const registerBtn = document.getElementById('buttonR');
   registerBtn.addEventListener('click', async () => {
@@ -402,8 +407,8 @@ async function register() {
     const user = response.json;
 
     setAuthenticatedUser(user);
-    
-    window.location.reload();
+    // window.location.reload(); 
+    NavigateTo('/');
   });
 }
 // FIN  
