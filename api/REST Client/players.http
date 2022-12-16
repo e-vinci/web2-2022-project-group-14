@@ -4,3 +4,23 @@ GET {{baseUrl}}
 ###
 GET {{baseUrl}}/player
 
+###
+GET {{baseUrl}}/attack
+
+###
+GET {{baseUrl}}/currentHP
+
+###
+GET {{baseUrl}}/level
+
+###
+GET {{baseUrl}}/maxHP
+
+###
+GET {{baseUrl}}/currentXP
+
+###
+GET {{baseUrl}}/XPToLvlUp
+
+
+

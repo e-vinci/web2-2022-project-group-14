@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import profileImage from '../../img/po.png';
+import {setAuthenticatedUser} from '../../utils/auths'
 import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
 // import Navigate from '../Router/Navigate'
-
 
 const homePage = `
 <!-- login modal -->
@@ -52,7 +52,7 @@ const homePage = `
 </div>
 <!-- header -->
 <nav class="align-items-center" id="header">
-  <div class="d-flex justify-content-around" id="header">
+  <div class="d-flex justify-content-around">
       <div id="leftPartHeader" class="align-items-center">
       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
       <p class="btnHeaderText">Login</p>
@@ -112,9 +112,9 @@ const homePage = `
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
-      <input class="mt-3 btn btn-primary text-align-center m-auto" type="button" value="Combattez !" id="fight-btn">
+      <input class="mt-3 btn btn-primary" type="button" value="Combattez !" id="fight-btn">
       </div>
-    <div  id="innerColRight2">
+    <div class="pt-3" id="innerColRight2">
       <div id="userPicture">
       </div>
       <div id="progressesBar">
@@ -143,11 +143,12 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
-  const div = document.getElementById('userPicture');
-  renderProfileImage(div, profileImage, 'test');
+
+  const photoUser = document.getElementById('userPicture');
+  renderProfileImage(photoUser, profileImage, 'test');
   
  async function getJSONTasksAndDisplay() {
-    
+  
   const response = await fetch('/api/taches');
   const data = await response.json();
   
@@ -373,7 +374,11 @@ async function login() {
       },
     });
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-    setAuthenticatedUser(response.json());
+
+    const user = response.json;
+
+    setAuthenticatedUser(user);
+    
     window.location.reload();
   });
 }
@@ -392,8 +397,12 @@ async function register() {
         'Content-Type': 'application/json',
       },
     });
-    setAuthenticatedUser(response.json());
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    const user = response.json;
+
+    setAuthenticatedUser(user);
+    
     window.location.reload();
   });
 }
