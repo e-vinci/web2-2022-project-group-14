@@ -143,16 +143,18 @@ const homePage = `
       <div id="userPicture">
       </div>
       <div id="progressesBar">
-        <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
+        <p class="mb-1"><u>Point de vie :</u></p>
         <div class=" progress mb-3">
-          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="20">50%</div>
+          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
         </div>
-        <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
+        <p class="mb-1"><u>Point d'XP :</u></p>
         <div class="progress">
           <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
       </div>
-    </div>   
+    </div> 
+    <div><p id="level"></p> </div>
+    <div><p id="degat"></p> </div>
   </div>
   </div>
 </div>
@@ -393,7 +395,7 @@ async function updateProgressBar() {
   const playerXP = player.currentXP;
   const playerLevel = player.level;
   const maxHpPlayer = player.maxHP;
-  const XPToLvlUp = player.XPToLvlUp;
+  const {XPToLvlUp} = player;
  
 
   const progressBarHP = document.getElementById("barHP");
@@ -401,17 +403,24 @@ async function updateProgressBar() {
 
 
   progressBarHP.innerText= `${playerHP}`;
-  progressBarHP.style.width = `${playerHP}%`;
+  progressBarHP.setAttribute("style", `width: ${(playerHP / maxHpPlayer) * 100}%`);
   progressBarHP.setAttribute("aria-valuenow", `${playerHP}`);
   progressBarHP.setAttribute("aria-valuemax", `${maxHpPlayer}`);
-  progressBarHP.innerHTML = `${playerHP}`;
+  
+  const splitHp = `${XPToLvlUp}`.slice(0,5);
+  progressBarXP.innerText= `${playerXP}/${splitHp}`;
+  progressBarXP.setAttribute("style", `width: ${(playerXP / XPToLvlUp) * 100}%`);
+  progressBarXP.setAttribute("aria-valuenow", `${playerXP}`);
+  progressBarHP.setAttribute("aria-valuemax", `${XPToLvlUp}`);
 
   
+ 
+  const degats = player.attack;
+  const level = document.getElementById("level");
+  const degat = document.getElementById("degat");
+  level.innerText = `Votre niveau : ${playerLevel} !` ;
+  degat.innerText = `Point de degats : ${degats} `;
   
-  progressBarXP.innerText= `${playerXP}`;
-  progressBarXP.style.width = `${playerXP}%`;
-  progressBarXP.setAttribute("aria-valuenow", playerXP);
-  progressBarXP.innerHTML = `${playerXP}%`;
 }
 
 
