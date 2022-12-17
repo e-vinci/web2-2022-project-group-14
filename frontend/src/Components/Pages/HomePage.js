@@ -158,6 +158,7 @@ const homePage = `
 </div>
      `;
 const HomePage = () => {
+  
   const main = document.querySelector('main');
   main.innerHTML = homePage;
   
@@ -172,12 +173,13 @@ const HomePage = () => {
   renderProfileImage(photoUser, profileImage, 'test');
   
  async function getJSONTasksAndDisplay() {
-  
+  const table = document.querySelector('table');
+  table.innerHTML = '';
   const response = await fetch('/api/taches');
   const data = await response.json();
   
   // Create a table element
-  const table = document.querySelector('table');
+  
   table.className="m-auto";
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
@@ -186,13 +188,19 @@ const HomePage = () => {
     const valueCel = document.createElement('td');
     const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].title);
+    valueCel.textContent = JSON.stringify(data[key].title).replace(/['"]+/g, '');
     valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
     valueCelDelete.className = "btn";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
     let buttonId = null;
+
+    row.appendChild(valueCel);
+    row.appendChild(valueCelDelete);
+    table.appendChild(row);
+
+    
     
     // delete the task 
     // eslint-disable-next-line func-names
@@ -218,16 +226,10 @@ const HomePage = () => {
       const jsConfetti = new JSConfetti({ button })
       valideTask(buttonId);
       deleteTask(buttonId);
-      /* jsConfetti.addConfetti().then(() => {
-        window.location.reload();
-      }); */
       jsConfetti.addConfetti();
       HomePage();
     });
     
-    row.appendChild(valueCel);
-    row.appendChild(valueCelDelete);
-    table.appendChild(row);
   }
 }
   
