@@ -74,6 +74,17 @@ function getXP(userID, taskDifficulty, monsterLevel) {
   return playerCharacter;
 }
 
+function updateHP(id, hp) {
+  const list = parse(jsonDbPath, listPlayerCharacters);
+  const playerCharacter = list.find((PlayerCharacter) => PlayerCharacter.userId === id);
+  playerCharacter.currentHP += hp;
+  if (playerCharacter.currentHP > playerCharacter.maxHP) {
+    playerCharacter.currentHP = playerCharacter.maxHP;
+  }
+  serialize(jsonDbPath, list);
+  return playerCharacter;
+}
+
 
 
 /* Prototype de get User -- A Vérifier */
@@ -137,6 +148,7 @@ function getAttack(id) {
 module.exports = {
   createPlayerCharacter,
   getXP,
+  updateHP,
   getPlayer,
   updateData,
   getCurrentXP,
