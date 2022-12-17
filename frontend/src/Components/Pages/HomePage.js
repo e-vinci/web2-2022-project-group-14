@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
-import JSConfetti from 'js-confetti'
+import JSConfetti from 'js-confetti';
 import profileImage from '../../img/avatar.png';
 import {setAuthenticatedUser, /* isAuthenticated */} from '../../utils/auths'
 

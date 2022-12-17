@@ -10,6 +10,11 @@ main{
     flex: 1 0 auto;
 }
 
+table{
+    border : none;
+    border-collapse: collapse;
+    width: 100%;
+}
 
 #header{
     background-color: #ecd977d5;
