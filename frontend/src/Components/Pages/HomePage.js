@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
+import JSConfetti from 'js-confetti'
 import profileImage from '../../img/avatar.png';
 import {setAuthenticatedUser, /* isAuthenticated */} from '../../utils/auths'
-// import Navigate from '../Router/Navigate'
 
 const homePage = `
 <!-- login modal -->
@@ -159,7 +159,6 @@ const homePage = `
      `;
 const HomePage = () => {
   const main = document.querySelector('main');
-  
   main.innerHTML = homePage;
   
   login();
@@ -199,6 +198,7 @@ const HomePage = () => {
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 
       deleteTask(this.datavalue);
+      HomePage();
     });
     // Display the task title, content
     // eslint-disable-next-line func-names
@@ -214,10 +214,15 @@ const HomePage = () => {
       buttonId = this.datavalue.id;
     });
     
-    // eslint-disable-next-line func-names
-    button.addEventListener("click", () => { 
+    button.addEventListener("click", () => {
+      const jsConfetti = new JSConfetti({ button })
       valideTask(buttonId);
       deleteTask(buttonId);
+      /* jsConfetti.addConfetti().then(() => {
+        window.location.reload();
+      }); */
+      jsConfetti.addConfetti();
+      HomePage();
     });
     
     row.appendChild(valueCel);
@@ -306,7 +311,6 @@ const HomePage = () => {
   
     const newTask = await response.json();
     
-    // window.location.reload()
     HomePage();
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
@@ -318,8 +322,6 @@ const HomePage = () => {
       method: 'DELETE'
     })
     .then(response => response.json());
-    window.location.reload();
-    // HomePage();
   }
   // Valide task 
   function valideTask(e) {

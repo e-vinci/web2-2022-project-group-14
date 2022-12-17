@@ -30,6 +30,7 @@
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
     "clean-webpack-plugin": "^4.0.0",
+    "js-confetti": "^0.11.0",
     "phaser": "^3.55.2",
     "terser-webpack-plugin": "^5.3.6",
     "uuid": "^9.0.0",
