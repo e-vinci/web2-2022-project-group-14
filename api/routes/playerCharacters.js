@@ -12,6 +12,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/player', (req, res) => {
+  console.log("In")
   const player = getPlayer(returnId());
   console.log("player", player);
   return res.json(player);
