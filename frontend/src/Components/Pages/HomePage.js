@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
-import profileImage from '../../img/po.png';
-// eslint-disable-next-line no-unused-vars
-import {setAuthenticatedUser, isAuthenticated} from '../../utils/auths'
-// import Navigate from '../Router/Navigate'
+import JSConfetti from 'js-confetti'
+import profileImage from '../../img/avatar.png';
+import {setAuthenticatedUser, /* isAuthenticated */} from '../../utils/auths'
 
 const homePage = `
 <!-- login modal -->
@@ -28,6 +27,7 @@ const homePage = `
     </div>
   </div>
 </div>
+
 <!-- register modal -->
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,18 +50,43 @@ const homePage = `
     </div>
   </div>
 </div>
+
+<!-- how to modal -->
+<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Comment fonctionne le site ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut odio sed diam dictum mattis sit amet nec eros. Cras quis leo blandit, molestie ligula vel, tempor libero. Phasellus vulputate nibh lorem, eget malesuada odio ullamcorper ac. Pellentesque ac dui fringilla, consequat nunc sed, efficitur lectus. Sed dignissim pharetra magna et finibus. Cras lacus velit, aliquet at pellentesque eget, pharetra dapibus lectus. Donec feugiat, tortor ullamcorper lobortis gravida, odio massa convallis libero, venenatis feugiat metus dui in quam. Aliquam sit amet odio sed tellus porta sollicitudin eget eu tellus. Suspendisse a finibus risus, sed ornare elit.</p>
+        <p>Sed mattis, nunc sed accumsan rutrum, ipsum nibh feugiat dolor, sit amet dictum nisl arcu et lorem. Nullam imperdiet, massa vitae semper aliquet, tellus lorem tincidunt tortor, at feugiat arcu felis eu sem. Phasellus ornare mi vitae nulla feugiat, at efficitur massa semper. Maecenas quis odio eros. Curabitur id mollis diam. Maecenas blandit urna felis. Vestibulum euismod odio nec leo tincidunt, quis faucibus metus efficitur. Pellentesque tincidunt dolor hendrerit eleifend condimentum. Integer sem orci, gravida eget eleifend at, commodo sed eros. Nunc fermentum augue ex, a fermentum lacus tempor sed. Proin condimentum purus eget efficitur rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce eu urna enim. Praesent eu arcu vitae neque mollis vulputate ac consequat ex.</p>
+        <p>Ut consequat auctor commodo. Praesent pulvinar malesuada vulputate. Duis faucibus pulvinar elit, nec lacinia lectus malesuada a. Nam tincidunt justo ut vestibulum gravida. Praesent tincidunt odio cursus libero vestibulum, at placerat odio ultrices. Sed vestibulum, purus vel dictum semper, enim eros fringilla nibh, id suscipit enim metus eu erat. Nunc convallis ut nisi at vulputate. Quisque accumsan, urna sit amet pellentesque interdum, erat massa lobortis erat, quis tincidunt tellus nisl quis eros. Quisque metus erat, varius non est venenatis, cursus semper turpis.</p>
+        <p>Sed commodo sem at interdum faucibus. Ut fermentum gravida metus pellentesque congue. Donec eu velit in nisl iaculis molestie at id dui. Curabitur magna arcu, placerat quis interdum vitae, congue sit amet turpis. Morbi placerat rhoncus nulla, id dictum nibh commodo iaculis. Nulla sagittis, lectus sit amet consequat euismod, nunc est tincidunt erat, nec efficitur dui sapien id nibh. Sed lacinia ac justo ac hendrerit. In odio nisl, pulvinar at consequat vitae, posuere nec lectus. Nam eu purus purus. Cras id venenatis mauris. Morbi sagittis ex vel erat pellentesque, sit amet consequat metus efficitur.</p>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque euismod dapibus metus, a consectetur erat dictum at. Aliquam eleifend at nunc sed sollicitudin. Sed molestie velit quis malesuada mollis. Donec tristique molestie ipsum, vitae dictum tortor elementum rutrum. Nam et nisl imperdiet nunc ullamcorper fermentum. Cras nec odio justo. Donec non mi nec enim dictum facilisis. In sagittis bibendum augue maximus convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- header -->
 <nav class="align-items-center" id="header">
   <div class="d-flex justify-content-around">
       <div id="leftPartHeader" class="align-items-center">
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-      <p class="btnHeaderText">Login</p>
-      </button>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+          <p class="btnHeaderText">Login</p>
+        </button>
       <div class="vr"></div>
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-      <p class="btnHeaderText">Register</p>
-      </button>
-    </div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        <p class="btnHeaderText">Register</p>
+        </button>
+      <div class="vr"></div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"<p class="btnHeaderText">Comment ça fonctionne ? </p></button>
+      </div>
     <div id="rightPartHeader">
       <div class="navbar">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasNavbar">
@@ -118,23 +143,25 @@ const homePage = `
       <div id="userPicture">
       </div>
       <div id="progressesBar">
-        <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
+        <p class="mb-1"><u>Point de vie :</u></p>
         <div class=" progress mb-3">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
         </div>
-        <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
+        <p class="mb-1"><u>Point d'XP :</u></p>
         <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+          <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
       </div>
-    </div>   
+    </div>
+    <div><p id="level"></p> </div>
+    <div><p id="degat"></p> </div>
   </div>
   </div>
 </div>
      `;
 const HomePage = () => {
-  const main = document.querySelector('main');
   
+  const main = document.querySelector('main');
   main.innerHTML = homePage;
   
   login();
@@ -143,17 +170,19 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
+  updateProgressBar();
 
   const photoUser = document.getElementById('userPicture');
   renderProfileImage(photoUser, profileImage, 'test');
   
  async function getJSONTasksAndDisplay() {
-  
+  const table = document.querySelector('table');
+  table.innerHTML = '';
   const response = await fetch('/api/taches');
   const data = await response.json();
   
   // Create a table element
-  const table = document.querySelector('table');
+  
   table.className="m-auto";
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
@@ -162,18 +191,25 @@ const HomePage = () => {
     const valueCel = document.createElement('td');
     const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].title);
+    valueCel.textContent = JSON.stringify(data[key].title).replace(/['"]+/g, '');
     valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
     valueCelDelete.className = "btn";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
     button.datavalue = data[key].id;
     let buttonId = null;
+
+    row.appendChild(valueCel);
+    row.appendChild(valueCelDelete);
+    table.appendChild(row);
+
+    
     
     // delete the task 
     // eslint-disable-next-line func-names
     valueCelDelete.addEventListener("click", function() { 
       deleteTask(this.datavalue);
+      HomePage();
     });
     // Display the task title, content
     // eslint-disable-next-line func-names
@@ -189,15 +225,14 @@ const HomePage = () => {
       buttonId = this.datavalue.id;
     });
     
-    // eslint-disable-next-line func-names
-    button.addEventListener("click", () => { 
+    button.addEventListener("click", () => {
+      const jsConfetti = new JSConfetti({ button })
       valideTask(buttonId);
       deleteTask(buttonId);
+      jsConfetti.addConfetti();
+      HomePage();
     });
     
-    row.appendChild(valueCel);
-    row.appendChild(valueCelDelete);
-    table.appendChild(row);
   }
 }
   
@@ -255,6 +290,7 @@ const HomePage = () => {
     form.addEventListener('submit', addTask);
     
   }
+
   // Add task 
   async function addTask(e) {
     e.preventDefault();
@@ -281,18 +317,18 @@ const HomePage = () => {
   
     const newTask = await response.json();
     
-    window.location.reload()
+    HomePage();
     // eslint-disable-next-line no-console
     console.log('task add : ',newTask);
   
   }
+
    // Delete task 
   function deleteTask(e) {
     fetch(`/api/taches/${e}`, {
       method: 'DELETE'
     })
     .then(response => response.json());
-    window.location.reload();
   }
   // Valide task 
   function valideTask(e) {
@@ -309,6 +345,7 @@ const HomePage = () => {
   
   // Create a table element
   const table = document.getElementById('table-ennemis');
+  table.innerHTML = "";
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
     const row = document.createElement('tr');
@@ -347,9 +384,46 @@ async function fight() {
       }, 9000);
     });
     setTimeout(() => {
-      window.location.reload();}, 1000);
+      HomePage();}, 2000);
   });
 }
+
+async function updateProgressBar() {
+  const response = await fetch('/api/playerCharacters/player');
+  const player = await response.json();
+  const playerHP  = player.currentHP;
+  const playerXP = player.currentXP;
+  const playerLevel = player.level;
+  const maxHpPlayer = player.maxHP;
+  const {XPToLvlUp} = player;
+  const degats = player.attack;
+ 
+
+  const progressBarHP = document.getElementById("barHP");
+  const progressBarXP = document.getElementById("barXP");
+
+
+  progressBarHP.innerText= `${playerHP}/${maxHpPlayer}`;
+  progressBarHP.setAttribute("style", `width: ${(playerHP / maxHpPlayer) * 100}%`);
+  progressBarHP.setAttribute("aria-valuenow", `${playerHP}`);
+  progressBarHP.setAttribute("aria-valuemax", `${maxHpPlayer}`);
+  
+  const splitHp = `${XPToLvlUp}`.slice(0,5);
+  progressBarXP.innerText= `${playerXP}/${splitHp}`;
+  progressBarXP.setAttribute("style", `width: ${(playerXP / XPToLvlUp) * 100}%`);
+  progressBarXP.setAttribute("aria-valuenow", `${playerXP}`);
+  progressBarHP.setAttribute("aria-valuemax", `${XPToLvlUp}`);
+
+  
+ 
+  const level = document.getElementById("level");
+  const degat = document.getElementById("degat");
+  level.innerText = `Vous etes niveau ${playerLevel} ` ;
+  degat.innerText = `Vous avez ${degats} points de dégats`;
+  
+}
+
+
 // render the profile image (to resize it you can use the height parameter)
 function renderProfileImage(wrapper, url) {
   const image = new Image();
@@ -378,10 +452,15 @@ async function login() {
     const user = response.json;
 
     setAuthenticatedUser(user);
-    
-    window.location.reload();
+    const modalL = document.getElementById('loginModal');
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(modalL)
+    modal.hide();
+    // window.location.reload();
+    HomePage();
   });
 }
+
 async function register() {
   const registerBtn = document.getElementById('buttonR');
   registerBtn.addEventListener('click', async () => {
@@ -402,8 +481,13 @@ async function register() {
     const user = response.json;
 
     setAuthenticatedUser(user);
-    
-    window.location.reload();
+    // window.location.reload();
+    const modalR = document.getElementById('staticBackdrop2');
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(modalR)
+    modal.hide();
+    HomePage();
+
   });
 }
 // FIN  
