@@ -152,7 +152,7 @@ const homePage = `
           <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
       </div>
-    </div> 
+    </div>
     <div><p id="level"></p> </div>
     <div><p id="degat"></p> </div>
   </div>
@@ -396,13 +396,14 @@ async function updateProgressBar() {
   const playerLevel = player.level;
   const maxHpPlayer = player.maxHP;
   const {XPToLvlUp} = player;
+  const degats = player.attack;
  
 
   const progressBarHP = document.getElementById("barHP");
   const progressBarXP = document.getElementById("barXP");
 
 
-  progressBarHP.innerText= `${playerHP}`;
+  progressBarHP.innerText= `${playerHP}/${maxHpPlayer}`;
   progressBarHP.setAttribute("style", `width: ${(playerHP / maxHpPlayer) * 100}%`);
   progressBarHP.setAttribute("aria-valuenow", `${playerHP}`);
   progressBarHP.setAttribute("aria-valuemax", `${maxHpPlayer}`);
@@ -415,11 +416,10 @@ async function updateProgressBar() {
 
   
  
-  const degats = player.attack;
   const level = document.getElementById("level");
   const degat = document.getElementById("degat");
-  level.innerText = `Votre niveau : ${playerLevel} !` ;
-  degat.innerText = `Point de degats : ${degats} `;
+  level.innerText = `Vous etes niveau ${playerLevel} ` ;
+  degat.innerText = `Vous avez ${degats} points de dégats`;
   
 }
 
