@@ -145,7 +145,7 @@ const homePage = `
       <div id="progressesBar">
         <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
         <div class=" progress mb-3">
-          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="20">50%</div>
         </div>
         <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
         <div class="progress">
@@ -168,6 +168,7 @@ const HomePage = () => {
   getJSONEnnemiesAndDisplay();
   fight();
   renderTaskForm();
+  updateProgressBar();
 
   const photoUser = document.getElementById('userPicture');
   renderProfileImage(photoUser, profileImage, 'test');
@@ -383,6 +384,34 @@ async function fight() {
     setTimeout(() => {
       HomePage();}, 2000);
   });
+}
+
+async function updateProgressBar() {
+  const response = await fetch('/api/playerCharacters/player');
+  const player = await response.json();
+  const playerHP  = player.currentHP;
+  const playerXP = player.currentXP;
+  const playerLevel = player.level;
+  const maxHpPlayer = player.maxHP;
+  const XPToLvlUp = player.XPToLvlUp;
+ 
+
+  const progressBarHP = document.getElementById("barHP");
+  const progressBarXP = document.getElementById("barXP");
+
+
+  progressBarHP.innerText= `${playerHP}`;
+  progressBarHP.style.width = `${playerHP}%`;
+  progressBarHP.setAttribute("aria-valuenow", `${playerHP}`);
+  progressBarHP.setAttribute("aria-valuemax", `${maxHpPlayer}`);
+  progressBarHP.innerHTML = `${playerHP}`;
+
+  
+  
+  progressBarXP.innerText= `${playerXP}`;
+  progressBarXP.style.width = `${playerXP}%`;
+  progressBarXP.setAttribute("aria-valuenow", playerXP);
+  progressBarXP.innerHTML = `${playerXP}%`;
 }
 
 
