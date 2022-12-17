@@ -145,11 +145,11 @@ const homePage = `
       <div id="progressesBar">
         <p class="mb-1"><u>Point de vie :</u></p>
         <div class=" progress mb-3">
-          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <p class="mb-1"><u>Point d'XP :</u></p>
         <div class="progress">
-          <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+          <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>
