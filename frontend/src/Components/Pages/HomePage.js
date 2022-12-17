@@ -342,6 +342,7 @@ const HomePage = () => {
   
   // Create a table element
   const table = document.getElementById('table-ennemis');
+  table.innerHTML = "";
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
     const row = document.createElement('tr');
