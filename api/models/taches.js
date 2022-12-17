@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
 const { returnId } = require('./users');
-const { getXP } = require('./playerCharacters');
+const { getXP,updateHP } = require('./playerCharacters');
 
 const jsonDbPath = path.join(__dirname, '/../data/taches.json');
 
@@ -81,6 +81,7 @@ function valideATask(id) {
   console.log('FoundIndex = ');
   console.log(foundIndex);
   getXP(returnId() ,list[foundIndex].difficulte, 0);
+  updateHP(returnId(), 5);
 }
 
 module.exports = {
