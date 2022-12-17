@@ -182,7 +182,7 @@ const HomePage = () => {
   table.innerHTML = '';
   const response = await fetch('/api/taches');
   const data = await response.json();
-  
+
   // Create a table element
   
   table.className="m-auto";
@@ -194,10 +194,13 @@ const HomePage = () => {
     const valueCelDelete = document.createElement('button');
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].title).replace(/['"]+/g, '');
+    valueCel.style.border = "1px solid transparent";
+    valueCel.style.borderBottom = "1px solid black";
     valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
     valueCelDelete.className = "btn";
     valueCelDelete.id = "td2";
     valueCelDelete.datavalue = data[key].id;
+    valueCelDelete.style.border = "1px solid transparent";
     button.datavalue = data[key].id;
     let buttonId = null;
 
@@ -358,19 +361,22 @@ async function getJSONEnnemiesAndDisplay() {
     const valueCelAttack = document.createElement('td');
 
     valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].name);
+    valueCel.textContent = JSON.stringify(data[key].name).replace(/['"]+/g, '');
     valueCel.style.border = "1px solid transparent";
     valueCel.style.borderBottom = "1px solid black";
+    valueCel.style.margin = "10px";
     valueCelHP.datavalue  = data[key];
     valueCelHP.textContent = "HP : "
     valueCelHP.textContent += JSON.stringify(data[key].HP);
     valueCelHP.style.border = "1px solid transparent";
     valueCelHP.style.borderBottom = "1px solid black";
+    valueCelHP.style.padding = "10px";
     valueCelAttack.datavalue  = data[key];
     valueCelAttack.textContent = "Attack : "
     valueCelAttack.textContent += JSON.stringify(data[key].attack);
     valueCelAttack.style.border = "1px solid transparent";
     valueCelAttack.style.borderBottom = "1px solid black";
+    valueCelAttack.style.margin = "10px";
     row.appendChild(valueCel);
     row.appendChild(valueCelHP);
     row.appendChild(valueCelAttack);
