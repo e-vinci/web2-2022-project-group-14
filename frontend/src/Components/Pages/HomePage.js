@@ -125,6 +125,7 @@ const homePage = `
       <button type="button" class="btn btn-primary" id="valideTaskButtonID" style="display:none" ></button>
   </div>
   </div>
+
   <!-- right part -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
@@ -140,7 +141,8 @@ const homePage = `
       <input class="mt-3 btn btn-primary" type="button" value="Combattez !" id="fight-btn">
       </div>
     <div class="pt-3" id="innerColRight2">
-      <div id="userPicture">
+      <h4 class="text-left pb-3">Votre personnage</h4>
+      <div class="mb-3" id="userPicture">
       </div>
       <div id="progressesBar">
         <p class="mb-1"><u>Point de vie :</u></p>
@@ -219,7 +221,9 @@ const HomePage = () => {
       document.getElementById("valideTaskButtonID").value = "valider la tache !";
       document.getElementById("valideTaskButtonID").style.display = "block";
       document.getElementById("displayTache").innerHTML = this.datavalue.title;
+      document.getElementById("displayTache").className = " p-3 text-justify shadow mb-5 bg-body rounded text-justify";
       document.getElementById("displayContenu").innerHTML = this.datavalue.content;
+      document.getElementById("displayContenu").className = " p-3 text-justify shadow mb-5 bg-body rounded text-justify";
       document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
       document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
       buttonId = this.datavalue.id;
@@ -348,6 +352,7 @@ async function getJSONEnnemiesAndDisplay() {
   // eslint-disable-next-line no-restricted-syntax
   for(const key of Object.keys(data)) {
     const row = document.createElement('tr');
+
     const valueCel = document.createElement('td');
     const valueCelHP = document.createElement('td');
     const valueCelAttack = document.createElement('td');
