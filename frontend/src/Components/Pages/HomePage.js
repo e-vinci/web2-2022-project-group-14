@@ -338,11 +338,10 @@ const HomePage = () => {
     .then(response => response.json());
   }
 // ------------------------------------ENNEMIS TABLE ---------------------------------------
- async function getJSONEnnemiesAndDisplay() {
-    
+async function getJSONEnnemiesAndDisplay() {
   const response = await fetch('/api/auths/readAllEnemies/');
   const data = await response.json();
-  
+
   // Create a table element
   const table = document.getElementById('table-ennemis');
   table.innerHTML = "";
@@ -352,15 +351,21 @@ const HomePage = () => {
     const valueCel = document.createElement('td');
     const valueCelHP = document.createElement('td');
     const valueCelAttack = document.createElement('td');
-    
+
     valueCel.datavalue = data[key];
     valueCel.textContent = JSON.stringify(data[key].name);
+    valueCel.style.border = "1px solid transparent";
+    valueCel.style.borderBottom = "1px solid black";
     valueCelHP.datavalue  = data[key];
     valueCelHP.textContent = "HP : "
     valueCelHP.textContent += JSON.stringify(data[key].HP);
+    valueCelHP.style.border = "1px solid transparent";
+    valueCelHP.style.borderBottom = "1px solid black";
     valueCelAttack.datavalue  = data[key];
     valueCelAttack.textContent = "Attack : "
     valueCelAttack.textContent += JSON.stringify(data[key].attack);
+    valueCelAttack.style.border = "1px solid transparent";
+    valueCelAttack.style.borderBottom = "1px solid black";
     row.appendChild(valueCel);
     row.appendChild(valueCelHP);
     row.appendChild(valueCelAttack);
