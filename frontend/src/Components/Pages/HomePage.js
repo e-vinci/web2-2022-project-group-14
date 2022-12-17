@@ -145,11 +145,11 @@ const homePage = `
       <div id="progressesBar">
         <p class="mb-1"><u>Point de vie :</u> Point de vie ici ?</p>
         <div class=" progress mb-3">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
         </div>
         <p class="mb-1"><u>Point d'XP :</u> Point d'XP ici ?</p>
         <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+          <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
         </div>
       </div>
     </div>   
@@ -287,6 +287,7 @@ const HomePage = () => {
     form.addEventListener('submit', addTask);
     
   }
+
   // Add task 
   async function addTask(e) {
     e.preventDefault();
@@ -318,6 +319,7 @@ const HomePage = () => {
     console.log('task add : ',newTask);
   
   }
+
    // Delete task 
   function deleteTask(e) {
     fetch(`/api/taches/${e}`, {
@@ -381,6 +383,7 @@ async function fight() {
       HomePage();}, 2000);
   });
 }
+
 
 // render the profile image (to resize it you can use the height parameter)
 function renderProfileImage(wrapper, url) {

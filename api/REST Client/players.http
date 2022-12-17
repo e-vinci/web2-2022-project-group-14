@@ -2,25 +2,25 @@
 GET {{baseUrl}}
 
 ###
-GET {{baseUrl}}/player
+GET {{baseUrl}}/playerCharacters/player
 
 ###
-GET {{baseUrl}}/attack
+GET {{baseUrl}}/playerCharacters/attack
 
 ###
-GET {{baseUrl}}/currentHP
+GET {{baseUrl}}/playerCharacters/currentHP
 
 ###
-GET {{baseUrl}}/level
+GET {{baseUrl}}/playerCharacters/level
 
 ###
-GET {{baseUrl}}/maxHP
+GET {{baseUrl}}/playerCharacters/maxHP
 
 ###
-GET {{baseUrl}}/currentXP
+GET {{baseUrl}}/playerCharacters/currentXP
 
 ###
-GET {{baseUrl}}/XPToLvlUp
+GET {{baseUrl}}/playerCharacters/XPToLvlUp
 
 
 
