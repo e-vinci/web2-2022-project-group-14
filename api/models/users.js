@@ -17,13 +17,7 @@ const jsonDbPath = path.join(__dirname, '/../data/users.json');
 
 let authenticatedUser = null;
 
-const defaultUsers = [
-  {
-    id: 1,
-    username: 'admin',
-    password: 'admin',
-  },
-];
+const defaultUsers = [];
 
 function login(username, password) {
   const userFound = readOneUserFromUsername(username);
