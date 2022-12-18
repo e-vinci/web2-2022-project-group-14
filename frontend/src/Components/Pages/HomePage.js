@@ -60,11 +60,20 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut odio sed diam dictum mattis sit amet nec eros. Cras quis leo blandit, molestie ligula vel, tempor libero. Phasellus vulputate nibh lorem, eget malesuada odio ullamcorper ac. Pellentesque ac dui fringilla, consequat nunc sed, efficitur lectus. Sed dignissim pharetra magna et finibus. Cras lacus velit, aliquet at pellentesque eget, pharetra dapibus lectus. Donec feugiat, tortor ullamcorper lobortis gravida, odio massa convallis libero, venenatis feugiat metus dui in quam. Aliquam sit amet odio sed tellus porta sollicitudin eget eu tellus. Suspendisse a finibus risus, sed ornare elit.</p>
-        <p>Sed mattis, nunc sed accumsan rutrum, ipsum nibh feugiat dolor, sit amet dictum nisl arcu et lorem. Nullam imperdiet, massa vitae semper aliquet, tellus lorem tincidunt tortor, at feugiat arcu felis eu sem. Phasellus ornare mi vitae nulla feugiat, at efficitur massa semper. Maecenas quis odio eros. Curabitur id mollis diam. Maecenas blandit urna felis. Vestibulum euismod odio nec leo tincidunt, quis faucibus metus efficitur. Pellentesque tincidunt dolor hendrerit eleifend condimentum. Integer sem orci, gravida eget eleifend at, commodo sed eros. Nunc fermentum augue ex, a fermentum lacus tempor sed. Proin condimentum purus eget efficitur rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce eu urna enim. Praesent eu arcu vitae neque mollis vulputate ac consequat ex.</p>
-        <p>Ut consequat auctor commodo. Praesent pulvinar malesuada vulputate. Duis faucibus pulvinar elit, nec lacinia lectus malesuada a. Nam tincidunt justo ut vestibulum gravida. Praesent tincidunt odio cursus libero vestibulum, at placerat odio ultrices. Sed vestibulum, purus vel dictum semper, enim eros fringilla nibh, id suscipit enim metus eu erat. Nunc convallis ut nisi at vulputate. Quisque accumsan, urna sit amet pellentesque interdum, erat massa lobortis erat, quis tincidunt tellus nisl quis eros. Quisque metus erat, varius non est venenatis, cursus semper turpis.</p>
-        <p>Sed commodo sem at interdum faucibus. Ut fermentum gravida metus pellentesque congue. Donec eu velit in nisl iaculis molestie at id dui. Curabitur magna arcu, placerat quis interdum vitae, congue sit amet turpis. Morbi placerat rhoncus nulla, id dictum nibh commodo iaculis. Nulla sagittis, lectus sit amet consequat euismod, nunc est tincidunt erat, nec efficitur dui sapien id nibh. Sed lacinia ac justo ac hendrerit. In odio nisl, pulvinar at consequat vitae, posuere nec lectus. Nam eu purus purus. Cras id venenatis mauris. Morbi sagittis ex vel erat pellentesque, sit amet consequat metus efficitur.</p>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque euismod dapibus metus, a consectetur erat dictum at. Aliquam eleifend at nunc sed sollicitudin. Sed molestie velit quis malesuada mollis. Donec tristique molestie ipsum, vitae dictum tortor elementum rutrum. Nam et nisl imperdiet nunc ullamcorper fermentum. Cras nec odio justo. Donec non mi nec enim dictum facilisis. In sagittis bibendum augue maximus convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <p>Bienvenu sur notre application ! </p>
+        <p>Tu te demandes comment ToDo fonctionne ?</p>
+        <p>Commence par te connecter ou t'enregistrer si ce n'est pas encore fait :).</p>
+        <p>Une fois inscrit, tu pourras commencer a ajouter des taches a ta liste de taches. En fonction du niveau de difficulté de la tache, tu lui assigneras un niveau. </p>
+        <p> Maintenant, ajoute une premiere tache :), dans la liste tu verras apparaitre la tache que tu viens d ajouter.</p>
+        <p>Tu pourras alors soit decider de la supprimer soit de cliquer dessus afin d'afficher son contenu.</p>
+        <p>oui bon, un site de tache ... tu dois te dire que c est classique et qu'il y a rien d'original ! </p>
+        <p>Dans la barre de navigation en haut a droite, clique sur le menu déroulant ;) </p>
+        <p>ahhhh, tu commences a comprendre :) Et oui, en faite a l'inscription tu as creer un personnage combatant !</p>
+        <p>Ton personnage combatant possède des points de vie et d'attaques ainsi qu'un niveau. Au départ, tu t'en doute surement mais tu commenceras au niveau 1.</p>
+        <p>Chaque fois que tu valideras une taches, tu gagneras de l'XP et de l'HP.</p>
+        <p>Tu as aussi pu remarquer en ouvrant la liste déroulante qu'un tableau d'ennemis etait present. Au fur et a mesure que tu valideras des taches, tu auras la possibilité de combattre des ennemis ! </p>
+        <p>Oui, ce tutoriel est déja finis :) , qu'est ce que tu attends pour commencer de nouvelles taches !  </p>
+        <p>A toi de jouer !!! </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
