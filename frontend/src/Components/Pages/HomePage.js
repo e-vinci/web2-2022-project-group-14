@@ -51,6 +51,12 @@ const homePage = `
           <input type="password" placeholder="Enter Password" name="password" id="passwordR" required>
         </div>
       </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          J'accepte les conditions d'utilisation
+        </label>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="buttonR" >Register</button>

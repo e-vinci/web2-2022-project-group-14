@@ -6,14 +6,13 @@
  * has to import all the pages to render them.
  */
 
+import { usePathPrefix } from '../../utils/path-prefix';
+
 const Navigate = (toUri) => {
   const fromUri = window.location.pathname;
-  if (fromUri === toUri) {
-    // eslint-disable-next-line no-console
-    console.log("ici1");
-    return;
-  }
-  window.history.pushState({}, '', toUri);
+  if (fromUri === toUri) return;
+
+  window.history.pushState({}, '', usePathPrefix(toUri));
   const popStateEvent = new PopStateEvent('popstate', { state: {} });
   dispatchEvent(popStateEvent);
 };
