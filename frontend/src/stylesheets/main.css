@@ -24,6 +24,17 @@ main{
     
 }
 
+.firstPartFormModals{
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.secondPartFormModals{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom : 5%;
+}
 
 #colonneLeft{
 

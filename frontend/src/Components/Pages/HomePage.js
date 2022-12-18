@@ -14,11 +14,15 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="usename" id="usernameL" required>
+        <div class="d-flex flex-column text-center firstPartFormModals">
+          <label for="username"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="usename" id="usernameL" required>
+        </div>
         <br>
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="passwordL" required>
+        <div class="d-flex flex-column text-center secondPartFormModals">
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" id="passwordL" required>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -37,11 +41,15 @@ const homePage = `
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="usename" id="usernameR" required>
-        <br>
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="passwordR" required>
+        <div class="d-flex flex-column text-center firstPartFormModals">
+          <label for="username"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="usename" id="usernameR" required>
+          <br>
+        </div>
+        <div class="d-flex flex-column text-center secondPartFormModals">
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" id="passwordR" required>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -185,6 +193,8 @@ const HomePage = () => {
 
   const photoUser = document.getElementById('userPicture');
   renderProfileImage(photoUser, profileImage, 'test');
+
+
   
  async function getJSONTasksAndDisplay() {
   const table = document.querySelector('table');
