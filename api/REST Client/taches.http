@@ -1,0 +1,25 @@
+### Read all pizzas
+GET http://localhost:3000/taches
+
+### read all task
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/taches/
+
+### Create a task
+POST {{baseUrl}}/taches/
+Content-Type: application/json
+
+{
+    "title":"raphael a? ",
+    "content":"AA112211A rgrg test",
+    "difficulte":3
+}
+
+### Remove a task with the Task ID
+DELETE {{baseUrl}}/taches/0394347f-d18d-40ce-a803-9985d4a05d2a
+
+### Display a specific task with the Task ID
+GET {{baseUrl}}/taches/c6667c00-bc7a-4a6f-8039-a6103e03028e
+
+### Valide a Task with the Task ID
+POST {{baseUrl}}/taches/valide/aef1c0d4-e1eb-42fa-aa6a-d80c2307c376

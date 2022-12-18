@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}
+
+###
+GET {{baseUrl}}/playerCharacters/player
+
+###
+GET {{baseUrl}}/playerCharacters/attack
+
+###
+GET {{baseUrl}}/playerCharacters/currentHP
+
+###
+GET {{baseUrl}}/playerCharacters/level
+
+###
+GET {{baseUrl}}/playerCharacters/maxHP
+
+###
+GET {{baseUrl}}/playerCharacters/currentXP
+
+###
+GET {{baseUrl}}/playerCharacters/XPToLvlUp
+
+
+

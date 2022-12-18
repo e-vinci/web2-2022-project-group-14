@@ -1,4 +1,39 @@
-@baseUrl = http://localhost:3000
 
-### Read all users
-GET {{baseUrl}}/users
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}
+
+### Create a user
+POST {{baseUrl}}/auths/register/
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "password": "test"
+}
+
+### Login
+POST {{baseUrl}}/auths/login/
+Content-Type: application/json
+ 
+{
+
+    "username" : "user1",
+    "password" : "test"
+}
+
+### addEnemy
+POST {{baseUrl}}/auths/addEnemy/
+Content-Type: application/json
+
+### removeEnemy
+POST {{baseUrl}}/auths/removeEnemy/
+Content-Type: application/json
+
+### readAllEnemies
+GET {{baseUrl}}/auths/readAllEnemies/
+Content-Type: application/json
+
+### fight
+POST {{baseUrl}}/auths/fight/
+Content-Type: application/json
+
