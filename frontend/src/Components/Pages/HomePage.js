@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../stylesheets/main.css';
 import JSConfetti from 'js-confetti';
 import profileImage from '../../img/avatar.png';
-import {setAuthenticatedUser, /* isAuthenticated */} from '../../utils/auths'
+import { setAuthenticatedUser } from '../../utils/auths';
 
 const homePage = `
 <!-- login modal -->
@@ -192,10 +192,9 @@ const homePage = `
 </div>
      `;
 const HomePage = () => {
-  
   const main = document.querySelector('main');
   main.innerHTML = homePage;
-  
+
   login();
   register();
   getJSONTasksAndDisplay();
@@ -207,74 +206,71 @@ const HomePage = () => {
   const photoUser = document.getElementById('userPicture');
   renderProfileImage(photoUser, profileImage, 'test');
 
+  async function getJSONTasksAndDisplay() {
+    const table = document.querySelector('table');
+    table.innerHTML = '';
+    const response = await fetch('/api/taches');
+    const data = await response.json();
 
-  
- async function getJSONTasksAndDisplay() {
-  const table = document.querySelector('table');
-  table.innerHTML = '';
-  const response = await fetch('/api/taches');
-  const data = await response.json();
+    // Create a table element
 
-  // Create a table element
-  
-  table.className="m-auto";
-  // eslint-disable-next-line no-restricted-syntax
-  for(const key of Object.keys(data)) {
-    const button = document.getElementById("valideTaskButtonID");
-    const row = document.createElement('tr');
-    const valueCel = document.createElement('td');
-    const valueCelDelete = document.createElement('button');
-    valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].title).replace(/['"]+/g, '');
-    valueCel.style.border = "1px solid transparent";
-    valueCel.style.borderBottom = "1px solid black";
-    valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
-    valueCelDelete.className = "btn";
-    valueCelDelete.id = "td2";
-    valueCelDelete.datavalue = data[key].id;
-    valueCelDelete.style.border = "1px solid transparent";
-    button.datavalue = data[key].id;
-    let buttonId = null;
+    table.className = 'm-auto';
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key of Object.keys(data)) {
+      const button = document.getElementById('valideTaskButtonID');
+      const row = document.createElement('tr');
+      const valueCel = document.createElement('td');
+      const valueCelDelete = document.createElement('button');
+      valueCel.datavalue = data[key];
+      valueCel.textContent = JSON.stringify(data[key].title).replace(/['"]+/g, '');
+      valueCel.style.border = '1px solid transparent';
+      valueCel.style.borderBottom = '1px solid black';
+      valueCelDelete.innerHTML = '<span><i class="bi bi-x-circle"></i></span>';
+      valueCelDelete.className = 'btn';
+      valueCelDelete.id = 'td2';
+      valueCelDelete.datavalue = data[key].id;
+      valueCelDelete.style.border = '1px solid transparent';
+      button.datavalue = data[key].id;
+      let buttonId = null;
 
-    row.appendChild(valueCel);
-    row.appendChild(valueCelDelete);
-    table.appendChild(row);
+      row.appendChild(valueCel);
+      row.appendChild(valueCelDelete);
+      table.appendChild(row);
 
-    
-    
-    // delete the task 
-    // eslint-disable-next-line func-names
-    valueCelDelete.addEventListener("click", function() { 
-      deleteTask(this.datavalue);
-      HomePage();
-    });
-    // Display the task title, content
-    // eslint-disable-next-line func-names
-    valueCel.addEventListener("click", function() { 
-      document.getElementById("tache").innerText = "Tâche Selectionée : ";
-      document.getElementById("contenu").innerText = "Contenu de la tache : ";
-      document.getElementById("valideTaskButtonID").value = "valider la tache !";
-      document.getElementById("valideTaskButtonID").style.display = "block";
-      document.getElementById("displayTache").innerHTML = this.datavalue.title;
-      document.getElementById("displayTache").className = " p-3 text-justify shadow mb-5 bg-body rounded text-justify";
-      document.getElementById("displayContenu").innerHTML = this.datavalue.content;
-      document.getElementById("displayContenu").className = " p-3 text-justify shadow mb-5 bg-body rounded text-justify";
-      document.getElementById("valideTaskButtonID").innerHTML = "Valider la tâche !" ;
-      document.getElementById("valideTaskButtonID").className = "btn btn-primary text-justify";
-      buttonId = this.datavalue.id;
-    });
-    
-    button.addEventListener("click", () => {
-      const jsConfetti = new JSConfetti({ button })
-      valideTask(buttonId);
-      deleteTask(buttonId);
-      jsConfetti.addConfetti();
-      HomePage();
-    });
-    
+      // delete the task
+      // eslint-disable-next-line func-names
+      valueCelDelete.addEventListener('click', function() {
+        deleteTask(this.datavalue);
+        HomePage();
+      });
+      // Display the task title, content
+      // eslint-disable-next-line func-names
+      valueCel.addEventListener('click', function() {
+        document.getElementById('tache').innerText = 'Tâche Selectionée : ';
+        document.getElementById('contenu').innerText = 'Contenu de la tache : ';
+        document.getElementById('valideTaskButtonID').value = 'valider la tache !';
+        document.getElementById('valideTaskButtonID').style.display = 'block';
+        document.getElementById('displayTache').innerHTML = this.datavalue.title;
+        document.getElementById('displayTache').className =
+          ' p-3 text-justify shadow mb-5 bg-body rounded text-justify';
+        document.getElementById('displayContenu').innerHTML = this.datavalue.content;
+        document.getElementById('displayContenu').className =
+          ' p-3 text-justify shadow mb-5 bg-body rounded text-justify';
+        document.getElementById('valideTaskButtonID').innerHTML = 'Valider la tâche !';
+        document.getElementById('valideTaskButtonID').className = 'btn btn-primary text-justify';
+        buttonId = this.datavalue.id;
+      });
+
+      button.addEventListener('click', () => {
+        const jsConfetti = new JSConfetti({ button });
+        valideTask(buttonId);
+        deleteTask(buttonId);
+        jsConfetti.addConfetti();
+        HomePage();
+      });
+    }
   }
-}
-  
+
   function renderTaskForm() {
     const divForm = document.getElementById('innerColLeft2');
     const form = document.createElement('form');
@@ -327,229 +323,222 @@ const HomePage = () => {
     form.appendChild(submit);
     divForm.appendChild(form);
     form.addEventListener('submit', addTask);
-    
   }
 
-  // Add task 
+  // Add task
   async function addTask(e) {
     e.preventDefault();
-  
+
     const title = document.querySelector('#title').value;
     const content = document.querySelector('#content').value;
     const difficulte = document.querySelector('#select').value;
-  
+
     const jsonOptions = {
       method: 'POST',
       body: JSON.stringify({
         title,
         content,
-        difficulte
+        difficulte,
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     };
-  
+
     const response = await fetch('/api/taches', jsonOptions);
-  
+
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-  
+
     const newTask = await response.json();
-    
+
     HomePage();
     // eslint-disable-next-line no-console
-    console.log('task add : ',newTask);
-  
+    console.log('task add : ', newTask);
   }
 
-   // Delete task 
+  // Delete task
   function deleteTask(e) {
     fetch(`/api/taches/${e}`, {
-      method: 'DELETE'
-    })
-    .then(response => response.json());
+      method: 'DELETE',
+    }).then((response) => response.json());
   }
-  // Valide task 
+  // Valide task
   function valideTask(e) {
     fetch(`/api/taches/valide/${e}`, {
-      method: 'POST'
-    })
-    .then(response => response.json());
+      method: 'POST',
+    }).then((response) => response.json());
   }
-// ------------------------------------ENNEMIS TABLE ---------------------------------------
-async function getJSONEnnemiesAndDisplay() {
-  const response = await fetch('/api/auths/readAllEnemies/');
-  const data = await response.json();
+  // ------------------------------------ENNEMIS TABLE ---------------------------------------
+  async function getJSONEnnemiesAndDisplay() {
+    const response = await fetch('/api/auths/readAllEnemies/');
+    const data = await response.json();
 
-  // Create a table element
-  const table = document.getElementById('table-ennemis');
-  table.innerHTML = "";
-  // eslint-disable-next-line no-restricted-syntax
-  for(const key of Object.keys(data)) {
-    const row = document.createElement('tr');
+    // Create a table element
+    const table = document.getElementById('table-ennemis');
+    table.innerHTML = '';
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key of Object.keys(data)) {
+      const row = document.createElement('tr');
 
-    const valueCel = document.createElement('td');
-    const valueCelHP = document.createElement('td');
-    const valueCelAttack = document.createElement('td');
+      const valueCel = document.createElement('td');
+      const valueCelHP = document.createElement('td');
+      const valueCelAttack = document.createElement('td');
 
-    valueCel.datavalue = data[key];
-    valueCel.textContent = JSON.stringify(data[key].name).replace(/['"]+/g, '');
-    valueCel.style.border = "1px solid transparent";
-    valueCel.style.borderBottom = "1px solid black";
-    valueCel.style.margin = "10px";
-    valueCelHP.datavalue  = data[key];
-    valueCelHP.textContent = "HP : "
-    valueCelHP.textContent += JSON.stringify(data[key].HP);
-    valueCelHP.style.border = "1px solid transparent";
-    valueCelHP.style.borderBottom = "1px solid black";
-    valueCelHP.style.padding = "10px";
-    valueCelAttack.datavalue  = data[key];
-    valueCelAttack.textContent = "Attack : "
-    valueCelAttack.textContent += JSON.stringify(data[key].attack);
-    valueCelAttack.style.border = "1px solid transparent";
-    valueCelAttack.style.borderBottom = "1px solid black";
-    valueCelAttack.style.margin = "10px";
-    row.appendChild(valueCel);
-    row.appendChild(valueCelHP);
-    row.appendChild(valueCelAttack);
-    table.appendChild(row);
+      valueCel.datavalue = data[key];
+      valueCel.textContent = JSON.stringify(data[key].name).replace(/['"]+/g, '');
+      valueCel.style.border = '1px solid transparent';
+      valueCel.style.borderBottom = '1px solid black';
+      valueCel.style.margin = '10px';
+      valueCelHP.datavalue = data[key];
+      valueCelHP.textContent = 'HP : ';
+      valueCelHP.textContent += JSON.stringify(data[key].HP);
+      valueCelHP.style.border = '1px solid transparent';
+      valueCelHP.style.borderBottom = '1px solid black';
+      valueCelHP.style.padding = '10px';
+      valueCelAttack.datavalue = data[key];
+      valueCelAttack.textContent = 'Attack : ';
+      valueCelAttack.textContent += JSON.stringify(data[key].attack);
+      valueCelAttack.style.border = '1px solid transparent';
+      valueCelAttack.style.borderBottom = '1px solid black';
+      valueCelAttack.style.margin = '10px';
+      row.appendChild(valueCel);
+      row.appendChild(valueCelHP);
+      row.appendChild(valueCelAttack);
+      table.appendChild(row);
+    }
   }
-}
-// fight button 
-async function fight() {
-  const fights = document.getElementById('fight-btn');
-  const message = document.querySelector('#messageFight');
-  fights.innerHTML = 'fight';
-  fights.addEventListener('click', () => {
-    fetch('/api/auths/fight', {
-      method: 'POST'
-    })
-    .then(response => response.json())
-    .then(result => {
-      message.innerHTML = result;
+  // fight button
+  async function fight() {
+    const fights = document.getElementById('fight-btn');
+    const message = document.querySelector('#messageFight');
+    fights.innerHTML = 'fight';
+    fights.addEventListener('click', () => {
+      fetch('/api/auths/fight', {
+        method: 'POST',
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          message.innerHTML = result;
+          setTimeout(() => {
+            message.innerHTML = 'Pret a combatre ?';
+          }, 9000);
+        });
       setTimeout(() => {
-        message.innerHTML = 'Pret a combatre ?';
-      }, 9000);
+        HomePage();
+      }, 2000);
     });
-    setTimeout(() => {
-      HomePage();}, 2000);
-  });
-}
+  }
 
-async function updateProgressBar() {
-  const response = await fetch('/api/playerCharacters/player');
-  const player = await response.json();
-  const playerHP  = player.currentHP;
-  const playerXP = player.currentXP;
-  const playerLevel = player.level;
-  const maxHpPlayer = player.maxHP;
-  const {XPToLvlUp} = player;
-  const degats = player.attack;
- 
+  async function updateProgressBar() {
+    const response = await fetch('/api/playerCharacters/player');
+    const player = await response.json();
+    const playerHP = player.currentHP;
+    const playerXP = player.currentXP;
+    const playerLevel = player.level;
+    const maxHpPlayer = player.maxHP;
+    const { XPToLvlUp } = player;
+    const degats = player.attack;
 
-  const progressBarHP = document.getElementById("barHP");
-  const progressBarXP = document.getElementById("barXP");
+    const progressBarHP = document.getElementById('barHP');
+    const progressBarXP = document.getElementById('barXP');
 
+    progressBarHP.innerText = `${playerHP}/${maxHpPlayer}`;
+    progressBarHP.setAttribute('style', `width: ${(playerHP / maxHpPlayer) * 100}%`);
+    progressBarHP.setAttribute('aria-valuenow', `${playerHP}`);
+    progressBarHP.setAttribute('aria-valuemax', `${maxHpPlayer}`);
 
-  progressBarHP.innerText= `${playerHP}/${maxHpPlayer}`;
-  progressBarHP.setAttribute("style", `width: ${(playerHP / maxHpPlayer) * 100}%`);
-  progressBarHP.setAttribute("aria-valuenow", `${playerHP}`);
-  progressBarHP.setAttribute("aria-valuemax", `${maxHpPlayer}`);
-  
-  const splitHp = `${XPToLvlUp}`.slice(0,5);
-  progressBarXP.innerText= `${playerXP}/${splitHp}`;
-  progressBarXP.setAttribute("style", `width: ${(playerXP / XPToLvlUp) * 100}%`);
-  progressBarXP.setAttribute("aria-valuenow", `${playerXP}`);
-  progressBarHP.setAttribute("aria-valuemax", `${XPToLvlUp}`);
+    const splitHp = `${XPToLvlUp}`.slice(0, 5);
+    progressBarXP.innerText = `${playerXP}/${splitHp}`;
+    progressBarXP.setAttribute('style', `width: ${(playerXP / XPToLvlUp) * 100}%`);
+    progressBarXP.setAttribute('aria-valuenow', `${playerXP}`);
+    progressBarHP.setAttribute('aria-valuemax', `${XPToLvlUp}`);
 
-  const progressesBar = document.getElementById("barre");
-  progressesBar.style.paddingTop = "50px";
- 
-  const level = document.getElementById("level");
-  const degat = document.getElementById("degat");
-  const coeur = document.getElementById("coeur");
-  
-  level.style.display="inline-block";
-  coeur.style.display="inline-block";
-  coeur.innerHTML = "&#x1F3C6;";
-  level.innerText = `Vous etes niveau ${playerLevel} ` ;
-  degat.innerText = `Vous avez ${degats} points de dégats`;
+    const progressesBar = document.getElementById('barre');
+    progressesBar.style.paddingTop = '50px';
 
-  const userPicture = document.getElementById("userPicture");
-  const niveauJouer = document.getElementById("niveauJouer");
-  userPicture.style.float="left";
-  niveauJouer.style.float = "left";
-  
-  
-}
+    const level = document.getElementById('level');
+    const degat = document.getElementById('degat');
+    const coeur = document.getElementById('coeur');
 
+    level.style.display = 'inline-block';
+    coeur.style.display = 'inline-block';
+    coeur.innerHTML = '&#x1F3C6;';
+    level.innerText = `Vous etes niveau ${playerLevel} `;
+    degat.innerText = `Vous avez ${degats} points de dégats`;
 
-// render the profile image (to resize it you can use the height parameter)
-function renderProfileImage(wrapper, url) {
-  const image = new Image();
-  image.src = url;
-  image.height = 100;
-  image.class = "img-fluid img-thumbnail";
-  wrapper.appendChild(image);
-}
-async function login() {
-  const registerBtn = document.getElementById('buttonL');
-  registerBtn.addEventListener('click', async () => {
-    const username = document.querySelector('#usernameL').value;
-    const password = document.querySelector('#passwordL').value;
-    const response = await fetch('/api/auths/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const userPicture = document.getElementById('userPicture');
+    const niveauJouer = document.getElementById('niveauJouer');
+    userPicture.style.float = 'left';
+    niveauJouer.style.float = 'left';
+  }
+
+  // render the profile image (to resize it you can use the height parameter)
+  function renderProfileImage(wrapper, url) {
+    const image = new Image();
+    image.src = url;
+    image.height = 100;
+    image.class = 'img-fluid img-thumbnail';
+    wrapper.appendChild(image);
+  }
+  async function login() {
+    const registerBtn = document.getElementById('buttonL');
+    registerBtn.addEventListener('click', async () => {
+      const username = document.querySelector('#usernameL').value;
+      const password = document.querySelector('#passwordL').value;
+      const response = await fetch('/api/auths/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok)
+        throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+      const user = response.json;
+
+      setAuthenticatedUser(user);
+      const modalL = document.getElementById('loginModal');
+      // eslint-disable-next-line no-undef
+      const modal = bootstrap.Modal.getInstance(modalL);
+      modal.hide();
+      // window.location.reload();
+      HomePage();
     });
-    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+  }
 
-    const user = response.json;
+  async function register() {
+    const registerBtn = document.getElementById('buttonR');
+    registerBtn.addEventListener('click', async () => {
+      const username = document.querySelector('#usernameR').value;
+      const password = document.querySelector('#passwordR').value;
+      const response = await fetch('/api/auths/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok)
+        throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
-    setAuthenticatedUser(user);
-    const modalL = document.getElementById('loginModal');
-    // eslint-disable-next-line no-undef
-    const modal = bootstrap.Modal.getInstance(modalL)
-    modal.hide();
-    // window.location.reload();
-    HomePage();
-  });
-}
+      const user = response.json;
 
-async function register() {
-  const registerBtn = document.getElementById('buttonR');
-  registerBtn.addEventListener('click', async () => {
-    const username = document.querySelector('#usernameR').value;
-    const password = document.querySelector('#passwordR').value;
-    const response = await fetch('/api/auths/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      setAuthenticatedUser(user);
+      // window.location.reload();
+      const modalR = document.getElementById('staticBackdrop2');
+      // eslint-disable-next-line no-undef
+      const modal = bootstrap.Modal.getInstance(modalR);
+      modal.hide();
+      HomePage();
     });
-    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-    const user = response.json;
-
-    setAuthenticatedUser(user);
-    // window.location.reload();
-    const modalR = document.getElementById('staticBackdrop2');
-    // eslint-disable-next-line no-undef
-    const modal = bootstrap.Modal.getInstance(modalR)
-    modal.hide();
-    HomePage();
-
-  });
-}
-// FIN  
+  }
+  // FIN
 };
 export default HomePage;

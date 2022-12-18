@@ -1,4 +1,4 @@
-const jwtDecode = require('jwt-decode')
+const jwtDecode = require('jwt-decode');
 
 const jwt = require('jsonwebtoken');
 const path = require('node:path');
@@ -6,9 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const Chance = require('chance');
 const bcrypt = require('bcrypt');
 const { parse, serialize } = require('../utils/json');
-const { getXP, getPlayer, createPlayerCharacter,updateData } = require('./playerCharacters');
-
-
+const { getXP, getPlayer, createPlayerCharacter, updateData } = require('./playerCharacters');
 
 const jwtSecret = 'ilovemytasks!';
 const lifetimeJwt = 24 * 60 * 60 * 1000 * 365 * 10; // in ms : 24 * 60 * 60 * 1000 = 24h
@@ -25,7 +23,7 @@ function login(username, password) {
   if (!bcrypt.compareSync(password, userFound.password)) return undefined;
 
   // Vérifie si l'utilisateur a une liste d'ennemis existante
-  let {enemies} = userFound;
+  let { enemies } = userFound;
   if (!enemies) {
     // Si non, créez une nouvelle liste d'ennemis
     enemies = [
@@ -101,7 +99,6 @@ function register(username, password) {
       HP: calcuateHP(5),
       attack: calculateAttack(5),
     },
-
   ];
 
   const salt = bcrypt.genSaltSync(10);
@@ -123,8 +120,6 @@ function register(username, password) {
     },
   );
 
-  
-
   authenticatedUser = {
     username,
     token,
@@ -133,8 +128,8 @@ function register(username, password) {
 
   // décodez le jeton pour obtenir l'ID
   const decodedToken = jwtDecode(token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
 
   return authenticatedUser;
 }
@@ -179,44 +174,43 @@ function returnUser() {
 
 function returnId() {
   const decodedToken = jwtDecode(authenticatedUser.token, jwtSecret);
-  const {id} = decodedToken;
-  console.log("id", id);
+  const { id } = decodedToken;
+  console.log('id', id);
   return id;
 }
-
 
 /*-----------------------------------*/
 
 // calculate HP
-function calcuateHP(lvl){
-  if (lvl%5 === 0){
-    return ((lvl + ((lvl/1,5) * 2))*2);
+function calcuateHP(lvl) {
+  if (lvl % 5 === 0) {
+    return (lvl + (lvl / 1, 5) * 2) * 2;
   }
-  const HP = lvl + ((lvl/1,5) * 2);
+  const HP = lvl + (lvl / 1, 5) * 2;
   return HP;
-  };
-  
-  // calculate attack
-function calculateAttack(lvl){
-  if (lvl%5 === 0){
-    return ((lvl + (lvl * 2))*2);
+}
+
+// calculate attack
+function calculateAttack(lvl) {
+  if (lvl % 5 === 0) {
+    return (lvl + lvl * 2) * 2;
   }
-  const attack = lvl + (lvl * 2);
+  const attack = lvl + lvl * 2;
   return attack;
-};
-  
-  // use library to create a random name
-function randomName(){
+}
+
+// use library to create a random name
+function randomName() {
   const chance = new Chance();
   const random = chance.name();
   console.log(random);
   return random;
-};
+}
 
 function readAllEnemies() {
   // Check if user is authenticated
   if (!authenticatedUser) return undefined;
-  const {enemies} = authenticatedUser;
+  const { enemies } = authenticatedUser;
   return enemies;
 }
 
@@ -225,21 +219,21 @@ function addEnemy() {
   if (!authenticatedUser) return undefined;
   const users = parse(jsonDbPath, defaultUsers);
 
-  const {enemies} = authenticatedUser;
+  const { enemies } = authenticatedUser;
 
   // Create new enemy object
-  // Get the last enemy in the list  
+  // Get the last enemy in the list
   const lastEnemy = enemies[enemies.length - 1];
 
-  // Get the level of the last enemy  
+  // Get the level of the last enemy
   const lvl = lastEnemy.lvl + 1;
-  
+
   const newEnemy = {
     id: uuidv4(),
-    name : randomName(), 
+    name: randomName(),
     lvl,
-    HP : calcuateHP(lvl),
-    attack : calculateAttack(lvl),
+    HP: calcuateHP(lvl),
+    attack: calculateAttack(lvl),
   };
 
   // Add new enemy to user's enemies list
@@ -247,8 +241,7 @@ function addEnemy() {
   authenticatedUser.enemies = enemies;
 
   // Update user's enemies list in the database
-  const indexOfUserFound = users.findIndex((user) => 
-  user.username === authenticatedUser.username);
+  const indexOfUserFound = users.findIndex((user) => user.username === authenticatedUser.username);
   users[indexOfUserFound].enemies = enemies;
 
   serialize(jsonDbPath, users);
@@ -260,26 +253,25 @@ function removeEnemy() {
   if (!authenticatedUser) return undefined;
   const users = parse(jsonDbPath, defaultUsers);
 
-  const {enemies} = authenticatedUser;
+  const { enemies } = authenticatedUser;
   // delete the first enemy
   const enemy = enemies.shift();
   authenticatedUser.enemies = enemies;
 
   // Update user's enemies list in the database
-  const indexOfUserFound = users.findIndex((user) => 
-  user.username === authenticatedUser.username);
+  const indexOfUserFound = users.findIndex((user) => user.username === authenticatedUser.username);
   users[indexOfUserFound].enemies = enemies;
-  
+
   serialize(jsonDbPath, users);
   return enemy;
 }
 
-// 
+//
 function fight() {
- // Check if user is authenticated
- if (!authenticatedUser) return "Joueur non authentifié";
+  // Check if user is authenticated
+  if (!authenticatedUser) return 'Joueur non authentifié';
 
-  const {enemies} = authenticatedUser;
+  const { enemies } = authenticatedUser;
   // get the first enemy
   const firstEnemy = enemies[0];
   if (!firstEnemy) return undefined; // If no enemy is found, stop execution
@@ -297,12 +289,12 @@ function fight() {
     player.currentHP = playerHP;
     firstEnemy.HP = enemyHP;
   }
-  
+
   let playerdead = false;
   // If player dies, stop execution
-  if (player.currentHP <= 0){
-    player.currentHP = playerMaxHP  - player.level;
-    if(player.currentHP <= 0){
+  if (player.currentHP <= 0) {
+    player.currentHP = playerMaxHP - player.level;
+    if (player.currentHP <= 0) {
       player.currentHP = 0;
     }
     firstEnemy.HP = calcuateHP(firstEnemy.lvl);
@@ -310,25 +302,23 @@ function fight() {
   }
 
   updateData(player.currentHP, returnId());
-  
+
   // If the enemy dies, add a new enemy and remove the current enemy
-  if (firstEnemy.HP <= 0){
+  if (firstEnemy.HP <= 0) {
     addEnemy();
     removeEnemy();
-    getXP(returnId(),0,firstEnemy.lvl);
+    getXP(returnId(), 0, firstEnemy.lvl);
     player.currentHP = player.maxHP;
-    if (playerdead === true){
-      return "Tu es mort mais tu as gagné";
+    if (playerdead === true) {
+      return 'Tu es mort mais tu as gagné';
     }
-    return "Tu as gagné";
+    return 'Tu as gagné';
   }
 
-  return "Tu as perdu";
+  return 'Tu as perdu';
 }
 
-
 /*-----------------------------------*/
-
 
 module.exports = {
   login,

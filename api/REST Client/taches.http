@@ -15,7 +15,6 @@ Content-Type: application/json
     "difficulte":3
 }
 
-
 ### Remove a task with the Task ID
 DELETE {{baseUrl}}/taches/0394347f-d18d-40ce-a803-9985d4a05d2a
 

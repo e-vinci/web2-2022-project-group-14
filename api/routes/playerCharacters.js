@@ -1,5 +1,14 @@
 const express = require('express');
-const { getXP, getPlayer, getAttack, getCurrentHP, getLevel, getMaxHP, getCurrentXP, getXPToLvlUp } = require('../models/playerCharacters');
+const {
+  getXP,
+  getPlayer,
+  getAttack,
+  getCurrentHP,
+  getLevel,
+  getMaxHP,
+  getCurrentXP,
+  getXPToLvlUp,
+} = require('../models/playerCharacters');
 const { returnId } = require('../models/users');
 
 const router = express.Router();
@@ -12,45 +21,45 @@ router.post('/', (req, res) => {
 });
 
 router.get('/player', (req, res) => {
-  console.log("In")
+  console.log('In');
   const player = getPlayer(returnId());
-  console.log("player", player);
+  console.log('player', player);
   return res.json(player);
 });
 
 router.get('/attack', (req, res) => {
   const attack = getAttack(returnId());
-  console.log("attack", attack);
+  console.log('attack', attack);
   return res.json(attack);
 });
 
 router.get('/currentHP', (req, res) => {
   const currentHP = getCurrentHP(returnId());
-  console.log("currentHP", currentHP);
+  console.log('currentHP', currentHP);
   return res.json(currentHP);
 });
 
 router.get('/level', (req, res) => {
   const level = getLevel(returnId());
-  console.log("level", level);
+  console.log('level', level);
   return res.json(level);
 });
 
 router.get('/maxHP', (req, res) => {
   const maxHP = getMaxHP(returnId());
-  console.log("maxHP", maxHP);
+  console.log('maxHP', maxHP);
   return res.json(maxHP);
 });
 
 router.get('/currentXP', (req, res) => {
   const currentXP = getCurrentXP(returnId());
-  console.log("currentXP", currentXP);
+  console.log('currentXP', currentXP);
   return res.json(currentXP);
 });
 
 router.get('/XPToLvlUp', (req, res) => {
   const XPToLvlUp = getXPToLvlUp(returnId());
-  console.log("XPToLvlUp", XPToLvlUp);
+  console.log('XPToLvlUp', XPToLvlUp);
   return res.json(XPToLvlUp);
 });
 

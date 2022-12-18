@@ -1,6 +1,14 @@
 const express = require('express');
 const { getPlayer } = require('../models/playerCharacters');
-const { register, login, addEnemy,removeEnemy,readAllEnemies,fight, returnId } = require('../models/users');
+const {
+  register,
+  login,
+  addEnemy,
+  removeEnemy,
+  readAllEnemies,
+  fight,
+  returnId,
+} = require('../models/users');
 
 const router = express.Router();
 
@@ -35,7 +43,6 @@ router.post('/login', (req, res) => {
   return res.json(authenticatedUser);
 });
 
-
 /* addEnemy */
 router.post('/addEnemy', (req, res) => {
   const authenticatedUser = addEnemy();
@@ -46,23 +53,22 @@ router.post('/addEnemy', (req, res) => {
 /* removeEnemy */
 router.post('/removeEnemy', (req, res) => {
   const authenticatedUser = removeEnemy();
-  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
   return res.json(authenticatedUser);
 });
 
 /* readAllEnemies */
 router.get('/readAllEnemies', (req, res) => {
   const authenticatedUser = readAllEnemies();
-  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
   return res.json(authenticatedUser);
 });
 
 /* fight */
 router.post('/fight', (req, res) => {
   const authenticatedUser = fight();
-  if(!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
+  if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
   return res.json(authenticatedUser);
 });
-
 
 module.exports = router;

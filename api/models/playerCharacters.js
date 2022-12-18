@@ -85,8 +85,6 @@ function updateHP(id, hp) {
   return playerCharacter;
 }
 
-
-
 /* Prototype de get User -- A Vérifier */
 function getPlayer(id) {
   const list = parse(jsonDbPath, listPlayerCharacters);
@@ -94,8 +92,7 @@ function getPlayer(id) {
   return playerCharacter;
 }
 
-
-function updateData(hp,id) {
+function updateData(hp, id) {
   const players = parse(jsonDbPath, listPlayerCharacters);
   const playerCharacter = players.find((PlayerCharacter) => PlayerCharacter.userId === id);
   playerCharacter.currentHP = hp;
