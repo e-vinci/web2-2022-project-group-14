@@ -177,6 +177,10 @@ const homePage = `
   </div>
   </div>
 </div>
+
+<div id="footer">
+<p> Copyright © 2021 Groupe14. Tous droits réservés. </p>
+</div>
      `;
 const HomePage = () => {
   
