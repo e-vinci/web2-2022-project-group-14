@@ -72,6 +72,14 @@ table tr td  {
     border: 1px solid black;
   }
 
+#footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 11%;
+  }
+  
+
 /*.colonne{
 margin-left: 1%;
 margin-right: 1%;
