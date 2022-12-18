@@ -155,26 +155,29 @@ const homePage = `
       <table id="table-ennemis" >
       </table>
       <p id="messageFight" > Pret a combatre ?</p>
-      <input class="mt-3 btn btn-primary" type="button" value="Combattez !" id="fight-btn">
+      <input class="mt-3 btn btn-primary" type="button" value="Combattez !" id="fight-btn" >
       </div>
+
     <div class="pt-3" id="innerColRight2">
       <h4 class="text-left pb-3">Votre personnage</h4>
+      
       <div class="mb-3" id="userPicture">
       </div>
-      <div id="progressesBar">
-        <p class="mb-1"><u>Point de vie :</u></p>
-        <div class=" progress mb-3">
-          <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <p class="mb-1"><u>Point d'XP :</u></p>
-        <div class="progress">
-          <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+      <div id="niveauJoeur" > <p id="level" class="box" ></p> <p id="coeur" ></p> </div>
+      <div><p id="degat"></p><p id="bombe" ></p> </div>
+      <div id= "barre">
+        <div id="progressesBar">
+          <p class="mb-1" id="pdv" ><u>Point de vie :</u></p><p id="vie" ></p>
+          <div class=" progress mb-3">
+            <div id="barHP" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Success example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p class="mb-1" id="xp"><u>Point d'XP :</u></p><p id="progres" ></p>
+          <div class="progress">
+            <div id="barXP" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Warning example" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         </div>
       </div>
     </div>
-    <div><p id="level"></p> </div>
-    <div><p id="degat"></p> </div>
-  </div>
   </div>
 </div>
 
@@ -453,12 +456,24 @@ async function updateProgressBar() {
   progressBarXP.setAttribute("aria-valuenow", `${playerXP}`);
   progressBarHP.setAttribute("aria-valuemax", `${XPToLvlUp}`);
 
-  
+  const progressesBar = document.getElementById("barre");
+  progressesBar.style.paddingTop = "50px";
  
   const level = document.getElementById("level");
   const degat = document.getElementById("degat");
+  const coeur = document.getElementById("coeur");
+  
+  level.style.display="inline-block";
+  coeur.style.display="inline-block";
+  coeur.innerHTML = "&#x1F3C6;";
   level.innerText = `Vous etes niveau ${playerLevel} ` ;
   degat.innerText = `Vous avez ${degats} points de dégats`;
+
+  const userPicture = document.getElementById("userPicture");
+  const niveauJouer = document.getElementById("niveauJouer");
+  userPicture.style.float="left";
+  niveauJouer.style.float = "left";
+  
   
 }
 
