@@ -4,8 +4,10 @@ const jwt = require('jsonwebtoken');
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const Chance = require('chance');
+const bcrypt = require('bcrypt');
 const { parse, serialize } = require('../utils/json');
 const { getXP, getPlayer, createPlayerCharacter,updateData } = require('./playerCharacters');
+
 
 
 const jwtSecret = 'ilovemytasks!';
@@ -26,7 +28,7 @@ const defaultUsers = [
 function login(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (!userFound) return undefined;
-  if (userFound.password !== password) return undefined;
+  if (!bcrypt.compareSync(password, userFound.password)) return undefined;
 
   // Vérifie si l'utilisateur a une liste d'ennemis existante
   let {enemies} = userFound;
@@ -108,7 +110,12 @@ function register(username, password) {
 
   ];
 
-  const createdUser = createOneUser(username, password, enemies);
+  const salt = bcrypt.genSaltSync(10);
+
+  // Hash the user's password using the salt
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  const createdUser = createOneUser(username, hashedPassword, enemies);
 
   // Créez un jeton JWT
   const token = jwt.sign(
